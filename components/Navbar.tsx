@@ -3,13 +3,13 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Github, Linkedin, Menu, X } from 'lucide-react';
+import { Github, Linkedin, Twitter, Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const navLinks = [
     { href: '/', label: 'Home' },
-    { href: '/blog', label: 'Blog' },
     { href: '/projects', label: 'Projects' },
+    { href: '/blog', label: 'Blog' },
     { href: '/about', label: 'About' },
     { href: '/contact', label: 'Contact' },
 ];
@@ -68,6 +68,9 @@ export default function Navbar() {
                             <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-white transition-colors p-1">
                                 <Linkedin size={18} />
                             </a>
+                            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-white transition-colors p-1">
+                                <Twitter size={18} />
+                            </a>
                         </div>
 
                         {/* Hamburger */}
@@ -114,6 +117,9 @@ export default function Navbar() {
                             </a>
                             <a href="https://linkedin.com" className="text-[var(--text-secondary)] hover:text-white p-2">
                                 <Linkedin size={24} />
+                            </a>
+                            <a href="https://twitter.com" className="text-[var(--text-secondary)] hover:text-white p-2">
+                                <Twitter size={24} />
                             </a>
                         </div>
                     </motion.div>
