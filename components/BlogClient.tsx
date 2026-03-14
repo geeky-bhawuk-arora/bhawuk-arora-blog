@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { posts, Post, Category } from '@/lib/data';
 import { formatDate } from '@/lib/utils';
 
-const CATEGORIES: Array<'All' | Category> = ['All', 'Tech', 'AI', 'Design', 'Life', 'Career'];
+const CATEGORIES: Array<'All' | Category> = ['All', 'Kubernetes', 'Terraform', 'MLOps pipelines', 'System design', 'Databricks', 'Docker', 'MLflow'];
 const POSTS_PER_PAGE = 8;
 
 function CleanCard({ post }: { post: Post }) {
@@ -113,8 +113,8 @@ export default function BlogClient() {
                                     key={cat}
                                     onClick={() => setActiveCategory(cat)}
                                     className={`flex-shrink-0 px-3 py-1.5 rounded text-xs font-mono font-medium transition-all duration-200 outline-none border ${isActive
-                                            ? 'bg-[var(--text-primary)] text-[var(--bg)] border-[var(--text-primary)]'
-                                            : 'bg-[var(--bg-elevated)] text-[var(--text-secondary)] border-[var(--border)] hover:text-[var(--text-primary)]'
+                                        ? 'bg-[var(--text-primary)] text-[var(--bg)] border-[var(--text-primary)]'
+                                        : 'bg-[var(--bg-elevated)] text-[var(--text-secondary)] border-[var(--border)] hover:text-[var(--text-primary)]'
                                         }`}
                                 >
                                     {cat}
