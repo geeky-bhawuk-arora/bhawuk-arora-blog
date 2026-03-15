@@ -16,7 +16,14 @@ export default async function BlogPage() {
         .select('*')
         .order('published_at', { ascending: false });
 
-    const posts = (data || []) as Post[];
+    const posts = (data || []).map((p: any) => ({
+        ...p,
+        readingTime: p.reading_time || 5,
+        publishedAt: p.published_at,
+        patternType: p.pattern_type || 'dots',
+        accentColor: p.accent_color || '#6366f1',
+        authorBio: p.author_bio || ''
+    })) as Post[];
 
     return <BlogClient initialPosts={posts} />;
 }

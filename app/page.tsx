@@ -87,9 +87,18 @@ export default async function HomePage() {
     .select("*")
     .order("published_at", { ascending: false });
 
-  const typedPosts = (posts || []) as Post[];
+  const mapPost = (p: any): Post => ({
+    ...p,
+    readingTime: p.reading_time || 5,
+    publishedAt: p.published_at,
+    patternType: p.pattern_type || 'dots',
+    accentColor: p.accent_color || '#6366f1',
+    authorBio: p.author_bio || ''
+  });
+
+  const typedPosts = (posts || []).map(mapPost);
   const featured = typedPosts.find(p => p.featured) || typedPosts[0];
-  const recentPosts = typedPosts.filter(p => !p.featured).slice(0, 4);
+  const recentPosts = typedPosts.filter(p => p.slug !== featured?.slug).slice(0, 4);
 
   return (
     <main className="min-h-screen pt-32 pb-24 w-full flex flex-col items-center">

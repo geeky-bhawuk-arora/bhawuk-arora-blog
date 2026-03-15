@@ -16,9 +16,13 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { slug } = await params;
     const supabase = await createClient();
-    const { data: post } = await supabase.from('posts').select('*').eq('slug', slug).single();
+    const { data: post, error } = await supabase
+        .from('posts')
+        .select('*')
+        .eq('slug', slug)
+        .maybeSingle();
 
-    if (!post) return { title: "Not Found" };
+    if (error || !post) return { title: "Not Found" };
 
     return {
         title: post.title,
@@ -28,7 +32,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             title: post.title,
             description: post.description,
             type: "article",
-            publishedTime: post.publishedAt,
+            publishedTime: post.published_at,
             authors: [post.author],
         },
     };
@@ -37,9 +41,26 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function ArticlePage({ params }: Props) {
     const { slug } = await params;
     const supabase = await createClient();
-    const { data } = await supabase.from('posts').select('*').eq('slug', slug).single();
 
-    if (!data) notFound();
+    const { data, error } = await supabase
+        .from('posts')
+        .select('*')
+        .eq('slug', slug)
+        .maybeSingle();
+
+    if (error || !data) notFound();
+
+    // Mapping helper
+    const mapPost = (p: any): Post => ({
+        ...p,
+        readingTime: p.reading_time || 5,
+        publishedAt: p.published_at,
+        patternType: p.pattern_type || 'dots',
+        accentColor: p.accent_color || '#6366f1',
+        authorBio: p.author_bio || ''
+    });
+
+    const post = mapPost(data);
 
     // Also fetch related posts
     const { data: relatedData } = await supabase
@@ -49,8 +70,7 @@ export default async function ArticlePage({ params }: Props) {
         .neq('slug', slug)
         .limit(2);
 
-    const post = data as Post;
-    const relatedPosts = (relatedData || []) as Post[];
+    const relatedPosts = (relatedData || []).map(mapPost);
 
     return <ArticleClient post={post} relatedPosts={relatedPosts} />;
 }
