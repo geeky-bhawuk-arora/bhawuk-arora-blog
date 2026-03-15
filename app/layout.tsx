@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import Providers from "@/components/Providers";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import { Suspense } from "react";
+import { Heart } from "lucide-react";
 
 export const metadata: Metadata = {
   title: {
@@ -58,46 +59,18 @@ function SiteFooter() {
           gap: "1rem",
         }}
       >
-        {/* Logo mark */}
-        <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
-          <div
-            style={{
-              width: "1.9rem",
-              height: "1.9rem",
-              borderRadius: "0.5rem",
-              background: "linear-gradient(135deg,#6366f1,#a855f7)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontSize: "0.6rem",
-              fontWeight: 700,
-              color: "white",
-              fontFamily: "JetBrains Mono, monospace",
-              letterSpacing: "-0.02em",
-              flexShrink: 0,
-            }}
-          >
-            BK
-          </div>
-          <span
-            style={{
-              fontSize: "0.8rem",
-              fontFamily: "JetBrains Mono, monospace",
-              color: "var(--text-muted)",
-            }}
-          >
-            bhawuk.dev
-          </span>
-        </div>
 
         <p
           style={{
             fontSize: "0.75rem",
             fontFamily: "JetBrains Mono, monospace",
             color: "var(--text-muted)",
+            display: "flex",
+            alignItems: "center",
+            gap: "0.4rem",
           }}
         >
-          Made with love by Bhawuk
+          Made with <Heart size={12} fill="#ef4444" color="#ef4444" /> by Bhawuk
         </p>
 
         {/* Static links — no event handlers */}

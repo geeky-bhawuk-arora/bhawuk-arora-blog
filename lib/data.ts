@@ -263,6 +263,41 @@ Implementing distributed tracing (e.g., using OpenTelemetry and Jaeger) is non-n
     }
 ];
 
+export interface Project {
+    title: string;
+    description: string;
+    tech: string[];
+    github: string | null;
+    demo: string | null;
+    featured?: boolean;
+}
+
+export const projects: Project[] = [
+    {
+        title: "Kubernetes Cluster Autoscaler",
+        description: "Built a highly available ML inferencing cluster that dynamically scales GPU nodes based on real-time traffic queues, reducing cloud costs by 45%.",
+        tech: ["Kubernetes", "Terraform", "AWS EKS", "Go"],
+        github: "https://github.com/geeky-bhawuk-arora/k8s-autoscaler",
+        demo: null,
+        featured: true,
+    },
+    {
+        title: "RAG Evaluation Pipeline",
+        description: "Automated MLOps pipeline for continuously testing and validating RAG application accuracy against golden datasets using MLflow and LangChain.",
+        tech: ["Python", "MLflow", "LangChain", "Docker"],
+        github: "https://github.com/geeky-bhawuk-arora/rag-eval",
+        demo: null,
+        featured: true,
+    },
+    {
+        title: "Terraform Module Registry",
+        description: "Internal self-service platform for developers to provision standardized, pre-approved AWS resources through an internal API.",
+        tech: ["Terraform", "FastAPI", "AWS", "GitHub Actions"],
+        github: "https://github.com/geeky-bhawuk-arora/tf-registry",
+        demo: null,
+    }
+];
+
 export function getPostBySlug(slug: string): Post | undefined {
     return posts.find(post => post.slug === slug);
 }

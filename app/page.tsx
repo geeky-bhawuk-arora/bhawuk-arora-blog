@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Github, ExternalLink, Terminal } from "lucide-react";
-import { Post } from "@/lib/data";
+import { Post, projects } from "@/lib/data";
 import { formatDate } from "@/lib/utils";
 import { createClient } from "@/utils/supabase/server";
 
@@ -10,29 +10,6 @@ export const metadata: Metadata = {
   description: "I build scalable ML infrastructure, cloud systems, and automation pipelines.",
 };
 
-const PROJECTS = [
-  {
-    title: "Kubernetes Cluster Autoscaler",
-    description: "Built a highly available ML inferencing cluster that dynamically scales GPU nodes based on real-time traffic queues, reducing cloud costs by 45%.",
-    tech: ["Kubernetes", "Terraform", "AWS EKS", "Go"],
-    github: "https://github.com/bhawuk/k8s-autoscaler",
-    demo: null,
-  },
-  {
-    title: "RAG Evaluation Pipeline",
-    description: "Automated MLOps pipeline for continuously testing and validating RAG application accuracy against golden datasets using MLflow and LangChain.",
-    tech: ["Python", "MLflow", "LangChain", "Docker"],
-    github: "https://github.com/bhawuk/rag-eval",
-    demo: "https://demo.example.com",
-  },
-  {
-    title: "Terraform Module Registry",
-    description: "Internal self-service platform for developers to provision standardized, pre-approved AWS resources through an internal API.",
-    tech: ["Terraform", "FastAPI", "AWS", "GitHub Actions"],
-    github: "https://github.com/bhawuk/tf-registry",
-    demo: null,
-  }
-];
 
 const TIMELINE = [
   {
@@ -131,7 +108,7 @@ export default async function HomePage() {
             <Link href="/blog" className="px-5 py-2.5 rounded text-[var(--text-primary)] bg-[var(--bg-elevated)] border border-[var(--border)] hover:bg-[var(--border)] transition-colors">
               Read Blog
             </Link>
-            <a href="https://github.com/geeky-bhawu-arora" target="_blank" rel="noopener noreferrer" className="px-5 py-2.5 rounded text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors underline underline-offset-4 decoration-[var(--border)] hover:decoration-white">
+            <a href="https://github.com/geeky-bhawuk-arora" target="_blank" rel="noopener noreferrer" className="px-5 py-2.5 rounded text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors underline underline-offset-4 decoration-[var(--border)] hover:decoration-white">
               GitHub
             </a>
             <a href="https://linkedin.com/in/bhawuk-arora" target="_blank" rel="noopener noreferrer" className="px-5 py-2.5 rounded text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors underline underline-offset-4 decoration-[var(--border)] hover:decoration-white">
@@ -195,7 +172,7 @@ export default async function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {PROJECTS.map(proj => (
+            {projects.map(proj => (
               <div key={proj.title} className="flex flex-col p-6 rounded-xl bg-[var(--bg-card)] border border-[var(--border)] hover:border-[var(--text-muted)] transition-colors">
                 <div className="flex justify-between items-start mb-4">
                   <h3 className="text-lg font-bold text-[var(--text-primary)] font-['Space_Grotesk'] leading-tight">
