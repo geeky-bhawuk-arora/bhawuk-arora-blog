@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-export type Category = 'Kubernetes' | 'Terraform' | 'CI/CD' | 'MLOps pipelines' | 'Infrastructure' | 'Cloud architecture' | 'DevOps tooling' | 'Machine Learning Systems' | 'Databricks' | 'Docker' | 'MLflow' | 'System design';
+export type Category = string;
 
 export interface Post {
     slug: string;

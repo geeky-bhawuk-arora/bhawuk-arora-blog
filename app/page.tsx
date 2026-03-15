@@ -6,6 +6,8 @@ import { workExperience, education, certifications } from "@/lib/experience";
 import { formatDate } from "@/lib/utils";
 import { createClient } from "@/utils/supabase/server";
 import AnimatedSection from "@/components/AnimatedSection";
+import HeroHandshake from "@/components/HeroHandshake";
+import { Cpu, Terminal, Database, Cloud, Code, BarChart } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Bhawuk Arora — MLOps Engineer",
@@ -43,14 +45,22 @@ export default async function HomePage() {
           <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_2px_2px,var(--border)_1px,transparent_0)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-20 pointer-events-none" />
 
           <div className="relative z-10">
-            <div className="flex items-center gap-2 mb-8 group/status">
-              <div className="flex h-2 w-2 relative">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            <div className="flex items-center gap-6 mb-12 font-mono text-[9px] uppercase tracking-[0.3em] text-[var(--text-muted)]">
+              <div className="flex items-center gap-2">
+                <div className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-20"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </div>
+                <span className="text-emerald-400/90 font-bold">Node.Live</span>
               </div>
-              <span className="text-[10px] font-mono text-[var(--text-muted)] uppercase tracking-[0.2em] group-hover/status:text-[var(--text-primary)] transition-colors">
-                Human Node: <span className="text-emerald-400">Stable</span> — System Pulse Identified
-              </span>
+              <div className="hidden sm:block h-3 w-[1px] bg-[var(--border)]" />
+              <div className="hidden sm:flex items-center gap-2 opacity-60">
+                <span>Relay: Local Cluster</span>
+              </div>
+              <div className="hidden lg:block h-3 w-[1px] bg-[var(--border)]" />
+              <div className="hidden lg:flex items-center gap-2 opacity-60">
+                <span>Protocol: HTTPS/3</span>
+              </div>
             </div>
 
             <div className="max-w-4xl">
@@ -71,7 +81,7 @@ export default async function HomePage() {
                 href="/projects"
                 className="px-8 py-4 rounded-xl text-white bg-[var(--accent-blue)] hover:bg-blue-600 transition-all font-bold shadow-lg shadow-blue-500/20 hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2 group"
               >
-                View Systems <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                View My Work <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
               </Link>
 
               <div className="flex gap-4">
@@ -85,9 +95,9 @@ export default async function HomePage() {
                 </a>
                 <Link
                   href="/blog"
-                  className="flex-1 sm:flex-none px-6 py-4 rounded-xl text-[var(--text-primary)] bg-[var(--bg-elevated)] border border-[var(--border)] hover:border-[var(--text-muted)] hover:bg-[var(--bg-card)] transition-all font-bold text-center"
+                  className="flex-1 sm:flex-none px-4 sm:px-6 py-4 rounded-xl text-[var(--text-primary)] bg-[var(--bg-elevated)] border border-[var(--border)] hover:border-[var(--text-muted)] hover:bg-[var(--bg-card)] transition-all font-bold text-center text-sm sm:text-base"
                 >
-                  Engineering Log
+                  Blog
                 </Link>
               </div>
             </div>
@@ -95,11 +105,10 @@ export default async function HomePage() {
         </section>
 
         {/* FEATURED POST */}
-        {/* LATEST ARTICLES */}
         <section className="mb-24">
-          <div className="flex items-center justify-between mb-6 border-b border-[var(--border)] pb-2">
-            <h2 className="text-sm font-mono font-bold uppercase tracking-widest text-[var(--accent-blue)]">Technical Briefs</h2>
-            <Link href="/blog" className="text-xs font-mono text-[var(--text-secondary)] hover:text-[var(--text-primary)] flex items-center gap-1.5 transition-colors group">
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-xl font-bold text-[var(--text-primary)] tracking-tight">My Thoughts</h2>
+            <Link href="/blog" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent-blue)] flex items-center gap-1.5 transition-colors group">
               Historical Logs <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
             </Link>
           </div>
@@ -108,7 +117,7 @@ export default async function HomePage() {
             {typedPosts.slice(0, 4).map((post, i) => (
               <AnimatedSection key={post.slug} delay={i * 100}>
                 <Link href={`/blog/${post.slug}`} className="group block h-full outline-none">
-                  <article className="p-8 rounded-2xl bg-[var(--bg-card)] border border-[var(--border)] hover:border-[var(--accent-blue)]/50 transition-all duration-300 relative overflow-hidden h-full flex flex-col hover:shadow-2xl hover:shadow-blue-500/5 group/card">
+                  <article className="p-6 sm:p-8 rounded-2xl bg-[var(--bg-card)] border border-[var(--border)] hover:border-[var(--accent-blue)]/50 transition-all duration-300 relative overflow-hidden h-full flex flex-col hover:shadow-2xl hover:shadow-blue-500/5 group/card">
                     {/* Technical Accent */}
                     <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 blur-[60px] opacity-0 group-hover/card:opacity-100 transition-opacity" />
 
@@ -117,7 +126,7 @@ export default async function HomePage() {
                       <span>{formatDate(post.publishedAt)}</span>
                     </div>
 
-                    <h3 className="text-2xl font-bold text-[var(--text-primary)] group-hover/card:text-[var(--accent-blue)] transition-colors mb-4 tracking-tight leading-tight">
+                    <h3 className="text-xl sm:text-2xl font-bold text-[var(--text-primary)] group-hover/card:text-[var(--accent-blue)] transition-colors mb-4 tracking-tight leading-tight">
                       {post.title}
                     </h3>
 
@@ -137,13 +146,16 @@ export default async function HomePage() {
             ))}
           </div>
         </section>
+        <AnimatedSection>
+          <div className="mb-24">
+            <HeroHandshake />
+          </div>
+        </AnimatedSection>
 
-
-        {/* PROJECTS SECTION */}
         <section className="mb-24">
-          <div className="flex items-center justify-between mb-6 border-b border-[var(--border)] pb-2">
-            <h2 className="text-sm font-mono font-bold uppercase tracking-widest text-[var(--accent-blue)]">System Implementations</h2>
-            <Link href="/projects" className="text-xs font-mono text-[var(--text-secondary)] hover:text-[var(--text-primary)] flex items-center gap-1.5 transition-colors group">
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-xl font-bold text-[var(--text-primary)] tracking-tight">System Implementations</h2>
+            <Link href="/projects" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent-blue)] flex items-center gap-1.5 transition-colors group">
               Full Registry <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
             </Link>
           </div>
@@ -190,8 +202,8 @@ export default async function HomePage() {
             {/* Experience Column */}
             <div className="space-y-10">
               <AnimatedSection>
-                <div className="flex items-center gap-3 mb-6 border-b border-[var(--border)] pb-2">
-                  <h2 className="text-sm font-mono font-bold uppercase tracking-widest text-[var(--accent-blue)]">Professional Journey</h2>
+                <div className="flex items-center gap-3 mb-8">
+                  <h2 className="text-xl font-bold text-[var(--text-primary)] tracking-tight">Experience</h2>
                 </div>
               </AnimatedSection>
 
@@ -206,7 +218,7 @@ export default async function HomePage() {
                           <div className="flex items-center justify-between gap-2 mb-1">
                             <h3 className="text-xl font-bold text-[var(--text-primary)] leading-tight">{job.title}</h3>
                             {job.period.toLowerCase().includes('present') && (
-                              <span className="px-2 py-0.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 font-bold font-mono text-[9px] tracking-widest uppercase shrink-0">Current</span>
+                              <span className="px-2 py-0.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 font-bold text-[10px] shrink-0">Current</span>
                             )}
                           </div>
                           <p className="text-[var(--accent-blue)] font-bold text-sm tracking-wide">{job.company}</p>
@@ -235,8 +247,8 @@ export default async function HomePage() {
             {/* Education Column */}
             <div className="space-y-10">
               <AnimatedSection>
-                <div className="flex items-center gap-3 mb-6 border-b border-[var(--border)] pb-2">
-                  <h2 className="text-sm font-mono font-bold uppercase tracking-widest text-[var(--accent-purple)]">Academic Foundation</h2>
+                <div className="flex items-center gap-3 mb-8">
+                  <h2 className="text-xl font-bold text-[var(--text-primary)] tracking-tight">Education</h2>
                 </div>
               </AnimatedSection>
 
@@ -272,8 +284,8 @@ export default async function HomePage() {
         {/* CERTIFICATIONS SECTION - FULL WIDTH */}
         <section className="mb-24">
           <AnimatedSection>
-            <div className="flex items-center gap-3 mb-6 border-b border-[var(--border)] pb-2">
-              <h2 className="text-sm font-mono font-bold uppercase tracking-widest text-[var(--accent-blue)]">Certifications</h2>
+            <div className="flex items-center gap-3 mb-8">
+              <h2 className="text-xl font-bold text-[var(--text-primary)] tracking-tight">Certifications</h2>
             </div>
           </AnimatedSection>
 
@@ -295,7 +307,42 @@ export default async function HomePage() {
           </div>
         </section>
 
+        <section className="mb-24">
+          <AnimatedSection>
+            <div className="flex items-center gap-3 mb-8">
+              <h2 className="text-xl font-bold text-[var(--text-primary)] tracking-tight">Technical Arsenal</h2>
+            </div>
+          </AnimatedSection>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            {[
+              { label: 'MLOps', icon: <Cpu size={20} />, items: ['TensorFlow', 'PyTorch', 'MLflow', 'Kubeflow'] },
+              { label: 'Cloud Infrastructure', icon: <Cloud size={20} />, items: ['Azure', 'AWS', 'Terraform', 'Kubernetes'] },
+              { label: 'Data Engineering', icon: <Database size={20} />, items: ['PostgreSQL', 'Redis', 'Vector DBs', 'Airflow'] },
+              { label: 'Backend Systems', icon: <Terminal size={20} />, items: ['Python', 'Node.js', 'Go', 'FastAPI'] },
+              { label: 'Frontend & UI', icon: <Code size={20} />, items: ['React', 'Next.js', 'TypeScript', 'Tailwind'] },
+              { label: 'Analytics', icon: <BarChart size={20} />, items: ['PowerBI', 'ELK Stack', 'Prometheus', 'Grafana'] }
+            ].map((skill, i) => (
+              <AnimatedSection key={i} delay={i * 80}>
+                <div className="p-5 rounded-2xl bg-[var(--bg-card)] border border-[var(--border)] h-full hover:border-[var(--accent-blue)]/50 transition-all group/skill">
+                  <div className="text-[var(--accent-blue)] mb-4 p-2.5 rounded-xl bg-[var(--accent-blue)]/5 border border-[var(--accent-blue)]/10 w-fit group-hover/skill:bg-[var(--accent-blue)]/10 transition-colors">
+                    {skill.icon}
+                  </div>
+                  <h3 className="text-xs font-bold text-[var(--text-primary)] mb-3">{skill.label}</h3>
+                  <div className="space-y-1.5 text-[10px] font-mono text-[var(--text-muted)]">
+                    {skill.items.map((item, idx) => (
+                      <div key={idx} className="flex items-center gap-2">
+                        <span className="w-1 h-1 rounded-full bg-[var(--accent-blue)] opacity-50" />
+                        {item}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </section>
       </div>
-    </main>
+    </main >
   );
 }

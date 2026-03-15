@@ -7,7 +7,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Post, Category } from '@/lib/data';
 import { formatDate } from '@/lib/utils';
 
-const CATEGORIES: Array<'All' | Category> = ['All', 'Kubernetes', 'Terraform', 'MLOps pipelines', 'System design', 'Databricks', 'Docker', 'MLflow'];
 const POSTS_PER_PAGE = 8;
 
 function CleanCard({ post }: { post: Post }) {
@@ -56,7 +55,12 @@ function CleanCard({ post }: { post: Post }) {
 
 export default function BlogClient({ initialPosts }: { initialPosts: Post[] }) {
     const [search, setSearch] = useState('');
-    const [activeCategory, setActiveCategory] = useState<'All' | Category>('All');
+    const [activeCategory, setActiveCategory] = useState<string>('All');
+    const categories = useMemo(() => {
+        const unique = new Set(initialPosts.map(p => p.category));
+        return ['All', ...Array.from(unique).sort()];
+    }, [initialPosts]);
+
     const [visibleCount, setVisibleCount] = useState(POSTS_PER_PAGE);
 
     const filtered = useMemo(() => {
@@ -79,12 +83,12 @@ export default function BlogClient({ initialPosts }: { initialPosts: Post[] }) {
         <main className="min-h-screen pt-32 pb-24 w-full flex flex-col items-center">
 
             {/* Header */}
-            <div className="w-full max-w-5xl mx-auto px-6 md:px-8 mb-16">
-                <h1 className="text-5xl md:text-7xl font-black tracking-tighter mb-6 text-[var(--text-primary)] leading-[0.9]">
-                    Engineering / <br />
-                    <span className="text-[var(--accent-blue)]">Intelligence.</span>
+            <div className="w-full max-w-5xl mx-auto px-6 md:px-8 mb-12 sm:mb-16">
+                <h1 className="text-4xl sm:text-7xl font-black tracking-tighter mb-4 sm:mb-6 text-[var(--text-primary)] leading-[0.9]">
+                    Technical / <br />
+                    <span className="text-[var(--accent-blue)]">Blog.</span>
                 </h1>
-                <p className="text-lg text-[var(--text-secondary)] leading-relaxed max-w-2xl mb-12 border-l-2 border-[var(--border)] pl-6 py-1">
+                <p className="text-base sm:text-lg text-[var(--text-secondary)] leading-relaxed max-w-2xl mb-8 sm:mb-12 border-l-2 border-[var(--border)] pl-4 sm:pl-6 py-1">
                     Essays on building scalable ML infrastructure, cloud architecture, and the craft of engineering.
                 </p>
 
@@ -107,7 +111,7 @@ export default function BlogClient({ initialPosts }: { initialPosts: Post[] }) {
                     </div>
 
                     <div className="flex overflow-x-auto pb-2 -mx-2 px-2 md:pb-0 md:mx-0 md:px-0 md:flex-wrap gap-2 scrollbar-hide">
-                        {CATEGORIES.map(cat => {
+                        {categories.map((cat: string) => {
                             const isActive = activeCategory === cat;
                             return (
                                 <button

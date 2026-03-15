@@ -23,6 +23,7 @@ export const metadata: Metadata = {
 
 import LoadingScreen from "@/components/LoadingScreen";
 import CustomCursor from "@/components/CustomCursor";
+import NewsletterModal from "@/components/NewsletterModal";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -30,9 +31,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
-      <body className="flex flex-col min-h-screen">
+      <body className="flex flex-col min-h-screen" suppressHydrationWarning>
         <LoadingScreen />
         <CustomCursor />
+        <NewsletterModal />
         <Providers>
           <Suspense fallback={null}>
             <GoogleAnalytics />
@@ -54,7 +56,7 @@ function SiteFooter() {
     <footer className="border-t border-[var(--border)] bg-[var(--bg-secondary)] mt-auto">
       <div className="max-w-5xl mx-auto px-6 md:px-8 py-10 flex flex-wrap items-center justify-between gap-4">
         <p className="text-xs font-mono text-[var(--text-muted)] flex items-center gap-1.5 uppercase tracking-widest">
-          System Node Operational <span className="w-1.5 h-3 bg-[var(--accent-blue)] animate-pulse" /> Established by Bhawuk
+          Made with <Heart size={12} className="text-red-500 fill-red-500" /> by Bhawuk
         </p>
 
         <div className="flex gap-6">
