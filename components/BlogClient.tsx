@@ -19,7 +19,7 @@ function CleanCard({ post }: { post: Post }) {
         >
             <Link href={`/blog/${post.slug}`} className="absolute inset-0 z-10 outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-xl" />
 
-            <div className="flex items-center gap-3 mb-4 font-mono text-xs text-[var(--text-muted)] uppercase tracking-wider">
+            <div className="flex items-center gap-3 mb-4 font-medium text-xs text-[var(--text-muted)]">
                 <span className="flex items-center justify-center w-6 h-6 rounded bg-[var(--bg-elevated)] border border-[var(--border)] text-base">
                     {post.emoji}
                 </span>
@@ -39,12 +39,12 @@ function CleanCard({ post }: { post: Post }) {
             <div className="flex items-center justify-between mt-auto pt-4 border-t border-[var(--border)]">
                 <div className="flex gap-2">
                     {post.tags.slice(0, 3).map(tag => (
-                        <span key={tag} className="px-2 py-0.5 rounded text-[11px] font-mono bg-[var(--bg-elevated)] text-[var(--text-muted)] border border-[var(--border)]">
+                        <span key={tag} className="px-2 py-0.5 rounded text-[11px] font-medium bg-[var(--bg-elevated)] text-[var(--text-muted)] border border-[var(--border)]">
                             #{tag}
                         </span>
                     ))}
                 </div>
-                <div className="flex items-center gap-1.5 font-mono text-[11px] text-[var(--text-muted)] shrink-0">
+                <div className="flex items-center gap-1.5 font-medium text-[11px] text-[var(--text-muted)] shrink-0">
                     <Clock size={12} />
                     {post.readingTime}m
                 </div>
@@ -117,7 +117,7 @@ export default function BlogClient({ initialPosts }: { initialPosts: Post[] }) {
                                 <button
                                     key={cat}
                                     onClick={() => setActiveCategory(cat)}
-                                    className={`flex-shrink-0 px-4 py-2 rounded-lg text-xs font-mono font-bold transition-all duration-200 outline-none border uppercase tracking-widest ${isActive
+                                    className={`flex-shrink-0 px-4 py-2 rounded-lg text-xs font-bold transition-all duration-200 outline-none border tracking-wide ${isActive
                                         ? 'bg-[var(--accent-blue)] text-white border-[var(--accent-blue)] shadow-lg shadow-blue-500/20'
                                         : 'bg-[var(--bg-elevated)] text-[var(--text-secondary)] border-[var(--border)] hover:border-[var(--text-muted)] hover:text-[var(--text-primary)]'
                                         }`}
@@ -146,7 +146,7 @@ export default function BlogClient({ initialPosts }: { initialPosts: Post[] }) {
                             exit={{ opacity: 0 }}
                             className="flex flex-col items-center justify-center py-20 rounded-xl bg-[var(--bg-card)] border border-dashed border-[var(--border)]"
                         >
-                            <p className="text-[var(--text-muted)] text-sm mb-4 font-mono uppercase tracking-wider">No results found</p>
+                            <p className="text-[var(--text-muted)] text-sm mb-4 font-medium">No results found</p>
                             <button
                                 onClick={() => { setSearch(''); setActiveCategory('All'); }}
                                 className="px-5 py-2 rounded bg-[var(--bg-elevated)] border border-[var(--border)] text-[var(--text-primary)] hover:border-[var(--text-muted)] text-sm transition-colors font-medium"

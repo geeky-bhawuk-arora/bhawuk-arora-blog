@@ -45,13 +45,13 @@ export default async function HomePage() {
           <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_2px_2px,var(--border)_1px,transparent_0)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-20 pointer-events-none" />
 
           <div className="relative z-10">
-            <div className="flex items-center gap-6 mb-12 font-mono text-[9px] uppercase tracking-[0.3em] text-[var(--text-muted)]">
+            <div className="flex items-center gap-6 mb-12 font-medium text-[10px] tracking-[0.2em] text-[var(--text-muted)]">
               <div className="flex items-center gap-2">
                 <div className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-20"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                 </div>
-                <span className="text-emerald-400/90 font-bold">Node.Live</span>
+                <span className="text-emerald-400 font-bold">Node.Live</span>
               </div>
               <div className="hidden sm:block h-3 w-[1px] bg-[var(--border)]" />
               <div className="hidden sm:flex items-center gap-2 opacity-60">
@@ -95,7 +95,7 @@ export default async function HomePage() {
                 </a>
                 <Link
                   href="/blog"
-                  className="flex-1 sm:flex-none px-4 sm:px-6 py-4 rounded-xl text-[var(--text-primary)] bg-[var(--bg-elevated)] border border-[var(--border)] hover:border-[var(--text-muted)] hover:bg-[var(--bg-card)] transition-all font-bold text-center text-sm sm:text-base"
+                  className="flex-1 sm:flex-none px-6 py-4 rounded-xl text-[var(--text-primary)] bg-[var(--bg-elevated)] border border-[var(--border)] hover:border-[var(--text-muted)] hover:bg-[var(--bg-card)] transition-all font-bold text-center text-sm sm:text-base"
                 >
                   Blog
                 </Link>
@@ -106,10 +106,10 @@ export default async function HomePage() {
 
         {/* FEATURED POST */}
         <section className="mb-24">
-          <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center justify-between mb-8 border-b border-[var(--border)] pb-4">
             <h2 className="text-xl font-bold text-[var(--text-primary)] tracking-tight">My Thoughts</h2>
             <Link href="/blog" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent-blue)] flex items-center gap-1.5 transition-colors group">
-              Historical Logs <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
+              View Blog <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
             </Link>
           </div>
 
@@ -153,10 +153,10 @@ export default async function HomePage() {
         </AnimatedSection>
 
         <section className="mb-24">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-xl font-bold text-[var(--text-primary)] tracking-tight">System Implementations</h2>
+          <div className="flex items-center justify-between mb-8 border-b border-[var(--border)] pb-4">
+            <h2 className="text-xl font-bold text-[var(--text-primary)] tracking-tight">Recent Work</h2>
             <Link href="/projects" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent-blue)] flex items-center gap-1.5 transition-colors group">
-              Full Registry <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
+              All Projects <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
             </Link>
           </div>
 
@@ -185,7 +185,7 @@ export default async function HomePage() {
 
                 <div className="flex flex-wrap gap-2 mt-auto">
                   {proj.tech.map(t => (
-                    <span key={t} className="px-2.5 py-1 rounded-lg text-[10px] font-mono bg-[var(--bg-elevated)] text-[var(--text-muted)] border border-[var(--border)] tracking-wider uppercase font-bold">
+                    <span key={t} className="px-2.5 py-1 rounded-lg text-[10px] font-medium bg-[var(--bg-elevated)] text-[var(--text-muted)] border border-[var(--border)]">
                       {t}
                     </span>
                   ))}
@@ -202,7 +202,7 @@ export default async function HomePage() {
             {/* Experience Column */}
             <div className="space-y-10">
               <AnimatedSection>
-                <div className="flex items-center gap-3 mb-8">
+                <div className="flex items-center gap-3 mb-8 border-b border-[var(--border)] pb-4">
                   <h2 className="text-xl font-bold text-[var(--text-primary)] tracking-tight">Experience</h2>
                 </div>
               </AnimatedSection>
@@ -224,7 +224,7 @@ export default async function HomePage() {
                           <p className="text-[var(--accent-blue)] font-bold text-sm tracking-wide">{job.company}</p>
                         </div>
 
-                        <div className="flex flex-wrap items-center gap-4 text-[10px] text-[var(--text-muted)] mb-4 font-mono uppercase tracking-wider">
+                        <div className="flex flex-wrap items-center gap-4 text-[11px] text-[var(--text-muted)] mb-4 font-medium">
                           <span className="flex items-center gap-1.5"><Calendar size={12} /> {job.period}</span>
                           <span className="flex items-center gap-1.5"><MapPin size={12} /> {job.location}</span>
                         </div>
@@ -233,7 +233,7 @@ export default async function HomePage() {
 
                         <div className="flex flex-wrap gap-2 pt-4 border-t border-[var(--border)]">
                           {job.highlights.map((h, i) => (
-                            <span key={i} className="px-2.5 py-1 rounded-lg text-[10px] font-mono bg-[var(--bg-elevated)] border border-[var(--border)] text-[var(--text-muted)] font-bold uppercase tracking-wider">
+                            <span key={i} className="px-2.5 py-1 rounded-lg text-[10px] font-medium bg-[var(--bg-elevated)] border border-[var(--border)] text-[var(--text-muted)]">
                               {h}
                             </span>
                           ))}
@@ -247,7 +247,7 @@ export default async function HomePage() {
             {/* Education Column */}
             <div className="space-y-10">
               <AnimatedSection>
-                <div className="flex items-center gap-3 mb-8">
+                <div className="flex items-center gap-3 mb-8 border-b border-[var(--border)] pb-4">
                   <h2 className="text-xl font-bold text-[var(--text-primary)] tracking-tight">Education</h2>
                 </div>
               </AnimatedSection>
@@ -263,10 +263,10 @@ export default async function HomePage() {
                         <div className="flex-1">
                           <div className="flex flex-wrap items-center justify-between gap-3 mb-2">
                             <h4 className="text-xl font-bold text-[var(--text-primary)] leading-tight">{edu.degree}</h4>
-                            <span className="px-2.5 py-0.5 rounded-full bg-green-500/10 border border-green-500/20 text-green-400 font-bold font-mono text-[10px] tracking-widest uppercase">{edu.grade}</span>
+                            <span className="px-2.5 py-0.5 rounded-full bg-green-500/10 border border-green-500/20 text-green-400 font-bold text-[10px]">{edu.grade}</span>
                           </div>
-                          <p className="text-sm text-[var(--accent-purple)] font-bold mb-2 uppercase tracking-wide">{edu.field}</p>
-                          <p className="text-xs text-[var(--text-muted)] mb-4 font-mono uppercase tracking-wider">{edu.institution} • {edu.location}</p>
+                          <p className="text-sm text-[var(--accent-purple)] font-bold mb-2 tracking-wide">{edu.field}</p>
+                          <p className="text-xs text-[var(--text-muted)] mb-4 font-medium">{edu.institution} • {edu.location}</p>
 
                           <p className="text-sm text-[var(--text-secondary)] leading-relaxed border-l-2 border-purple-500/20 pl-4 py-1 italic font-medium">
                             {edu.description}
@@ -284,7 +284,7 @@ export default async function HomePage() {
         {/* CERTIFICATIONS SECTION - FULL WIDTH */}
         <section className="mb-24">
           <AnimatedSection>
-            <div className="flex items-center gap-3 mb-8">
+            <div className="flex items-center gap-3 mb-8 border-b border-[var(--border)] pb-4">
               <h2 className="text-xl font-bold text-[var(--text-primary)] tracking-tight">Certifications</h2>
             </div>
           </AnimatedSection>
@@ -299,7 +299,7 @@ export default async function HomePage() {
                   </div>
                   <div className="relative z-10">
                     <p className="text-[13px] font-bold text-[var(--text-primary)] leading-snug group-hover/card:text-[var(--accent-blue)] transition-colors mb-0.5">{cert.name}</p>
-                    <p className="text-[9px] font-mono text-[var(--text-muted)] uppercase tracking-[0.15em] font-bold">{cert.issuer}</p>
+                    <p className="text-[10px] font-medium text-[var(--text-muted)]">{cert.issuer}</p>
                   </div>
                 </div>
               </AnimatedSection>
@@ -309,7 +309,7 @@ export default async function HomePage() {
 
         <section className="mb-24">
           <AnimatedSection>
-            <div className="flex items-center gap-3 mb-8">
+            <div className="flex items-center gap-3 mb-8 border-b border-[var(--border)] pb-4">
               <h2 className="text-xl font-bold text-[var(--text-primary)] tracking-tight">Technical Arsenal</h2>
             </div>
           </AnimatedSection>

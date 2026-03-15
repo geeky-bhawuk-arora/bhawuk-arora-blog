@@ -45,7 +45,7 @@ export const education: Education[] = [
         period: "November 2022 - May 2026 (Expected)",
         location: "Jaipur, Rajasthan, India",
         grade: "CGPA: 9.08",
-        description: "Comprehensive education in AI, machine learning, data science, deep learning, and software development.",
+        description: "Building a rigorous foundation in Machine Learning and Systems Engineering, with a specialized focus on the architectures that power modern AI at scale.",
         icon: "college"
     }
 ];
