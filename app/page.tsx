@@ -63,22 +63,28 @@ export default async function HomePage() {
 
         {/* HERO SECTION */}
         <section className="mb-24 mt-8">
-          <div className="flex items-center gap-2.5 mb-6">
-            <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-[var(--bg-elevated)] border border-[var(--border)] overflow-hidden">
-              <img src="/logo.svg" alt="Logo" className="w-full h-full object-cover" />
+          <div className="flex items-center gap-4 mb-10 group">
+            <div className="relative shrink-0">
+              <img src="/logo.svg" alt="Logo" className="w-7 h-7 rounded-lg shadow-lg shadow-blue-500/10 group-hover:scale-110 transition-transform duration-300" />
+              <div className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-green-500 border-2 border-[var(--bg)] rounded-full animate-pulse" />
             </div>
-            <span className="text-sm font-mono text-[var(--text-secondary)] tracking-tight">Status: Architecting production MLOps</span>
+            <div className="flex flex-col">
+              <span className="text-[10px] font-mono font-bold text-[var(--text-muted)] uppercase tracking-[0.2em] mb-0.5">Current Status</span>
+              <span className="text-sm font-mono text-[var(--text-secondary)]">Architecting production MLOps</span>
+            </div>
           </div>
 
-          <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight mb-6 text-[var(--text-primary)] leading-[1.05] font-['Space_Grotesk']">
-            Bhawuk Arora
+          <h1 className="text-6xl sm:text-7xl md:text-8xl font-black tracking-tighter mb-4 text-[var(--text-primary)] leading-[0.9] font-['Space_Grotesk']">
+            Bhawuk <span className="text-[var(--accent-blue)]">Arora</span>
           </h1>
-          <h2 className="text-2xl sm:text-3xl font-medium text-[var(--text-secondary)] mb-8 font-['Space_Grotesk'] tracking-tight">
-            DevOps & MLOps Engineer
-          </h2>
+          <div className="flex flex-wrap gap-x-4 gap-y-2 mb-10 font-mono text-sm text-[var(--text-muted)] font-bold">
+            <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-blue-500" /> DevOps Wizard</span>
+            <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-purple-500" /> MLOps Architect</span>
+            <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-green-500" /> Chaos Engineer</span>
+          </div>
 
-          <p className="text-lg md:text-xl text-[var(--text-secondary)] leading-relaxed max-w-2xl mb-12">
-            I build the data foundations and automation pipelines that power intelligent systems. Specialized in <span className="text-[var(--text-primary)] font-semibold">Kubernetes</span>, <span className="text-[var(--text-primary)] font-semibold">Terraform</span>, and <span className="text-[var(--text-primary)] font-semibold">Scalable Infrastructure</span>.
+          <p className="text-xl md:text-2xl text-[var(--text-secondary)] leading-tight max-w-xl mb-12 font-medium tracking-tight">
+            I build <span className="text-[var(--text-primary)]">bulletproof infrastructure</span> that scales before you even realize you need it. I turn complex cloud chaos into <span className="italic text-[var(--accent-blue)]">elegant automation.</span>
           </p>
 
           <div className="flex flex-wrap items-center gap-4 font-mono text-sm">
