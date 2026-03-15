@@ -158,7 +158,7 @@ code,
 }
 
 .card-premium:hover {
-  @apply border-[var(--accent-blue)]/50 shadow-2xl shadow-blue-500/5 -translate-y-1;
+  @apply border-[var(--accent-blue)]/50 shadow-lg shadow-blue-500/5 -translate-y-1;
 }
 
 .no-scrollbar::-webkit-scrollbar {

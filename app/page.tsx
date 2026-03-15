@@ -64,16 +64,16 @@ export default async function HomePage() {
         {/* HERO SECTION */}
         <section className="mb-24 mt-8">
           <div className="flex items-center gap-2.5 mb-6">
-            <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-[var(--accent-blue)]/10 border border-[var(--accent-blue)]/20 text-[var(--accent-blue)]">
-              <Terminal size={16} />
-            </span>
+            <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-[var(--bg-elevated)] border border-[var(--border)] overflow-hidden">
+              <img src="/logo.svg" alt="Logo" className="w-full h-full object-cover" />
+            </div>
             <span className="text-sm font-mono text-[var(--text-secondary)] tracking-tight">Status: Architecting production MLOps</span>
           </div>
 
           <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight mb-6 text-[var(--text-primary)] leading-[1.05] font-['Space_Grotesk']">
             Bhawuk Arora
           </h1>
-          <h2 className="text-2xl sm:text-3xl font-medium text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500 mb-8 font-['Space_Grotesk'] tracking-tight">
+          <h2 className="text-2xl sm:text-3xl font-medium text-[var(--text-secondary)] mb-8 font-['Space_Grotesk'] tracking-tight">
             DevOps & MLOps Engineer
           </h2>
 
@@ -82,7 +82,7 @@ export default async function HomePage() {
           </p>
 
           <div className="flex flex-wrap items-center gap-4 font-mono text-sm">
-            <Link href="/projects" className="px-6 py-3 rounded-xl text-white bg-[var(--accent-blue)] hover:bg-blue-600 transition-all font-bold shadow-lg shadow-blue-500/20 hover:scale-[1.02] active:scale-[0.98]">
+            <Link href="/projects" className="px-6 py-3 rounded-xl text-white bg-[var(--accent-blue)] hover:bg-blue-700 transition-all font-bold shadow-md hover:scale-[1.02] active:scale-[0.98]">
               View Projects
             </Link>
             <Link href="/blog" className="px-6 py-3 rounded-xl text-[var(--text-primary)] bg-[var(--bg-elevated)] border border-[var(--border)] hover:border-[var(--text-muted)] transition-all font-bold hover:scale-[1.02] active:scale-[0.98]">
@@ -187,84 +187,105 @@ export default async function HomePage() {
           <section className="md:col-span-3">
             <AnimatedSection>
               <div className="flex items-center gap-3 mb-10 border-b border-[var(--border)] pb-2">
-                <h2 className="text-sm font-mono font-bold uppercase tracking-widest text-[var(--accent-blue)]">Professional Journey</h2>
+                <h2 className="text-sm font-mono font-bold uppercase tracking-widest text-[var(--text-primary)]">Professional Journey</h2>
               </div>
             </AnimatedSection>
 
-            <div className="space-y-12 relative border-l border-[var(--border)] ml-3">
+            <div className="space-y-8">
               {workExperience.map((job, index) => (
                 <AnimatedSection key={index} delay={index * 100}>
-                  <div className="relative pl-10">
-                    <div className="absolute -left-[9px] top-2 w-4 h-4 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 border-4 border-[var(--bg)] shadow-[0_0_15px_rgba(59,130,246,0.3)]" />
-
-                    <div className="bg-[var(--bg-card)] border border-[var(--border)] p-6 rounded-2xl transition-all duration-300 hover:border-[var(--accent-blue)]/30 hover:shadow-xl hover:-translate-y-1 relative group overflow-hidden">
-                      <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity" />
-
-                      <div className="mb-2">
+                  <div className="bg-[var(--bg-card)] border border-[var(--border)] p-6 rounded-2xl transition-all duration-300 hover:border-[var(--accent-blue)]/30 hover:shadow-lg hover:-translate-y-1 relative group overflow-hidden">
+                    <div className="mb-2">
+                      <div className="flex items-center justify-between gap-2 mb-1">
                         <h3 className="text-xl font-bold text-[var(--text-primary)] font-['Space_Grotesk'] leading-tight">{job.title}</h3>
-                        <p className="text-[var(--accent-blue)] font-bold text-sm tracking-wide">{job.company}</p>
+                        {job.period.toLowerCase().includes('present') && (
+                          <span className="px-2 py-0.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 font-bold font-mono text-[9px] tracking-widest uppercase shrink-0">Current</span>
+                        )}
                       </div>
+                      <p className="text-[var(--accent-blue)] font-bold text-sm tracking-wide">{job.company}</p>
+                    </div>
 
-                      <div className="flex flex-wrap items-center gap-5 text-[11px] text-[var(--text-muted)] mb-5 font-mono">
-                        <span className="flex items-center gap-1.5"><Calendar size={14} className="text-[var(--accent-blue)]/50" /> {job.period}</span>
-                        <span className="flex items-center gap-1.5"><MapPin size={14} className="text-[var(--accent-blue)]/50" /> {job.location}</span>
-                      </div>
+                    <div className="flex flex-wrap items-center gap-5 text-[11px] text-[var(--text-muted)] mb-5 font-mono">
+                      <span className="flex items-center gap-1.5"><Calendar size={14} className="text-[var(--accent-blue)]/50" /> {job.period}</span>
+                      <span className="flex items-center gap-1.5"><MapPin size={14} className="text-[var(--accent-blue)]/50" /> {job.location}</span>
+                    </div>
 
-                      <p className="text-sm text-[var(--text-secondary)] leading-relaxed mb-6">{job.description}</p>
+                    <p className="text-sm text-[var(--text-secondary)] leading-relaxed mb-6">{job.description}</p>
 
-                      <div className="flex flex-wrap gap-2 pt-4 border-t border-[var(--border)]">
-                        {job.highlights.map((h, i) => (
-                          <span key={i} className="px-2.5 py-1 rounded-lg text-[10px] font-mono bg-[var(--bg-elevated)] border border-[var(--border)] text-[var(--text-muted)] group-hover:border-[var(--accent-blue)]/20 transition-colors">
-                            {h}
-                          </span>
-                        ))}
-                      </div>
+                    <div className="flex flex-wrap gap-2 pt-4 border-t border-[var(--border)]">
+                      {job.highlights.map((h, i) => (
+                        <span key={i} className="px-2.5 py-1 rounded-lg text-[10px] font-mono bg-[var(--bg-elevated)] border border-[var(--border)] text-[var(--text-muted)] group-hover:border-[var(--accent-blue)]/20 transition-colors">
+                          {h}
+                        </span>
+                      ))}
                     </div>
                   </div>
                 </AnimatedSection>
               ))}
             </div>
+
+            <AnimatedSection delay={200}>
+              <div className="mt-8">
+                <a
+                  href="https://linkedin.com/in/bhawu-arora"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs font-mono font-bold text-[var(--text-muted)] hover:text-[var(--accent-blue)] transition-colors flex items-center gap-2 group"
+                >
+                  Explore more on LinkedIn <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                </a>
+              </div>
+            </AnimatedSection>
 
             {/* EDUCATION */}
             <AnimatedSection delay={200}>
               <div className="flex items-center gap-3 mb-10 border-b border-[var(--border)] pb-2 mt-24">
-                <h2 className="text-sm font-mono font-bold uppercase tracking-widest text-[var(--accent-purple)]">Education</h2>
+                <h2 className="text-sm font-mono font-bold uppercase tracking-widest text-[var(--text-primary)]">Education</h2>
               </div>
             </AnimatedSection>
 
-            <div className="space-y-8 relative border-l border-[var(--border)] ml-3">
+            <div className="space-y-8">
               {education.map((edu, index) => (
                 <AnimatedSection key={index} delay={index * 120}>
-                  <div className="relative pl-10">
-                    <div className="absolute -left-[9px] top-2 w-4 h-4 rounded-full bg-gradient-to-br from-purple-500 to-pink-600 border-4 border-[var(--bg)] shadow-[0_0_15px_rgba(168,85,247,0.3)]" />
-
-                    <div className="bg-[var(--bg-card)] border border-[var(--border)] p-6 rounded-2xl transition-all duration-300 hover:border-[var(--accent-purple)]/30 hover:shadow-xl hover:-translate-y-1 group">
-                      <div className="flex flex-col sm:flex-row sm:items-start gap-5">
-                        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-600 to-indigo-600 flex items-center justify-center shrink-0 shadow-lg shadow-purple-500/10 group-hover:scale-110 transition-transform duration-300">
-                          <GraduationCap size={24} className="text-white" />
+                  <div className="bg-[var(--bg-card)] border border-[var(--border)] p-6 rounded-2xl transition-all duration-300 hover:border-[var(--accent-purple)]/30 hover:shadow-lg hover:-translate-y-1 group">
+                    <div className="flex flex-col sm:flex-row sm:items-start gap-5">
+                      <div className="w-12 h-12 rounded-xl bg-[var(--bg-elevated)] border border-[var(--border)] flex items-center justify-center shrink-0 group-hover:border-[var(--accent-purple)] transition-colors duration-300">
+                        <GraduationCap size={24} className="text-[var(--accent-purple)]" />
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex flex-wrap items-center justify-between gap-3 mb-2">
+                          <h4 className="text-xl font-bold text-[var(--text-primary)] font-['Space_Grotesk'] leading-tight">{edu.degree}</h4>
+                          <span className="px-2.5 py-0.5 rounded-full bg-green-500/10 border border-green-500/20 text-green-400 font-bold font-mono text-[10px] tracking-widest uppercase">{edu.grade}</span>
                         </div>
-                        <div className="flex-1">
-                          <div className="flex flex-wrap items-center justify-between gap-3 mb-2">
-                            <h4 className="text-xl font-bold text-[var(--text-primary)] font-['Space_Grotesk'] leading-tight">{edu.degree}</h4>
-                            <span className="px-2.5 py-0.5 rounded-full bg-green-500/10 border border-green-500/20 text-green-400 font-bold font-mono text-[10px] tracking-widest uppercase">{edu.grade}</span>
-                          </div>
-                          <p className="text-sm text-[var(--accent-purple)] font-semibold mb-2">{edu.field}</p>
-                          <p className="text-xs text-[var(--text-muted)] font-medium mb-4">{edu.institution} • {edu.location}</p>
+                        <p className="text-sm text-[var(--accent-purple)] font-semibold mb-2">{edu.field}</p>
+                        <p className="text-xs text-[var(--text-muted)] font-medium mb-4">{edu.institution} • {edu.location}</p>
 
-                          <div className="flex items-center gap-2 text-[10px] font-mono text-[var(--text-muted)] px-3 py-1 rounded-lg bg-[var(--bg)] border border-[var(--border)] w-fit mb-4 font-bold">
-                            <Calendar size={12} /> {edu.period}
-                          </div>
-
-                          <p className="text-sm text-[var(--text-secondary)] leading-relaxed border-l-2 border-purple-500/20 pl-4 py-1 italic">
-                            {edu.description}
-                          </p>
+                        <div className="flex items-center gap-2 text-[10px] font-mono text-[var(--text-muted)] px-3 py-1 rounded-lg bg-[var(--bg)] border border-[var(--border)] w-fit mb-4 font-bold">
+                          <Calendar size={12} /> {edu.period}
                         </div>
+
+                        <p className="text-sm text-[var(--text-secondary)] leading-relaxed border-l-2 border-purple-500/20 pl-4 py-1 italic">
+                          {edu.description}
+                        </p>
                       </div>
                     </div>
                   </div>
                 </AnimatedSection>
               ))}
             </div>
+
+            <AnimatedSection delay={300}>
+              <div className="mt-8">
+                <a
+                  href="https://linkedin.com/in/bhawu-arora"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs font-mono font-bold text-[var(--text-muted)] hover:text-[var(--accent-purple)] transition-colors flex items-center gap-2 group"
+                >
+                  Explore more on LinkedIn <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                </a>
+              </div>
+            </AnimatedSection>
           </section>
 
           {/* ASIDE: TECH STACK & CERTIFICATIONS */}
@@ -327,7 +348,7 @@ export default async function HomePage() {
           </aside>
         </div>
 
-      </div>
-    </main>
+      </div >
+    </main >
   );
 }

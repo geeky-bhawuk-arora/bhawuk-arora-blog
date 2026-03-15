@@ -13,3 +13,14 @@ export function formatDate(dateStr: string): string {
         day: "numeric",
     });
 }
+
+export function generateSlug(text: string): string {
+    const base = text
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-|-$/g, '');
+
+    // Add a unique 6-character hex suffix for security/uniqueness
+    const suffix = Math.random().toString(16).substring(2, 8);
+    return `${base}-${suffix}`;
+}

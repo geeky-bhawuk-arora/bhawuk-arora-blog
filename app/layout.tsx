@@ -15,6 +15,10 @@ export const metadata: Metadata = {
     "Thoughts on code, AI, design, career, and the craft of building software. Written by Bhawuk.",
   keywords: ["developer", "blog", "typescript", "nextjs", "AI", "design"],
   authors: [{ name: "Bhawuk" }],
+  icons: {
+    icon: "/logo.svg",
+    apple: "/logo.svg",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -23,13 +27,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
-      <body>
+      <body className="flex flex-col min-h-screen">
         <Providers>
           <Suspense fallback={null}>
             <GoogleAnalytics />
           </Suspense>
           <Navbar />
-          {children}
+          <div className="flex-1">
+            {children}
+          </div>
           <SiteFooter />
         </Providers>
       </body>

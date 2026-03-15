@@ -37,9 +37,12 @@ export default function Navbar() {
                 <div className="max-w-5xl md:max-w-7xl mx-auto px-5 md:px-8 flex items-center justify-between">
 
                     {/* Logo */}
-                    <Link href="/" className="flex items-center gap-2 group shrink-0 outline-none">
+                    <Link href="/" className="flex items-center gap-3 group shrink-0 outline-none">
+                        <div className="relative w-8 h-8 rounded-lg overflow-hidden border border-[var(--border)] group-hover:border-[var(--accent-blue)] transition-all">
+                            <img src="/logo.svg" alt="Bhawuk Logo" className="w-full h-full object-cover" />
+                        </div>
                         <span className="font-['Space_Grotesk'] text-lg font-bold tracking-tight text-[var(--text-primary)] group-hover:text-[var(--accent-blue)] transition-colors">
-                            bhawuk.
+                            bhawuk
                         </span>
                     </Link>
 
