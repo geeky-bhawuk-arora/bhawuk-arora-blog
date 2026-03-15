@@ -4,7 +4,7 @@ import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { Search, X, Clock, Calendar } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { posts, Post, Category } from '@/lib/data';
+import { Post, Category } from '@/lib/data';
 import { formatDate } from '@/lib/utils';
 
 const CATEGORIES: Array<'All' | Category> = ['All', 'Kubernetes', 'Terraform', 'MLOps pipelines', 'System design', 'Databricks', 'Docker', 'MLflow'];
@@ -54,14 +54,14 @@ function CleanCard({ post }: { post: Post }) {
     );
 }
 
-export default function BlogClient() {
+export default function BlogClient({ initialPosts }: { initialPosts: Post[] }) {
     const [search, setSearch] = useState('');
     const [activeCategory, setActiveCategory] = useState<'All' | Category>('All');
     const [visibleCount, setVisibleCount] = useState(POSTS_PER_PAGE);
 
     const filtered = useMemo(() => {
         const q = search.toLowerCase();
-        return posts.filter(p => {
+        return initialPosts.filter(p => {
             const matchesCat = activeCategory === 'All' || p.category === activeCategory;
             const matchesSearch = !q ||
                 p.title.toLowerCase().includes(q) ||

@@ -3,7 +3,7 @@
 import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, Clock, Calendar, Check, Copy } from 'lucide-react';
-import { Post, CATEGORY_COLORS, CATEGORY_BG, posts as allPosts } from '@/lib/data';
+import { Post, CATEGORY_COLORS, CATEGORY_BG } from '@/lib/data';
 import { formatDate } from '@/lib/utils';
 import TableOfContents from '@/components/TableOfContents';
 import ShareButtons from '@/components/ShareButtons';
@@ -151,10 +151,10 @@ function SimpleRelatedCard({ post }: { post: Post }) {
     );
 }
 
-export default function ArticleClient({ post }: { post: Post }) {
+export default function ArticleClient({ post, relatedPosts = [] }: { post: Post, relatedPosts?: Post[] }) {
     const blocks = useMemo(() => parseBlocks(post.content), [post.content]);
     const tocItems = useMemo(() => blocks.filter((b): b is Extract<Block, { type: 'h2' | 'h3' }> => b.type === 'h2' || b.type === 'h3').map(b => ({ id: b.id, text: b.text, level: b.type === 'h2' ? 2 : 3 })), [blocks]);
-    const related = allPosts.filter(p => p.slug !== post.slug && p.category === post.category).slice(0, 2);
+    const related = relatedPosts.slice(0, 2);
 
     return (
         <main className="min-h-screen pt-32 pb-32">

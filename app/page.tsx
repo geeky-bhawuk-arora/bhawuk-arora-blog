@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Github, ExternalLink, Terminal } from "lucide-react";
-import { posts, Post } from "@/lib/data";
+import { Post } from "@/lib/data";
 import { formatDate } from "@/lib/utils";
+import { createClient } from "@/utils/supabase/server";
 
 export const metadata: Metadata = {
   title: "Bhawuk Arora — DevOps & MLOps Engineer",
@@ -79,9 +80,16 @@ function MiniPostRow({ post }: { post: Post }) {
   );
 }
 
-export default function HomePage() {
-  const featured = posts.find(p => p.featured) || posts[0];
-  const recentPosts = posts.filter(p => !p.featured).slice(0, 4);
+export default async function HomePage() {
+  const supabase = await createClient();
+  const { data: posts } = await supabase
+    .from("posts")
+    .select("*")
+    .order("published_at", { ascending: false });
+
+  const typedPosts = (posts || []) as Post[];
+  const featured = typedPosts.find(p => p.featured) || typedPosts[0];
+  const recentPosts = typedPosts.filter(p => !p.featured).slice(0, 4);
 
   return (
     <main className="min-h-screen pt-32 pb-24 w-full flex flex-col items-center">
