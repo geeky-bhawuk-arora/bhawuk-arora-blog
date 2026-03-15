@@ -6,7 +6,7 @@ import { formatDate } from "@/lib/utils";
 import { createClient } from "@/utils/supabase/server";
 
 export const metadata: Metadata = {
-  title: "Bhawuk Arora — DevOps & MLOps Engineer",
+  title: "Bhawuk Arora — MLOps Engineer",
   description: "I build scalable ML infrastructure, cloud systems, and automation pipelines.",
 };
 
@@ -131,10 +131,10 @@ export default async function HomePage() {
             <Link href="/blog" className="px-5 py-2.5 rounded text-[var(--text-primary)] bg-[var(--bg-elevated)] border border-[var(--border)] hover:bg-[var(--border)] transition-colors">
               Read Blog
             </Link>
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="px-5 py-2.5 rounded text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors underline underline-offset-4 decoration-[var(--border)] hover:decoration-white">
+            <a href="https://github.com/geeky-bhawu-arora" target="_blank" rel="noopener noreferrer" className="px-5 py-2.5 rounded text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors underline underline-offset-4 decoration-[var(--border)] hover:decoration-white">
               GitHub
             </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="px-5 py-2.5 rounded text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors underline underline-offset-4 decoration-[var(--border)] hover:decoration-white">
+            <a href="https://linkedin.com/in/bhawuk-arora" target="_blank" rel="noopener noreferrer" className="px-5 py-2.5 rounded text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors underline underline-offset-4 decoration-[var(--border)] hover:decoration-white">
               LinkedIn
             </a>
           </div>

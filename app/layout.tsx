@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Providers from "@/components/Providers";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: {
@@ -22,6 +24,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <Providers>
+          <Suspense fallback={null}>
+            <GoogleAnalytics />
+          </Suspense>
           <Navbar />
           {children}
           <SiteFooter />
@@ -92,15 +97,21 @@ function SiteFooter() {
             color: "var(--text-muted)",
           }}
         >
-          © {year} Bhawuk — Built with Next.js
+          Made with love by Bhawuk
         </p>
 
         {/* Static links — no event handlers */}
         <div style={{ display: "flex", gap: "1.25rem" }}>
-          {(["Twitter", "GitHub", "LinkedIn"] as const).map((s) => (
+          {[
+            { label: "GitHub", href: "https://github.com/geeky-bhawuk-arora" },
+            { label: "LinkedIn", href: "https://linkedin.com/in/bhawuk-arora" },
+            { label: "Email", href: "mailto:bhawuk.arora008@gmail.com" }
+          ].map((s) => (
             <a
-              key={s}
-              href="#"
+              key={s.label}
+              href={s.href}
+              target="_blank"
+              rel="noopener noreferrer"
               style={{
                 fontSize: "0.75rem",
                 fontFamily: "JetBrains Mono, monospace",
@@ -109,7 +120,7 @@ function SiteFooter() {
                 transition: "color 0.2s",
               }}
             >
-              {s}
+              {s.label}
             </a>
           ))}
         </div>

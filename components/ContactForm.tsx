@@ -92,20 +92,20 @@ const ContactForm = () => {
                                 <ContactLink
                                     icon={<Mail size={20} />}
                                     label="Email me at"
-                                    value="hello@bhawuk.dev"
-                                    href="mailto:hello@bhawuk.dev"
+                                    value="bhawuk.arora008@gmail.com"
+                                    href="mailto:bhawuk.arora008@gmail.com"
                                 />
                                 <ContactLink
                                     icon={<Github size={20} />}
                                     label="Follow on GitHub"
-                                    value="github.com/bhawuk"
-                                    href="https://github.com/bhawuk"
+                                    value="github.com/geeky-bhawuk-arora"
+                                    href="https://github.com/geeky-bhawuk-arora"
                                 />
                                 <ContactLink
                                     icon={<Linkedin size={20} />}
                                     label="Connect on LinkedIn"
-                                    value="linkedin.com/in/bhawuk"
-                                    href="https://linkedin.com/in/bhawuk"
+                                    value="linkedin.com/in/bhawuk-arora"
+                                    href="https://linkedin.com/in/bhawuk-arora"
                                 />
                             </div>
 

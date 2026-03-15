@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const navLinks = [
     { href: '/', label: 'Home' },
-    { href: '/projects', label: 'Projects' },
+    // { href: '/projects', label: 'Projects' },
     { href: '/blog', label: 'Blog' },
     { href: '/about', label: 'About' },
     { href: '/contact', label: 'Contact' },
@@ -62,13 +62,13 @@ export default function Navbar() {
                     {/* Socials & Menu */}
                     <div className="flex items-center gap-4 shrink-0">
                         <div className="hidden md:flex items-center gap-3">
-                            <a href="mailto:hello@bhawuk.dev" className="text-[var(--text-secondary)] hover:text-white transition-colors p-1" title="Email">
+                            <a href="mailto:bhawuk.arora008@gmail.com" className="text-[var(--text-secondary)] hover:text-white transition-colors p-1" title="Email">
                                 <Mail size={18} />
                             </a>
-                            <a href="https://github.com/bhawuk" target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-white transition-colors p-1" title="GitHub">
+                            <a href="https://github.com/geeky-bhawu-arora" target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-white transition-colors p-1" title="GitHub">
                                 <Github size={18} />
                             </a>
-                            <a href="https://linkedin.com/in/bhawuk" target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-white transition-colors p-1" title="LinkedIn">
+                            <a href="https://linkedin.com/in/bhawuk-arora" target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-white transition-colors p-1" title="LinkedIn">
                                 <Linkedin size={18} />
                             </a>
                         </div>
@@ -112,13 +112,13 @@ export default function Navbar() {
                         </div>
 
                         <div className="mt-8 pt-6 border-t border-[var(--border)] flex items-center justify-center gap-6">
-                            <a href="mailto:hello@bhawuk.dev" className="text-[var(--text-secondary)] hover:text-white p-2">
+                            <a href="mailto:bhawuk.arora008@gmail.com" className="text-[var(--text-secondary)] hover:text-white p-2">
                                 <Mail size={24} />
                             </a>
-                            <a href="https://github.com/bhawuk" target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-white p-2">
+                            <a href="https://github.com/geeky-bhawuk-arora" target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-white p-2">
                                 <Github size={24} />
                             </a>
-                            <a href="https://linkedin.com/in/bhawuk" target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-white p-2">
+                            <a href="https://linkedin.com/in/bhawuk-arora" target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-white p-2">
                                 <Linkedin size={24} />
                             </a>
                         </div>
