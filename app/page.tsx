@@ -192,6 +192,29 @@ export default async function HomePage() {
                 </div>
               </div>
             ))}
+
+            {/* Explore More Card */}
+            <div className="flex flex-col p-8 rounded-2xl bg-[var(--bg-elevated)] border-2 border-dashed border-[var(--border)] hover:border-[var(--accent-blue)]/50 transition-all duration-300 relative overflow-hidden group/card justify-center items-center text-center h-full min-h-[300px]">
+              <div className="absolute inset-0 bg-blue-500/[0.02] opacity-0 group-hover/card:opacity-100 transition-opacity" />
+              <div className="relative z-10">
+                <div className="w-12 h-12 rounded-full bg-[var(--bg-card)] border border-[var(--border)] flex items-center justify-center mx-auto mb-4 group-hover/card:scale-110 transition-transform shadow-lg shadow-blue-500/5">
+                  <Github size={24} className="text-[var(--accent-blue)]" />
+                </div>
+                <h3 className="text-xl font-bold text-[var(--text-primary)] mb-2">More Coming Soon</h3>
+                <p className="text-[var(--text-secondary)] text-sm mb-6 max-w-xs mx-auto font-medium">
+                  Currently architecting high-throughput systems and distributed modules.
+                  <span className="block mt-2">More implementations arriving shortly.</span>
+                </p>
+                <a
+                  href="https://github.com/geeky-bhawuk-arora"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[var(--bg-card)] border border-[var(--border)] text-sm font-bold text-[var(--text-primary)] hover:border-[var(--accent-blue)] hover:text-[var(--accent-blue)] transition-all group/link shadow-sm"
+                >
+                  Explore GitHub <ArrowRight size={14} className="group-hover/link:translate-x-1 transition-transform" />
+                </a>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -307,7 +330,7 @@ export default async function HomePage() {
           </div>
         </section>
 
-        <section className="mb-24">
+        {/* <section className="mb-24">
           <AnimatedSection>
             <div className="flex items-center gap-3 mb-8 border-b border-[var(--border)] pb-4">
               <h2 className="text-xl font-bold text-[var(--text-primary)] tracking-tight">Technical Arsenal</h2>
@@ -341,7 +364,7 @@ export default async function HomePage() {
               </AnimatedSection>
             ))}
           </div>
-        </section>
+        </section> */}
       </div>
     </main >
   );
