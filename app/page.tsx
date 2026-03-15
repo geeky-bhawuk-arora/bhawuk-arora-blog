@@ -43,17 +43,26 @@ export default async function HomePage() {
           <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_2px_2px,var(--border)_1px,transparent_0)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-20 pointer-events-none" />
 
           <div className="relative z-10">
+            <div className="flex items-center gap-2 mb-8 group/status">
+              <div className="flex h-2 w-2 relative">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </div>
+              <span className="text-[10px] font-mono text-[var(--text-muted)] uppercase tracking-[0.2em] group-hover/status:text-[var(--text-primary)] transition-colors">
+                Human Node: <span className="text-emerald-400">Stable</span> — System Pulse Identified
+              </span>
+            </div>
 
             <div className="max-w-4xl">
               <h1 className="text-6xl sm:text-7xl md:text-9xl font-black tracking-tighter mb-6 text-[var(--text-primary)] leading-[0.85]">
                 Bhawuk <span className="text-[var(--accent-blue)]">Arora.</span>
               </h1>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-8 text-[var(--text-secondary)]">
-                Thinking in systems. <br className="hidden md:block" /> Building for scale.
+                MLOps & Systems Engineering.
               </h2>
 
               <p className="text-lg md:text-xl text-[var(--text-muted)] leading-relaxed max-w-2xl mb-12 font-medium">
-                I bridge the gap between experimental machine learning and enterprise-grade production. Specializing in <span className="text-[var(--text-primary)]">MLOps</span>, <span className="text-[var(--text-primary)]">Cloud Architecture</span>, and <span className="text-[var(--text-primary)]">Reliability Engineering</span>.
+                Operationalizing high-throughput ML systems and distributed infrastructure.
               </p>
             </div>
 
@@ -62,7 +71,7 @@ export default async function HomePage() {
                 href="/projects"
                 className="px-8 py-4 rounded-xl text-white bg-[var(--accent-blue)] hover:bg-blue-600 transition-all font-bold shadow-lg shadow-blue-500/20 hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2 group"
               >
-                Explore Portfolio <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                View Systems <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
               </Link>
 
               <div className="flex gap-4">
@@ -78,7 +87,7 @@ export default async function HomePage() {
                   href="/blog"
                   className="flex-1 sm:flex-none px-6 py-4 rounded-xl text-[var(--text-primary)] bg-[var(--bg-elevated)] border border-[var(--border)] hover:border-[var(--text-muted)] hover:bg-[var(--bg-card)] transition-all font-bold text-center"
                 >
-                  Blog
+                  Engineering Log
                 </Link>
               </div>
             </div>
@@ -89,9 +98,9 @@ export default async function HomePage() {
         {/* LATEST ARTICLES */}
         <section className="mb-24">
           <div className="flex items-center justify-between mb-6 border-b border-[var(--border)] pb-2">
-            <h2 className="text-sm font-mono font-bold uppercase tracking-widest text-[var(--accent-blue)]">Latest Engineering Thinking</h2>
+            <h2 className="text-sm font-mono font-bold uppercase tracking-widest text-[var(--accent-blue)]">Technical Briefs</h2>
             <Link href="/blog" className="text-xs font-mono text-[var(--text-secondary)] hover:text-[var(--text-primary)] flex items-center gap-1.5 transition-colors group">
-              View archives <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
+              Historical Logs <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
             </Link>
           </div>
 
@@ -118,9 +127,9 @@ export default async function HomePage() {
 
                     <div className="mt-auto flex items-center justify-between">
                       <div className="flex items-center gap-2 font-mono text-[10px] text-[var(--accent-blue)] font-bold uppercase tracking-widest">
-                        Access Deep Dive <ArrowRight size={12} className="group-hover/card:translate-x-1 transition-transform" />
+                        Examine Logic <ArrowRight size={12} className="group-hover/card:translate-x-1 transition-transform" />
                       </div>
-                      <span className="text-[10px] font-mono text-[var(--text-muted)] uppercase tracking-tighter opacity-70">{post.readingTime}m session</span>
+                      <span className="text-[10px] font-mono text-[var(--text-muted)] uppercase tracking-tighter opacity-70">{post.readingTime}m runtime</span>
                     </div>
                   </article>
                 </Link>
@@ -133,9 +142,9 @@ export default async function HomePage() {
         {/* PROJECTS SECTION */}
         <section className="mb-24">
           <div className="flex items-center justify-between mb-6 border-b border-[var(--border)] pb-2">
-            <h2 className="text-sm font-mono font-bold uppercase tracking-widest text-[var(--accent-blue)]">Engineering Work</h2>
+            <h2 className="text-sm font-mono font-bold uppercase tracking-widest text-[var(--accent-blue)]">System Implementations</h2>
             <Link href="/projects" className="text-xs font-mono text-[var(--text-secondary)] hover:text-[var(--text-primary)] flex items-center gap-1.5 transition-colors group">
-              Full portfolio <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
+              Full Registry <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
             </Link>
           </div>
 
@@ -223,74 +232,70 @@ export default async function HomePage() {
                 ))}
               </div>
             </div>
+            {/* Education Column */}
+            <div className="space-y-10">
+              <AnimatedSection>
+                <div className="flex items-center gap-3 mb-6 border-b border-[var(--border)] pb-2">
+                  <h2 className="text-sm font-mono font-bold uppercase tracking-widest text-[var(--accent-purple)]">Academic Foundation</h2>
+                </div>
+              </AnimatedSection>
 
-            {/* Education & Certs Column */}
-            <div className="space-y-12">
-              {/* Education Section */}
-              <div className="space-y-8">
-                <AnimatedSection>
-                  <div className="flex items-center gap-3 mb-6 border-b border-[var(--border)] pb-2">
-                    <h2 className="text-sm font-mono font-bold uppercase tracking-widest text-[var(--accent-purple)]">Academic Foundation</h2>
-                  </div>
-                </AnimatedSection>
-
-                <div className="space-y-6">
-                  {education.map((edu, index) => (
-                    <AnimatedSection key={index} delay={index * 120}>
-                      <div className="bg-[var(--bg-card)] border border-[var(--border)] p-8 rounded-2xl transition-all duration-300 hover:border-[var(--accent-purple)]/50 hover:shadow-2xl hover:shadow-purple-500/5 group/card overflow-hidden">
-                        <div className="flex flex-col sm:flex-row sm:items-start gap-6 relative z-10">
-                          <div className="w-14 h-14 rounded-2xl bg-[var(--bg-elevated)] border border-[var(--border)] flex items-center justify-center shrink-0 group-hover/card:border-[var(--accent-purple)] transition-colors duration-300 shadow-lg">
-                            <GraduationCap size={28} className="text-[var(--accent-purple)]" />
+              <div className="space-y-6">
+                {education.map((edu, index) => (
+                  <AnimatedSection key={index} delay={index * 120}>
+                    <div className="bg-[var(--bg-card)] border border-[var(--border)] p-8 rounded-2xl transition-all duration-300 hover:border-[var(--accent-purple)]/50 hover:shadow-2xl hover:shadow-purple-500/5 group/card overflow-hidden">
+                      <div className="flex flex-col sm:flex-row sm:items-start gap-6 relative z-10">
+                        <div className="w-14 h-14 rounded-2xl bg-[var(--bg-elevated)] border border-[var(--border)] flex items-center justify-center shrink-0 group-hover/card:border-[var(--accent-purple)] transition-colors duration-300 shadow-lg">
+                          <GraduationCap size={28} className="text-[var(--accent-purple)]" />
+                        </div>
+                        <div className="flex-1">
+                          <div className="flex flex-wrap items-center justify-between gap-3 mb-2">
+                            <h4 className="text-xl font-bold text-[var(--text-primary)] leading-tight">{edu.degree}</h4>
+                            <span className="px-2.5 py-0.5 rounded-full bg-green-500/10 border border-green-500/20 text-green-400 font-bold font-mono text-[10px] tracking-widest uppercase">{edu.grade}</span>
                           </div>
-                          <div className="flex-1">
-                            <div className="flex flex-wrap items-center justify-between gap-3 mb-2">
-                              <h4 className="text-xl font-bold text-[var(--text-primary)] leading-tight">{edu.degree}</h4>
-                              <span className="px-2.5 py-0.5 rounded-full bg-green-500/10 border border-green-500/20 text-green-400 font-bold font-mono text-[10px] tracking-widest uppercase">{edu.grade}</span>
-                            </div>
-                            <p className="text-sm text-[var(--accent-purple)] font-bold mb-2 uppercase tracking-wide">{edu.field}</p>
-                            <p className="text-xs text-[var(--text-muted)] mb-4 font-mono uppercase tracking-wider">{edu.institution} • {edu.location}</p>
+                          <p className="text-sm text-[var(--accent-purple)] font-bold mb-2 uppercase tracking-wide">{edu.field}</p>
+                          <p className="text-xs text-[var(--text-muted)] mb-4 font-mono uppercase tracking-wider">{edu.institution} • {edu.location}</p>
 
-                            <p className="text-sm text-[var(--text-secondary)] leading-relaxed border-l-2 border-purple-500/20 pl-4 py-1 italic font-medium">
-                              {edu.description}
-                            </p>
-                          </div>
+                          <p className="text-sm text-[var(--text-secondary)] leading-relaxed border-l-2 border-purple-500/20 pl-4 py-1 italic font-medium">
+                            {edu.description}
+                          </p>
                         </div>
                       </div>
-                    </AnimatedSection>
-                  ))}
-                </div>
-              </div>
-
-              {/* Certifications Section */}
-              <div className="space-y-8">
-                <AnimatedSection>
-                  <div className="flex items-center gap-3 mb-6 border-b border-[var(--border)] pb-2">
-                    <h2 className="text-sm font-mono font-bold uppercase tracking-widest text-[var(--accent-blue)]">Certifications</h2>
-                  </div>
-                </AnimatedSection>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
-                  {certifications.map((cert, index) => (
-                    <AnimatedSection key={index} delay={index * 120}>
-                      <div className="bg-[var(--bg-card)] border border-[var(--border)] p-5 rounded-2xl flex items-center gap-5 transition-all duration-300 hover:border-[var(--accent-blue)]/50 hover:shadow-xl hover:shadow-blue-500/5 group/card relative overflow-hidden">
-                        <div className="absolute top-0 right-0 w-24 h-24 bg-blue-500/5 blur-[40px] opacity-0 group-hover/card:opacity-100 transition-opacity" />
-                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center shrink-0 shadow-lg shadow-blue-500/10 group-hover/card:scale-105 transition-transform duration-300">
-                          <Award size={18} className="text-white" />
-                        </div>
-                        <div className="relative z-10">
-                          <p className="text-[13px] font-bold text-[var(--text-primary)] leading-snug group-hover/card:text-[var(--accent-blue)] transition-colors mb-0.5">{cert.name}</p>
-                          <p className="text-[9px] font-mono text-[var(--text-muted)] uppercase tracking-[0.15em] font-bold">{cert.issuer}</p>
-                        </div>
-                      </div>
-                    </AnimatedSection>
-                  ))}
-                </div>
+                    </div>
+                  </AnimatedSection>
+                ))}
               </div>
             </div>
           </div>
         </section>
 
-      </div >
-    </main >
+        {/* CERTIFICATIONS SECTION - FULL WIDTH */}
+        <section className="mb-24">
+          <AnimatedSection>
+            <div className="flex items-center gap-3 mb-6 border-b border-[var(--border)] pb-2">
+              <h2 className="text-sm font-mono font-bold uppercase tracking-widest text-[var(--accent-blue)]">Certifications</h2>
+            </div>
+          </AnimatedSection>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {certifications.map((cert, index) => (
+              <AnimatedSection key={index} delay={index * 120}>
+                <div className="bg-[var(--bg-card)] border border-[var(--border)] p-5 rounded-2xl flex items-center gap-5 transition-all duration-300 hover:border-[var(--accent-blue)]/50 hover:shadow-xl hover:shadow-blue-500/5 group/card relative overflow-hidden h-full">
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-blue-500/5 blur-[40px] opacity-0 group-hover/card:opacity-100 transition-opacity" />
+                  <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center shrink-0 shadow-lg shadow-blue-500/10 group-hover/card:scale-105 transition-transform duration-300">
+                    <Award size={18} className="text-white" />
+                  </div>
+                  <div className="relative z-10">
+                    <p className="text-[13px] font-bold text-[var(--text-primary)] leading-snug group-hover/card:text-[var(--accent-blue)] transition-colors mb-0.5">{cert.name}</p>
+                    <p className="text-[9px] font-mono text-[var(--text-muted)] uppercase tracking-[0.15em] font-bold">{cert.issuer}</p>
+                  </div>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </section>
+
+      </div>
+    </main>
   );
 }

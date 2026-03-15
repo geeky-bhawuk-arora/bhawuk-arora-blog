@@ -12,8 +12,8 @@ export const metadata: Metadata = {
     template: "%s | Bhawuk",
   },
   description:
-    "Thoughts on code, AI, design, career, and the craft of building software. Written by Bhawuk.",
-  keywords: ["developer", "blog", "typescript", "nextjs", "AI", "design"],
+    "Engineering logs on MLOps, Distributed Systems, and Infrastructure Automation by Bhawuk Arora.",
+  keywords: ["MLOps", "DevOps", "Infrastructure as Code", "Kubernetes", "Reliability Engineering"],
   authors: [{ name: "Bhawuk" }],
   icons: {
     icon: "/logo.svg",
@@ -53,8 +53,8 @@ function SiteFooter() {
   return (
     <footer className="border-t border-[var(--border)] bg-[var(--bg-secondary)] mt-auto">
       <div className="max-w-5xl mx-auto px-6 md:px-8 py-10 flex flex-wrap items-center justify-between gap-4">
-        <p className="text-xs font-mono text-[var(--text-muted)] flex items-center gap-1.5">
-          Made with <Heart size={12} className="text-red-500 fill-red-500" /> by Bhawuk
+        <p className="text-xs font-mono text-[var(--text-muted)] flex items-center gap-1.5 uppercase tracking-widest">
+          System Node Operational <span className="w-1.5 h-3 bg-[var(--accent-blue)] animate-pulse" /> Established by Bhawuk
         </p>
 
         <div className="flex gap-6">
