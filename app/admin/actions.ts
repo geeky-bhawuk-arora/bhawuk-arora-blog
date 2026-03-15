@@ -43,3 +43,42 @@ export async function deletePost(id: string) {
     revalidatePath('/')
     return { success: true }
 }
+
+export async function togglePostEnabled(id: string, enabled: boolean) {
+    const supabase = await createClient()
+    const headerList = await headers()
+
+    const ip = headerList.get('x-forwarded-for') || 'unknown'
+    const ua = headerList.get('user-agent') || 'unknown'
+
+    const { data: { user } } = await supabase.auth.getUser()
+
+    if (!user) {
+        throw new Error('Not authenticated')
+    }
+
+    const { data: post } = await supabase.from('posts').select('slug, title').eq('id', id).single()
+
+    const { error } = await supabase
+        .from('posts')
+        .update({ enabled })
+        .eq('id', id)
+
+    if (error) {
+        console.error(error)
+        throw new Error(error.message)
+    }
+
+    await supabase.from('audit_logs').insert({
+        user_id: user.id,
+        event_type: enabled ? 'enable_post' : 'disable_post',
+        ip_address: ip,
+        user_agent: ua,
+        metadata: { id, slug: post?.slug, title: post?.title, enabled }
+    })
+
+    revalidatePath('/blog')
+    revalidatePath('/')
+    revalidatePath('/admin')
+    return { success: true }
+}

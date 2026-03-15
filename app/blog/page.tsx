@@ -13,8 +13,10 @@ export default async function BlogPage() {
     const supabase = await createClient();
     const { data } = await supabase
         .from('posts')
-        .select('*')
-        .order('published_at', { ascending: false });
+        .select('slug, title, description, category, tags, reading_time, published_at, featured, emoji, pattern_type, accent_color, author, author_bio')
+        .eq('enabled', true)
+        .order('published_at', { ascending: false })
+        .limit(50);
 
     const posts = (data || []).map((p: any) => ({
         ...p,

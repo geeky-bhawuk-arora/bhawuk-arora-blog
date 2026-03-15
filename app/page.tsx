@@ -20,8 +20,10 @@ export default async function HomePage() {
   const supabase = await createClient();
   const { data: posts } = await supabase
     .from("posts")
-    .select("*")
-    .order("published_at", { ascending: false });
+    .select("slug, title, description, category, tags, reading_time, published_at, featured, emoji, pattern_type, accent_color, author, author_bio")
+    .eq("enabled", true)
+    .order("published_at", { ascending: false })
+    .limit(4);
 
   const mapPost = (p: any): Post => ({
     ...p,

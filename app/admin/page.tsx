@@ -3,12 +3,13 @@ import Link from 'next/link';
 import { createClient } from '@/utils/supabase/server';
 import { Plus, Edit2 } from 'lucide-react';
 import DeleteButton from '@/components/admin/DeleteButton';
+import ToggleButton from '@/components/admin/ToggleButton';
 
 export default async function AdminDashboard() {
     const supabase = await createClient();
     const { data: posts, error } = await supabase
         .from('posts')
-        .select('id, title, published_at, category, slug')
+        .select('id, title, published_at, category, slug, enabled')
         .order('published_at', { ascending: false });
 
     if (error) {
@@ -30,11 +31,18 @@ export default async function AdminDashboard() {
             <div className="grid gap-4">
                 {posts && posts.length > 0 ? (
                     posts.map((post) => (
-                        <div key={post.id} className="group flex items-center justify-between p-5 rounded-xl bg-[var(--bg-card)] border border-[var(--border)] transition-all hover:border-[var(--accent-blue)]/50 hover:shadow-xl hover:shadow-blue-500/5">
+                        <div key={post.id} className={`group flex items-center justify-between p-5 rounded-xl bg-[var(--bg-card)] border border-[var(--border)] transition-all hover:border-[var(--accent-blue)]/50 hover:shadow-xl hover:shadow-blue-500/5 ${post.enabled === false ? 'opacity-50' : ''}`}>
                             <div className="flex-1 min-w-0 mr-4">
-                                <h2 className="text-xl font-bold font-['Space_Grotesk'] text-[var(--text-primary)] leading-tight group-hover:text-[var(--accent-blue)] transition-colors truncate">
-                                    {post.title}
-                                </h2>
+                                <div className="flex items-center gap-3 mb-1">
+                                    <h2 className="text-xl font-bold font-['Space_Grotesk'] text-[var(--text-primary)] leading-tight group-hover:text-[var(--accent-blue)] transition-colors truncate">
+                                        {post.title}
+                                    </h2>
+                                    {post.enabled === false ? (
+                                        <span className="px-2 py-0.5 rounded-full bg-gray-500/10 border border-gray-500/20 text-gray-400 font-bold text-[10px] shrink-0">Draft</span>
+                                    ) : (
+                                        <span className="px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-bold text-[10px] shrink-0">Live</span>
+                                    )}
+                                </div>
                                 <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-[var(--text-muted)] mt-2">
                                     <span className="px-2 py-0.5 rounded bg-[var(--bg-elevated)] border border-[var(--border)]">{post.category}</span>
                                     <span>{new Date(post.published_at).toLocaleDateString()}</span>
@@ -42,7 +50,8 @@ export default async function AdminDashboard() {
                                     <span className="truncate max-w-[200px]">/{post.slug}</span>
                                 </div>
                             </div>
-                            <div className="flex items-center gap-1 shrink-0">
+                            <div className="flex items-center gap-3 shrink-0">
+                                <ToggleButton id={post.id} enabled={post.enabled !== false} />
                                 <Link
                                     href={`/admin/edit/${post.id}`}
                                     className="p-3 text-[var(--text-secondary)] hover:text-[var(--accent-blue)] hover:bg-[var(--bg-elevated)] rounded-lg transition-all"

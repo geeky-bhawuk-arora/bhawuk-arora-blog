@@ -15,9 +15,13 @@ create table public.posts (
   accent_color text default '#6366f1',
   author text default 'Bhawuk Arora',
   author_bio text default 'DevOps & MLOps Engineer',
+  enabled boolean default true not null,
   created_at timestamp with time zone default timezone('utc'::text, now()) not null,
   updated_at timestamp with time zone default timezone('utc'::text, now()) not null
 );
+
+-- Migration for existing databases: add 'enabled' column if it does not exist
+-- ALTER TABLE public.posts ADD COLUMN IF NOT EXISTS enabled boolean default true not null;
 
 -- 2. Set Row Level Security (RLS)
 alter table public.posts enable row level security;
