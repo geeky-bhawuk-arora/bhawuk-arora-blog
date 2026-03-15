@@ -74,17 +74,16 @@ export default async function HomePage() {
             </div>
           </div>
 
-          <h1 className="text-6xl sm:text-7xl md:text-8xl font-black tracking-tighter mb-4 text-[var(--text-primary)] leading-[0.9] font-['Space_Grotesk']">
-            Bhawuk <span className="text-[var(--accent-blue)]">Arora</span>
-          </h1>
-          <div className="flex flex-wrap gap-x-4 gap-y-2 mb-10 font-mono text-sm text-[var(--text-muted)] font-bold">
-            <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-blue-500" /> DevOps Wizard</span>
-            <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-purple-500" /> MLOps Architect</span>
-            <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-green-500" /> Chaos Engineer</span>
+          <div className="mb-6 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-mono font-bold uppercase tracking-widest">
+            BHAWUK ARORA / DEVOPS & MLOPS
           </div>
+          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight mb-8 text-[var(--text-primary)] leading-[1.05] font-['Space_Grotesk']">
+            Thinking in systems.<br />
+            Building for <span className="text-[var(--accent-blue)]">scale.</span>
+          </h1>
 
-          <p className="text-xl md:text-2xl text-[var(--text-secondary)] leading-tight max-w-xl mb-12 font-medium tracking-tight">
-            I build <span className="text-[var(--text-primary)]">bulletproof infrastructure</span> that scales before you even realize you need it. I turn complex cloud chaos into <span className="italic text-[var(--accent-blue)]">elegant automation.</span>
+          <p className="text-xl md:text-2xl text-[var(--text-secondary)] leading-tight max-w-2xl mb-12 font-medium tracking-tight">
+            I turn complex cloud infrastructure into elegant, automated systems. <span className="text-[var(--text-muted)] italic">Mostly so I can sleep soundly without 3 AM pager alerts.</span>
           </p>
 
           <div className="flex flex-wrap items-center gap-4 font-mono text-sm">
