@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Github, ExternalLink, Terminal } from "lucide-react";
+import { ArrowRight, Github, ExternalLink, Terminal, Calendar, MapPin, GraduationCap, Award, Heart } from "lucide-react";
 import { Post, projects } from "@/lib/data";
+import { workExperience, education, certifications } from "@/lib/experience";
 import { formatDate } from "@/lib/utils";
 import { createClient } from "@/utils/supabase/server";
+import AnimatedSection from "@/components/AnimatedSection";
 
 export const metadata: Metadata = {
   title: "Bhawuk Arora — MLOps Engineer",
@@ -11,26 +13,6 @@ export const metadata: Metadata = {
 };
 
 
-const TIMELINE = [
-  {
-    year: "Current",
-    title: "DevOps & App Modernization Intern",
-    company: "Celebal Technologies",
-    description: "Working on containerization, CI/CD, and migrating legacy workloads."
-  },
-  {
-    year: "2024",
-    title: "Building ML Infrastructure",
-    company: "Personal Projects",
-    description: "Experimenting with Databricks, MLflow, and distributed MLOps pipelines."
-  },
-  {
-    year: "2023",
-    title: "Cloud Architectures",
-    company: "Learning Phase",
-    description: "Deep dive into AWS, Terraform state management, and Kubernetes operators."
-  }
-];
 
 const STACK = ["Docker", "Kubernetes", "Terraform", "Python", "MLflow", "Databricks", "Git", "Linux", "AWS", "Bash", "CI/CD"];
 
@@ -204,48 +186,137 @@ export default async function HomePage() {
           </div>
         </section>
 
-        {/* TIMELINE AND TECH STACK */}
+        {/* PROFESSIONAL JOURNEY */}
         <div className="grid grid-cols-1 md:grid-cols-5 gap-12 md:gap-8 mb-24">
-
           <section className="md:col-span-3">
-            <div className="flex items-center gap-3 mb-8 border-b border-[var(--border)] pb-2">
-              <h2 className="text-sm font-mono font-bold uppercase tracking-widest text-[var(--text-primary)]">Learning Timeline</h2>
+            <AnimatedSection>
+              <div className="flex items-center gap-3 mb-8 border-b border-[var(--border)] pb-2">
+                <h2 className="text-sm font-mono font-bold uppercase tracking-widest text-[var(--text-primary)]">Professional Journey</h2>
+              </div>
+            </AnimatedSection>
+
+            <div className="space-y-12 relative border-l border-[var(--border)] ml-3">
+              {workExperience.map((job, index) => (
+                <AnimatedSection key={index} delay={index * 100}>
+                  <div className="relative pl-10">
+                    {/* Timeline Dot */}
+                    <div className="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 border-4 border-[var(--bg)] shadow-[0_0_15px_rgba(59,130,246,0.5)]" />
+
+                    <div className="bg-[var(--bg-card)] border border-[var(--border)] p-6 rounded-2xl transition-all duration-300 hover:border-blue-500/30 hover:shadow-xl hover:-translate-y-1">
+                      <div className="flex justify-between items-start mb-1">
+                        <h3 className="text-xl font-bold text-[var(--text-primary)] font-['Space_Grotesk']">{job.title}</h3>
+                        <span className="text-[10px] font-mono font-bold px-2 py-1 rounded bg-blue-500/10 text-blue-400 border border-blue-400/20">{job.duration}</span>
+                      </div>
+                      <p className="text-blue-400 font-semibold text-sm mb-3">{job.company}</p>
+
+                      <div className="flex flex-wrap items-center gap-4 text-xs text-[var(--text-muted)] mb-4">
+                        <span className="flex items-center gap-1.5"><Calendar size={14} /> {job.period}</span>
+                        <span className="flex items-center gap-1.5"><MapPin size={14} /> {job.location}</span>
+                      </div>
+
+                      <p className="text-sm text-[var(--text-secondary)] leading-relaxed mb-4">{job.description}</p>
+
+                      <div className="flex flex-wrap gap-2">
+                        {job.highlights.map((h, i) => (
+                          <span key={i} className="px-2 py-1 rounded-lg text-[10px] font-mono bg-[var(--bg)] border border-[var(--border)] text-[var(--text-muted)]">
+                            {h}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </AnimatedSection>
+              ))}
             </div>
-            <div className="flex flex-col gap-6 ml-2 border-l border-[var(--border)]">
-              {TIMELINE.map((item, i) => (
-                <div key={i} className="relative pl-6">
-                  <div className="absolute w-2.5 h-2.5 rounded-full bg-[var(--bg-elevated)] border border-[var(--text-muted)] -left-[5px] top-1.5" />
-                  <span className="text-xs font-mono text-[var(--accent-blue)] font-bold">{item.year}</span>
-                  <h4 className="text-base font-bold text-[var(--text-primary)] mt-1 font-['Space_Grotesk']">{item.title}</h4>
-                  <span className="text-xs font-mono text-[var(--text-muted)]">{item.company}</span>
-                  <p className="text-sm text-[var(--text-secondary)] mt-2 leading-relaxed">
-                    {item.description}
-                  </p>
-                </div>
+
+            {/* EDUCATION */}
+            <AnimatedSection delay={200}>
+              <div className="flex items-center gap-3 mb-8 border-b border-[var(--border)] pb-2 mt-20">
+                <h2 className="text-sm font-mono font-bold uppercase tracking-widest text-[var(--text-primary)]">Education</h2>
+              </div>
+            </AnimatedSection>
+
+            <div className="space-y-8 relative border-l border-[var(--border)] ml-3">
+              {education.map((edu, index) => (
+                <AnimatedSection key={index} delay={index * 120}>
+                  <div className="relative pl-10">
+                    <div className="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-gradient-to-br from-purple-500 to-pink-600 border-4 border-[var(--bg)] shadow-[0_0_15px_rgba(168,85,247,0.5)]" />
+
+                    <div className="bg-[var(--bg-card)] border border-[var(--border)] p-6 rounded-2xl transition-all duration-300 hover:border-purple-500/30 hover:shadow-xl hover:-translate-y-1">
+                      <div className="flex items-start gap-4">
+                        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center shrink-0">
+                          <GraduationCap size={22} className="text-white" />
+                        </div>
+                        <div>
+                          <h4 className="text-lg font-bold text-[var(--text-primary)] font-['Space_Grotesk']">{edu.degree}</h4>
+                          <p className="text-sm text-purple-400">{edu.field}</p>
+                          <p className="text-xs text-[var(--text-muted)] mt-1">{edu.institution}</p>
+                          <div className="text-[10px] font-mono text-[var(--text-muted)] mt-3">
+                            {edu.period} • <span className="text-green-400">{edu.grade}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </AnimatedSection>
               ))}
             </div>
           </section>
 
-          <aside className="md:col-span-2">
-            <div className="flex items-center gap-3 mb-8 border-b border-[var(--border)] pb-2">
-              <h2 className="text-sm font-mono font-bold uppercase tracking-widest text-[var(--text-primary)]">Tech Stack</h2>
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {STACK.map(tech => (
-                <span key={tech} className="px-3 py-1.5 rounded-md text-xs font-mono bg-[var(--bg-elevated)] text-[var(--text-muted)] border border-[var(--border)]">
-                  {tech}
-                </span>
-              ))}
-            </div>
+          {/* ASIDE: TECH STACK & CERTIFICATIONS */}
+          <aside className="md:col-span-2 space-y-20">
+            {/* TECH STACK */}
+            <section>
+              <AnimatedSection>
+                <div className="flex items-center gap-3 mb-8 border-b border-[var(--border)] pb-2">
+                  <h2 className="text-sm font-mono font-bold uppercase tracking-widest text-[var(--text-primary)]">Tech Stack</h2>
+                </div>
+              </AnimatedSection>
+              <div className="flex flex-wrap gap-2">
+                {STACK.map(tech => (
+                  <span key={tech} className="px-3 py-1.5 rounded-md text-xs font-mono bg-[var(--bg-elevated)] text-[var(--text-muted)] border border-[var(--border)]">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </section>
 
-            <div className="mt-12 flex items-center gap-3 mb-6 border-b border-[var(--border)] pb-2">
-              <h2 className="text-sm font-mono font-bold uppercase tracking-widest text-[var(--text-primary)]">Now</h2>
-            </div>
-            <p className="text-sm text-[var(--text-secondary)] leading-relaxed italic border-l-2 border-[var(--accent-blue)] pl-4">
-              Currently exploring distributed system patterns, heavily diving into production Databricks cluster setups, and learning Go for building custom Kubernetes controllers.
-            </p>
+            {/* CERTIFICATIONS */}
+            <section>
+              <AnimatedSection delay={300}>
+                <div className="flex items-center gap-3 mb-8 border-b border-[var(--border)] pb-2">
+                  <h2 className="text-sm font-mono font-bold uppercase tracking-widest text-[var(--text-primary)]">Certifications</h2>
+                </div>
+              </AnimatedSection>
+              <div className="space-y-4">
+                {certifications.map((cert, index) => (
+                  <AnimatedSection key={index} delay={index * 120}>
+                    <div className="bg-[var(--bg-card)] border border-[var(--border)] p-4 rounded-xl flex items-center gap-4 transition-all duration-300 hover:border-blue-400/40 hover:shadow-lg hover:-translate-x-1">
+                      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shrink-0">
+                        <Award size={18} className="text-white" />
+                      </div>
+                      <div>
+                        <p className="text-sm font-bold text-[var(--text-primary)] leading-tight font-['Space_Grotesk']">{cert.name}</p>
+                        <p className="text-[10px] font-mono text-[var(--text-muted)] mt-1 uppercase tracking-tighter">{cert.issuer}</p>
+                      </div>
+                    </div>
+                  </AnimatedSection>
+                ))}
+              </div>
+            </section>
+
+            {/* CURRENT STATUS */}
+            <section>
+              <AnimatedSection>
+                <div className="flex items-center gap-3 mb-6 border-b border-[var(--border)] pb-2">
+                  <h2 className="text-sm font-mono font-bold uppercase tracking-widest text-[var(--text-primary)]">Now</h2>
+                </div>
+              </AnimatedSection>
+              <p className="text-sm text-[var(--text-secondary)] leading-relaxed italic border-l-2 border-blue-500 pl-4">
+                Currently building LLM eval pipelines with LangChain and optimizing Kubernetes clusters for low-latency ML inferencing.
+              </p>
+            </section>
           </aside>
-
         </div>
 
       </div>
