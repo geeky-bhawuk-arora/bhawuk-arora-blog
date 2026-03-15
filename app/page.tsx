@@ -74,15 +74,14 @@ export default async function HomePage() {
             </div>
           </div>
 
-          <div className="mb-6 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-mono font-bold uppercase tracking-widest">
-            BHAWUK ARORA / DEVOPS & MLOPS
-          </div>
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight mb-8 text-[var(--text-primary)] leading-[1.05] font-['Space_Grotesk']">
-            Thinking in systems.<br />
-            Building for <span className="text-[var(--accent-blue)]">scale.</span>
+          <h1 className="text-6xl sm:text-7xl md:text-8xl font-black tracking-tighter mb-4 text-[var(--text-primary)] leading-[0.9] font-['Space_Grotesk']">
+            Bhawuk <span className="text-[var(--accent-blue)]">Arora.</span>
           </h1>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-10 text-[var(--text-secondary)] font-['Space_Grotesk']">
+            Thinking in systems. Building for scale.
+          </h2>
 
-          <p className="text-xl md:text-2xl text-[var(--text-secondary)] leading-tight max-w-2xl mb-12 font-medium tracking-tight">
+          <p className="text-xl md:text-2xl text-[var(--text-secondary)] leading-tight max-w-xl mb-12 font-medium tracking-tight">
             I turn complex cloud infrastructure into elegant, automated systems. <span className="text-[var(--text-muted)] italic">Mostly so I can sleep soundly without 3 AM pager alerts.</span>
           </p>
 
