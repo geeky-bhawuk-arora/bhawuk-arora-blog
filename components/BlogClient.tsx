@@ -80,11 +80,12 @@ export default function BlogClient({ initialPosts }: { initialPosts: Post[] }) {
 
             {/* Header */}
             <div className="w-full max-w-5xl mx-auto px-6 md:px-8 mb-16">
-                <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4 text-[var(--text-primary)] font-['Space_Grotesk']">
-                    Articles & Notes
+                <h1 className="text-5xl md:text-7xl font-black tracking-tighter mb-6 text-[var(--text-primary)] font-['Space_Grotesk'] leading-[0.9]">
+                    Engineering / <br />
+                    <span className="text-[var(--accent-blue)]">Intelligence.</span>
                 </h1>
-                <p className="text-lg text-[var(--text-secondary)] leading-relaxed max-w-2xl mb-12">
-                    Essays on building scalable ML infrastructure, cloud architecture, automation, and the craft of engineering.
+                <p className="text-lg text-[var(--text-secondary)] leading-relaxed max-w-2xl mb-12 border-l-2 border-[var(--border)] pl-6 py-1">
+                    Essays on building scalable ML infrastructure, cloud architecture, and the craft of engineering.
                 </p>
 
                 {/* Search & Filter */}
@@ -112,9 +113,9 @@ export default function BlogClient({ initialPosts }: { initialPosts: Post[] }) {
                                 <button
                                     key={cat}
                                     onClick={() => setActiveCategory(cat)}
-                                    className={`flex-shrink-0 px-3 py-1.5 rounded text-xs font-mono font-medium transition-all duration-200 outline-none border ${isActive
-                                        ? 'bg-[var(--text-primary)] text-[var(--bg)] border-[var(--text-primary)]'
-                                        : 'bg-[var(--bg-elevated)] text-[var(--text-secondary)] border-[var(--border)] hover:text-[var(--text-primary)]'
+                                    className={`flex-shrink-0 px-4 py-2 rounded-lg text-xs font-mono font-bold transition-all duration-200 outline-none border uppercase tracking-widest ${isActive
+                                        ? 'bg-[var(--accent-blue)] text-white border-[var(--accent-blue)] shadow-lg shadow-blue-500/20'
+                                        : 'bg-[var(--bg-elevated)] text-[var(--text-secondary)] border-[var(--border)] hover:border-[var(--text-muted)] hover:text-[var(--text-primary)]'
                                         }`}
                                 >
                                     {cat}
