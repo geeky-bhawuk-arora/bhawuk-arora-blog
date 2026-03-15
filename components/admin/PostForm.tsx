@@ -14,6 +14,14 @@ export default function PostForm({ initialData, action, submitLabel }: PostFormP
     const [title, setTitle] = useState(initialData?.title || '');
     const [slug, setSlug] = useState(initialData?.slug || '');
     const [isAutoSlug, setIsAutoSlug] = useState(!initialData?.slug);
+    const [category, setCategory] = useState(initialData?.category || '');
+
+    const categoryPresets: string[] = [
+        'Kubernetes', 'Terraform', 'CI/CD', 'MLOps pipelines',
+        'Databricks', 'System design', 'Docker', 'MLflow',
+        'Infrastructure', 'Cloud architecture', 'DevOps tooling',
+        'Machine Learning Systems', 'Data Engineering', 'Python', 'AI/ML'
+    ];
 
     useEffect(() => {
         if (isAutoSlug && title) {
@@ -91,21 +99,32 @@ export default function PostForm({ initialData, action, submitLabel }: PostFormP
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                 <div className="flex flex-col gap-2">
                     <label htmlFor="category" className="text-sm font-medium text-[var(--text-secondary)]">Category</label>
-                    <select
+                    <input
+                        required
+                        type="text"
                         name="category"
                         id="category"
-                        defaultValue={initialData?.category || "Kubernetes"}
-                        className="px-4 py-2.5 rounded bg-[var(--bg)] border border-[var(--border)] text-[var(--text-primary)] outline-none focus:border-[var(--accent-blue)] focus:ring-1 focus:ring-[var(--accent-blue)] appearance-none"
-                    >
-                        <option value="Kubernetes">Kubernetes</option>
-                        <option value="Terraform">Terraform</option>
-                        <option value="CI/CD">CI/CD</option>
-                        <option value="MLOps pipelines">MLOps pipelines</option>
-                        <option value="Databricks">Databricks</option>
-                        <option value="System design">System design</option>
-                        <option value="Docker">Docker</option>
-                        <option value="MLflow">MLflow</option>
-                    </select>
+                        value={category}
+                        onChange={(e) => setCategory(e.target.value)}
+                        placeholder="Type or select below"
+                        className="px-4 py-2.5 rounded bg-[var(--bg)] border border-[var(--border)] text-[var(--text-primary)] outline-none focus:border-[var(--accent-blue)] focus:ring-1 focus:ring-[var(--accent-blue)]"
+                    />
+                    <div className="flex flex-wrap gap-1.5 mt-1">
+                        {categoryPresets.map(cat => (
+                            <button
+                                key={cat}
+                                type="button"
+                                onClick={() => setCategory(cat)}
+                                className={`px-2.5 py-1 rounded-md text-[10px] font-bold border transition-all cursor-pointer ${
+                                    category === cat
+                                        ? 'bg-[var(--accent-blue)]/15 border-[var(--accent-blue)]/40 text-[var(--accent-blue)]'
+                                        : 'bg-[var(--bg-elevated)] border-[var(--border)] text-[var(--text-muted)] hover:border-[var(--text-muted)] hover:text-[var(--text-secondary)]'
+                                }`}
+                            >
+                                {cat}
+                            </button>
+                        ))}
+                    </div>
                 </div>
 
                 <div className="flex flex-col gap-2 md:col-span-2">
