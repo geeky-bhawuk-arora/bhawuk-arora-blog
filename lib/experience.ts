@@ -1,7 +1,6 @@
 export interface Job {
     title: string;
     company: string;
-    duration: string;
     period: string;
     location: string;
     description: string;
@@ -13,60 +12,107 @@ export interface Education {
     field: string;
     institution: string;
     period: string;
+    location: string;
     grade: string;
+    description: string;
+    icon: string;
 }
 
 export interface Certification {
     name: string;
     issuer: string;
+    icon: string;
+    color: string;
+    link: string;
 }
 
 export const workExperience: Job[] = [
     {
-        title: "DevOps \u0026 App Modernization Intern",
+        title: "Junior Associate - DevOps and App Modernisation",
         company: "Celebal Technologies",
-        duration: "3 mos",
-        period: "Jan 2024 \u2014 Present",
-        location: "Jaipur, India",
-        description: "Focusing on containerizing legacy monolithic applications and building robust CI/CD pipelines to automate cloud deployments.",
-        highlights: ["Kubernetes", "Docker", "Azure DevOps", "CI/CD Pipelines", "App Modernization"]
+        period: "Nov 2025 - Present",
+        location: "Jaipur, Rajasthan, India",
+        description: "Working on DevOps practices and application modernization projects, implementing cloud infrastructure and CI/CD pipelines.",
+        highlights: ["DevOps Implementation", "App Modernisation", "Cloud Infrastructure", "CI/CD Pipelines"]
     },
     {
-        title: "Building ML Infrastructure",
-        company: "Personal Research",
-        duration: "6 mos",
-        period: "June 2023 \u2014 Dec 2023",
-        location: "Remote",
-        description: "Engineered scalable data foundations and experimentation platforms using MLflow, Databricks, and AWS.",
-        highlights: ["MLOps", "MLflow", "Databricks", "AWS", "Terraform"]
+        title: "Cloud Infra and Security Intern",
+        company: "Celebal Technologies",
+        period: "Jun 2025 - Aug 2025",
+        location: "Jaipur, Rajasthan, India",
+        description: "Focused on cloud infrastructure setup and security implementations, working with modern cloud platforms and security best practices.",
+        highlights: ["Cloud Security", "Infrastructure Design", "Security Best Practices"]
+    },
+    {
+        title: "Salesforce Developer Intern",
+        company: "TechMatrix Consulting",
+        period: "Apr 2025 - Jul 2025",
+        location: "Jaipur, Rajasthan, India",
+        description: "Developed custom Salesforce solutions, worked on CRM implementations, and created automation workflows.",
+        highlights: ["Salesforce Development", "CRM Solutions", "Workflow Automation"]
     }
 ];
 
 export const education: Education[] = [
     {
-        degree: "Bachelor of Technology",
-        field: "Computer Science \u0026 Engineering (AI \u0026 DS)",
-        institution: "Amity University",
-        period: "2021 \u2014 2025",
-        grade: "9.2 CGPA"
+        degree: "Bachelor of Technology - BTech",
+        field: "Artificial Intelligence and Data Science",
+        institution: "Poornima College of Engineering",
+        period: "November 2022 - May 2026 (Expected)",
+        location: "Jaipur, Rajasthan, India",
+        grade: "CGPA: 9.08",
+        description: "Comprehensive education in AI, machine learning, data science, deep learning, and software development.",
+        icon: "college"
+    },
+    {
+        degree: "Higher Secondary Certificate",
+        field: "Physics, Chemistry, Mathematics (PCM)",
+        institution: "Lord Buddha Public School Kota",
+        period: "April 2020 - April 2022",
+        location: "Kota, Rajasthan, India",
+        grade: "92.22%",
+        description: "CBSE Board - Science stream with focus on PCM.",
+        icon: "school"
+    },
+    {
+        degree: "Secondary School Certificate",
+        field: "CBSE",
+        institution: "St Paul's Sr. Sec. School",
+        period: "April 2009 - March 2020",
+        location: "Vallabh Nagar, Kota, Rajasthan, India",
+        grade: "92.6%",
+        description: "CBSE Board - Completed secondary education with distinction.",
+        icon: "school"
     }
 ];
 
 export const certifications: Certification[] = [
     {
-        name: "HashiCorp Certified: Terraform Associate",
-        issuer: "HashiCorp"
+        name: "Microsoft Certified: Azure Developer Associate",
+        issuer: "Microsoft",
+        icon: "azure",
+        color: "blue",
+        link: ""
     },
     {
-        name: "AWS Certified Solutions Architect \u2014 Associate",
-        issuer: "Amazon Web Services"
+        name: "Microsoft Certified: Azure AI Engineer Associate",
+        issuer: "Microsoft",
+        icon: "azure",
+        color: "blue",
+        link: ""
     },
     {
-        name: "Microsoft Certified: Azure Fundamentals",
-        issuer: "Microsoft"
+        name: "Oracle Cloud Infrastructure Certified DevOps Professional",
+        issuer: "Oracle",
+        icon: "oracle",
+        color: "red",
+        link: ""
     },
     {
-        name: "CKA: Certified Kubernetes Administrator",
-        issuer: "Cloud Native Computing Foundation"
+        name: "Oracle Cloud Infrastructure Certified Architect Associate",
+        issuer: "Oracle",
+        icon: "oracle",
+        color: "red",
+        link: ""
     }
 ];

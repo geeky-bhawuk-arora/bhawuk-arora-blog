@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const navLinks = [
     { href: '/', label: 'Home' },
-    // { href: '/projects', label: 'Projects' },
+    { href: '/projects', label: 'Projects' },
     { href: '/blog', label: 'Blog' },
     { href: '/about', label: 'About' },
     { href: '/contact', label: 'Contact' },
@@ -65,7 +65,7 @@ export default function Navbar() {
                             <a href="mailto:bhawuk.arora008@gmail.com" className="text-[var(--text-secondary)] hover:text-white transition-colors p-1" title="Email">
                                 <Mail size={18} />
                             </a>
-                            <a href="https://github.com/geeky-bhawu-arora" target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-white transition-colors p-1" title="GitHub">
+                            <a href="https://github.com/geeky-bhawuk-arora" target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-white transition-colors p-1" title="GitHub">
                                 <Github size={18} />
                             </a>
                             <a href="https://linkedin.com/in/bhawuk-arora" target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-white transition-colors p-1" title="LinkedIn">

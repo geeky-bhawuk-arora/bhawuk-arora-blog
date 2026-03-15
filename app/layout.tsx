@@ -39,42 +39,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
 /* Server-safe footer — NO event handlers, NO client hooks */
 function SiteFooter() {
-  const year = new Date().getFullYear();
   return (
-    <footer
-      style={{
-        borderTop: "1px solid var(--border)",
-        background: "var(--bg-secondary)",
-      }}
-    >
-      <div
-        style={{
-          maxWidth: "72rem",
-          margin: "0 auto",
-          padding: "2.5rem 2rem",
-          display: "flex",
-          flexWrap: "wrap",
-          alignItems: "center",
-          justifyContent: "space-between",
-          gap: "1rem",
-        }}
-      >
-
-        <p
-          style={{
-            fontSize: "0.75rem",
-            fontFamily: "JetBrains Mono, monospace",
-            color: "var(--text-muted)",
-            display: "flex",
-            alignItems: "center",
-            gap: "0.4rem",
-          }}
-        >
-          Made with <Heart size={12} fill="#ef4444" color="#ef4444" /> by Bhawuk
+    <footer className="border-t border-[var(--border)] bg-[var(--bg-secondary)] mt-auto">
+      <div className="max-w-5xl mx-auto px-6 md:px-8 py-10 flex flex-wrap items-center justify-between gap-4">
+        <p className="text-xs font-mono text-[var(--text-muted)] flex items-center gap-1.5">
+          Made with <Heart size={12} className="text-red-500 fill-red-500" /> by Bhawuk
         </p>
 
-        {/* Static links — no event handlers */}
-        <div style={{ display: "flex", gap: "1.25rem" }}>
+        <div className="flex gap-6">
           {[
             { label: "GitHub", href: "https://github.com/geeky-bhawuk-arora" },
             { label: "LinkedIn", href: "https://linkedin.com/in/bhawuk-arora" },
@@ -85,13 +57,7 @@ function SiteFooter() {
               href={s.href}
               target="_blank"
               rel="noopener noreferrer"
-              style={{
-                fontSize: "0.75rem",
-                fontFamily: "JetBrains Mono, monospace",
-                color: "var(--text-muted)",
-                textDecoration: "none",
-                transition: "color 0.2s",
-              }}
+              className="text-[10px] md:text-xs font-mono text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors uppercase tracking-widest"
             >
               {s.label}
             </a>
