@@ -68,3 +68,19 @@ alter table public.audit_logs enable row level security;
 -- For simplicity in this admin-only blog, we allow authenticated users to see and insert logs.
 create policy "Authenticated users can manage audit logs" on public.audit_logs
   for all using (auth.role() = 'authenticated');
+-- 8. Create a table for email subscribers
+create table public.subscribers (
+  id uuid default gen_random_uuid() primary key,
+  email text unique not null,
+  created_at timestamp with time zone default timezone('utc'::text, now()) not null
+);
+
+-- 9. Set RLS for subscribers
+alter table public.subscribers enable row level security;
+
+-- Policy: Anyone can insert (subscribe), but only authenticated users (admin) can select/manage.
+create policy "Anyone can subscribe" on public.subscribers
+  for insert with check (true);
+
+create policy "Authenticated users can manage subscribers" on public.subscribers
+  for all using (auth.role() = 'authenticated');

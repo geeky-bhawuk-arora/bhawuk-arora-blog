@@ -10,7 +10,7 @@ export default function AboutPage() {
         <main className="min-h-screen pt-32 pb-24 w-full flex flex-col items-center">
             <div className="w-full max-w-3xl mx-auto px-6 md:px-8">
 
-                <h1 className="text-5xl md:text-7xl font-black tracking-tighter mb-10 text-[var(--text-primary)] font-['Space_Grotesk'] leading-[0.9]">
+                <h1 className="text-5xl md:text-7xl font-black tracking-tighter mb-10 text-[var(--text-primary)] leading-[0.9]">
                     The / <br />
                     <span className="text-[var(--accent-blue)]">Architect.</span>
                 </h1>
@@ -32,7 +32,7 @@ export default function AboutPage() {
                         When I'm not debugging Kubernetes clusters or refining automated experiments with MLflow and Databricks, I'm usually exploring new paradigms in distributed architecture or contributing to the technical community.
                     </p>
 
-                    <h2 className="mt-16 mb-8 text-2xl font-bold font-['Space_Grotesk'] text-[var(--text-primary)]">Operational Channels</h2>
+                    <h2 className="mt-16 mb-8 text-2xl font-bold text-[var(--text-primary)]">Operational Channels</h2>
 
                     <div className="space-y-4 font-mono text-sm">
                         <div className="flex items-center gap-4 group/item">

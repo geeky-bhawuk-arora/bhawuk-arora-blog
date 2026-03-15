@@ -29,7 +29,7 @@ function CleanCard({ post }: { post: Post }) {
                 <span>{formatDate(post.publishedAt)}</span>
             </div>
 
-            <h3 className="font-bold text-xl leading-snug line-clamp-2 text-[var(--text-primary)] group-hover:text-blue-400 transition-colors mb-2 font-['Space_Grotesk']">
+            <h3 className="font-bold text-xl leading-snug line-clamp-2 text-[var(--text-primary)] group-hover:text-blue-400 transition-colors mb-2">
                 {post.title}
             </h3>
 
@@ -80,7 +80,7 @@ export default function BlogClient({ initialPosts }: { initialPosts: Post[] }) {
 
             {/* Header */}
             <div className="w-full max-w-5xl mx-auto px-6 md:px-8 mb-16">
-                <h1 className="text-5xl md:text-7xl font-black tracking-tighter mb-6 text-[var(--text-primary)] font-['Space_Grotesk'] leading-[0.9]">
+                <h1 className="text-5xl md:text-7xl font-black tracking-tighter mb-6 text-[var(--text-primary)] leading-[0.9]">
                     Engineering / <br />
                     <span className="text-[var(--accent-blue)]">Intelligence.</span>
                 </h1>

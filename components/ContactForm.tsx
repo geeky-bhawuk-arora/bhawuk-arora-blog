@@ -60,7 +60,7 @@ const ContactForm = () => {
         <div className="w-full">
             <AnimatedSection delay={100}>
                 <div className="flex flex-col mb-12 max-w-xl">
-                    <h1 className="text-4xl md:text-5xl font-bold text-[var(--text-primary)] font-['Space_Grotesk'] tracking-tight mb-4">
+                    <h1 className="text-4xl md:text-5xl font-bold text-[var(--text-primary)] tracking-tight mb-4">
                         Connect / <span className="text-[var(--accent-blue)]">Collaborate.</span>
                     </h1>
                     <p className="text-[var(--text-secondary)] text-base leading-relaxed border-l-2 border-[var(--border)] pl-4">
@@ -204,7 +204,7 @@ const ContactForm = () => {
                                         <div className="w-20 h-20 rounded-full bg-green-500/10 text-green-500 flex items-center justify-center mb-6">
                                             <CheckCircle size={40} />
                                         </div>
-                                        <h3 className="text-2xl font-bold text-[var(--text-primary)] mb-2 font-['Space_Grotesk']">Success</h3>
+                                        <h3 className="text-2xl font-bold text-[var(--text-primary)] mb-2">Success</h3>
                                         <p className="text-[var(--text-secondary)] text-sm max-w-xs mb-8">
                                             Message successfully pushed to the inbox. I'll get back to you shortly.
                                         </p>

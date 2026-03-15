@@ -31,17 +31,15 @@ export default function Navbar() {
     return (
         <>
             <header
-                className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 font-sans ${scrolled ? 'glass-nav py-3' : 'bg-transparent py-5 border-transparent'
-                    }`}
+                className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'glass-nav py-3' : 'bg-transparent py-5 border-transparent'}`}
             >
                 <div className="max-w-5xl md:max-w-7xl mx-auto px-5 md:px-8 flex items-center justify-between">
-
                     {/* Logo */}
                     <Link href="/" className="flex items-center gap-3 group shrink-0 outline-none">
                         <div className="relative w-8 h-8 rounded-lg overflow-hidden border border-[var(--border)] group-hover:border-[var(--accent-blue)] transition-all">
                             <img src="/logo.svg" alt="Bhawuk Logo" className="w-full h-full object-cover" />
                         </div>
-                        <span className="font-['Space_Grotesk'] text-lg font-bold tracking-tight text-[var(--text-primary)] group-hover:text-[var(--accent-blue)] transition-colors">
+                        <span className="text-lg font-bold tracking-tight text-[var(--text-primary)] group-hover:text-[var(--accent-blue)] transition-colors">
                             bhawuk
                         </span>
                     </Link>

@@ -141,7 +141,7 @@ function renderInline(text: string): React.ReactNode {
 function SimpleRelatedCard({ post }: { post: Post }) {
     return (
         <Link href={`/blog/${post.slug}`} className="flex flex-col p-5 rounded-lg bg-[var(--bg-card)] border border-[var(--border)] hover:border-[var(--text-muted)] transition-colors">
-            <h4 className="text-base font-medium leading-snug line-clamp-2 text-[var(--text-primary)] font-['Space_Grotesk'] mb-2">
+            <h4 className="text-base font-medium leading-snug line-clamp-2 text-[var(--text-primary)] mb-2">
                 {post.title}
             </h4>
             <p className="text-xs mt-auto text-[var(--text-secondary)] font-mono">
@@ -174,7 +174,7 @@ export default function ArticleClient({ post, relatedPosts = [] }: { post: Post,
                     <article className="lg:w-[70%] max-w-3xl shrink-0">
 
                         <div className="mb-12 border-b border-[var(--border)] pb-8">
-                            <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-6 text-[var(--text-primary)] font-['Space_Grotesk'] leading-[1.1]">
+                            <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-6 text-[var(--text-primary)] leading-[1.1]">
                                 {post.title}
                             </h1>
 
@@ -214,7 +214,7 @@ export default function ArticleClient({ post, relatedPosts = [] }: { post: Post,
 
                         {/* Author Minimal Footer Placeholder */}
                         <div className="mt-16 pt-8 border-t border-[var(--border)]">
-                            <h4 className="font-['Space_Grotesk'] font-bold text-lg mb-2 text-[var(--text-primary)]">Bhawuk Arora</h4>
+                            <h4 className="font-bold text-lg mb-2 text-[var(--text-primary)]">Bhawuk Arora</h4>
                             <p className="text-sm text-[var(--text-secondary)] max-w-xl">
                                 {post.authorBio}
                             </p>

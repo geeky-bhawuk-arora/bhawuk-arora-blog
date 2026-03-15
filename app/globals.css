@@ -13,13 +13,18 @@
   --text-muted: #64748b;
   --accent-blue: #3b82f6;
   --accent-purple: #8b5cf6;
+
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-heading: 'Space Grotesk', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
   color-scheme: dark;
 }
 
 body {
   background-color: var(--bg);
   color: var(--text-primary);
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
 }
@@ -30,12 +35,13 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-family: var(--font-heading);
+  letter-spacing: -0.02em;
 }
 
 code,
 .font-mono {
-  font-family: 'JetBrains Mono', monospace !important;
+  font-family: var(--font-mono) !important;
 }
 
 .glass-nav {
@@ -150,15 +156,22 @@ code,
 }
 
 .gradient-text {
-  @apply text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500;
+  background: linear-gradient(to right, #60a5fa, #6366f1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .card-premium {
-  @apply bg-[var(--bg-card)] border border-[var(--border)] transition-all duration-300;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .card-premium:hover {
-  @apply border-[var(--accent-blue)]/50 shadow-lg shadow-blue-500/5 -translate-y-1;
+  border-color: rgba(59, 130, 246, 0.5);
+  box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.05);
+  transform: translateY(-4px);
 }
 
 .no-scrollbar::-webkit-scrollbar {
@@ -168,4 +181,26 @@ code,
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+@keyframes blink {
+
+  from,
+  to {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+.animate-blink {
+  animation: blink 1s step-end infinite;
+}
+
+/* Ensure custom cursor takes priority */
+html,
+body {
+  cursor: none !important;
 }

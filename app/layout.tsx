@@ -22,6 +22,7 @@ export const metadata: Metadata = {
 };
 
 import LoadingScreen from "@/components/LoadingScreen";
+import CustomCursor from "@/components/CustomCursor";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -31,6 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="flex flex-col min-h-screen">
         <LoadingScreen />
+        <CustomCursor />
         <Providers>
           <Suspense fallback={null}>
             <GoogleAnalytics />

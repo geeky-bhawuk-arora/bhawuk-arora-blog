@@ -23,7 +23,7 @@ export default function ProjectsPage() {
                         </Link>
 
                         <div className="flex flex-col gap-6">
-                            <h1 className="text-5xl md:text-7xl font-black text-[var(--text-primary)] font-['Space_Grotesk'] tracking-tighter leading-[0.9]">
+                            <h1 className="text-5xl md:text-7xl font-black text-[var(--text-primary)] tracking-tighter leading-[0.9]">
                                 Systems / <br />
                                 <span className="text-[var(--accent-blue)]">Solutions.</span>
                             </h1>
@@ -48,7 +48,7 @@ export default function ProjectsPage() {
                                                 Featured
                                             </span>
                                         )}
-                                        <h2 className="text-2xl font-bold text-[var(--text-primary)] font-['Space_Grotesk'] group-hover:text-[var(--accent-blue)] transition-colors leading-tight">
+                                        <h2 className="text-2xl font-bold text-[var(--text-primary)] group-hover:text-[var(--accent-blue)] transition-colors leading-tight">
                                             {project.title}
                                         </h2>
                                     </div>
@@ -87,7 +87,7 @@ export default function ProjectsPage() {
                     <div className="mt-28 p-10 md:p-16 rounded-[2rem] bg-[var(--bg-card)] border border-[var(--border)] text-center relative overflow-hidden group">
                         <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,var(--border)_1px,transparent_0)] bg-[size:32px_32px] opacity-10" />
 
-                        <h3 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)] mb-6 font-['Space_Grotesk'] tracking-tight relative z-10">Start a technical session?</h3>
+                        <h3 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)] mb-6 tracking-tight relative z-10">Start a technical session?</h3>
                         <p className="text-lg text-[var(--text-secondary)] mb-10 max-w-xl mx-auto leading-relaxed relative z-10">
                             I'm available for collaborations on cloud infrastructure, MLOps automation, and architecture design.
                         </p>
