@@ -163,7 +163,7 @@ export default async function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {projects.slice(0, 4).map(proj => (
+            {projects.slice(0, 2).map(proj => (
               <div key={proj.title} className="flex flex-col p-8 rounded-2xl bg-[var(--bg-card)] border border-[var(--border)] hover:border-[var(--accent-blue)]/50 transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/5 group/card relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 blur-[60px] opacity-0 group-hover/card:opacity-100 transition-opacity" />
 
