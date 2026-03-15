@@ -6,7 +6,6 @@ import { workExperience, education, certifications } from "@/lib/experience";
 import { formatDate } from "@/lib/utils";
 import { createClient } from "@/utils/supabase/server";
 import AnimatedSection from "@/components/AnimatedSection";
-import HeroHandshake from "@/components/HeroHandshake";
 
 export const metadata: Metadata = {
   title: "Bhawuk Arora — MLOps Engineer",
@@ -39,48 +38,57 @@ export default async function HomePage() {
     <main className="min-h-screen pt-32 pb-24 w-full flex flex-col items-center">
       <div className="w-full max-w-5xl mx-auto px-6 md:px-8">
 
-        <section className="mb-24 mt-8">
+        <section className="mb-24 mt-8 relative">
+          <div className="absolute -top-24 -left-24 w-96 h-96 bg-blue-500/10 blur-[120px] rounded-full pointer-events-none" />
+          <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_2px_2px,var(--border)_1px,transparent_0)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-20 pointer-events-none" />
 
-          <div className="max-w-4xl">
-            <h1 className="text-6xl sm:text-7xl md:text-9xl font-black tracking-tighter mb-6 text-[var(--text-primary)] leading-[0.85]">
-              Bhawuk <span className="text-[var(--accent-blue)]">Arora.</span>
-            </h1>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-8 text-[var(--text-secondary)]">
-              Thinking in systems. <br className="hidden md:block" /> Building for scale.
-            </h2>
+          <div className="relative z-10">
 
-            <p className="text-lg md:text-xl text-[var(--text-muted)] leading-relaxed max-w-2xl mb-12 font-medium">
-              I bridge the gap between experimental machine learning and enterprise-grade production. Specializing in <span className="text-[var(--text-primary)]">MLOps</span>, <span className="text-[var(--text-primary)]">Cloud Architecture</span>, and <span className="text-[var(--text-primary)]">Reliability Engineering</span>.
-            </p>
+            <div className="max-w-4xl">
+              <h1 className="text-6xl sm:text-7xl md:text-9xl font-black tracking-tighter mb-6 text-[var(--text-primary)] leading-[0.85]">
+                Bhawuk <span className="text-[var(--accent-blue)]">Arora.</span>
+              </h1>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-8 text-[var(--text-secondary)]">
+                Thinking in systems. <br className="hidden md:block" /> Building for scale.
+              </h2>
+
+              <p className="text-lg md:text-xl text-[var(--text-muted)] leading-relaxed max-w-2xl mb-12 font-medium">
+                I bridge the gap between experimental machine learning and enterprise-grade production. Specializing in <span className="text-[var(--text-primary)]">MLOps</span>, <span className="text-[var(--text-primary)]">Cloud Architecture</span>, and <span className="text-[var(--text-primary)]">Reliability Engineering</span>.
+              </p>
+            </div>
+
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-12">
+              <Link
+                href="/projects"
+                className="px-8 py-4 rounded-xl text-white bg-[var(--accent-blue)] hover:bg-blue-600 transition-all font-bold shadow-lg shadow-blue-500/20 hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2 group"
+              >
+                Explore Portfolio <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              </Link>
+
+              <div className="flex gap-4">
+                <a
+                  href="https://res.cloudinary.com/bhawuk-prod/image/upload/v1759812546/bhawuk-portfolio-react/bhawuk_resume.jpg"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 sm:flex-none px-6 py-4 rounded-xl text-[var(--accent-blue)] bg-[var(--accent-blue)]/5 border border-[var(--accent-blue)]/20 hover:border-[var(--accent-blue)]/50 hover:bg-[var(--accent-blue)]/10 transition-all font-bold text-center"
+                >
+                  Resume
+                </a>
+                <Link
+                  href="/blog"
+                  className="flex-1 sm:flex-none px-6 py-4 rounded-xl text-[var(--text-primary)] bg-[var(--bg-elevated)] border border-[var(--border)] hover:border-[var(--text-muted)] hover:bg-[var(--bg-card)] transition-all font-bold text-center"
+                >
+                  Blog
+                </Link>
+              </div>
+            </div>
           </div>
-
-          <div className="flex flex-wrap items-center gap-5 mb-24">
-            <Link href="/projects" className="px-8 py-4 rounded-xl text-white bg-[var(--accent-blue)] hover:bg-blue-700 transition-all font-bold shadow-xl shadow-blue-500/10 hover:scale-[1.02] active:scale-[0.98] flex items-center gap-2">
-              View Systems <ArrowRight size={18} />
-            </Link>
-            <a
-              href="https://res.cloudinary.com/bhawuk-prod/image/upload/v1759812546/bhawuk-portfolio-react/bhawuk_resume.jpg"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-8 py-4 rounded-xl text-[var(--accent-blue)] bg-[var(--accent-blue)]/5 border border-[var(--accent-blue)]/20 hover:border-[var(--accent-blue)] transition-all font-bold hover:scale-[1.02] active:scale-[0.98]"
-            >
-              View Resume
-            </a>
-            <Link href="/blog" className="px-8 py-4 rounded-xl text-[var(--text-primary)] bg-[var(--bg-elevated)] border border-[var(--border)] hover:border-[var(--text-muted)] transition-all font-bold hover:scale-[1.02] active:scale-[0.98]">
-              Read Engineering Notes
-            </Link>
-          </div>
-
-
-          <AnimatedSection>
-            <HeroHandshake />
-          </AnimatedSection>
         </section>
 
         {/* FEATURED POST */}
         {/* LATEST ARTICLES */}
         <section className="mb-24">
-          <div className="flex items-center justify-between mb-8 border-b border-[var(--border)] pb-2">
+          <div className="flex items-center justify-between mb-6 border-b border-[var(--border)] pb-2">
             <h2 className="text-sm font-mono font-bold uppercase tracking-widest text-[var(--accent-blue)]">Latest Engineering Thinking</h2>
             <Link href="/blog" className="text-xs font-mono text-[var(--text-secondary)] hover:text-[var(--text-primary)] flex items-center gap-1.5 transition-colors group">
               View archives <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
