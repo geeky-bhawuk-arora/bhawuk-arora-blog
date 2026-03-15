@@ -19,6 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             .from('posts')
             .select('*')
             .eq('slug', slug)
+            .eq('enabled', true)
             .maybeSingle();
 
         if (error || !post) return { title: "Post Not Found" };
@@ -48,6 +49,7 @@ export default async function ArticlePage({ params }: Props) {
         .from('posts')
         .select('*')
         .eq('slug', slug)
+        .eq('enabled', true)
         .maybeSingle();
 
     if (error || !data) {
@@ -72,6 +74,7 @@ export default async function ArticlePage({ params }: Props) {
         .from('posts')
         .select('*')
         .eq('category', data.category)
+        .eq('enabled', true)
         .neq('slug', slug)
         .limit(2);
 
