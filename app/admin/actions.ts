@@ -82,3 +82,42 @@ export async function togglePostEnabled(id: string, enabled: boolean) {
     revalidatePath('/admin')
     return { success: true }
 }
+
+export async function togglePostFeatured(id: string, featured: boolean) {
+    const supabase = await createClient()
+    const headerList = await headers()
+
+    const ip = headerList.get('x-forwarded-for') || 'unknown'
+    const ua = headerList.get('user-agent') || 'unknown'
+
+    const { data: { user } } = await supabase.auth.getUser()
+
+    if (!user) {
+        throw new Error('Not authenticated')
+    }
+
+    const { data: post } = await supabase.from('posts').select('slug, title').eq('id', id).single()
+
+    const { error } = await supabase
+        .from('posts')
+        .update({ featured })
+        .eq('id', id)
+
+    if (error) {
+        console.error(error)
+        throw new Error(error.message)
+    }
+
+    await supabase.from('audit_logs').insert({
+        user_id: user.id,
+        event_type: featured ? 'feature_post' : 'unfeature_post',
+        ip_address: ip,
+        user_agent: ua,
+        metadata: { id, slug: post?.slug, title: post?.title, featured }
+    })
+
+    revalidatePath('/blog')
+    revalidatePath('/')
+    revalidatePath('/admin')
+    return { success: true }
+}

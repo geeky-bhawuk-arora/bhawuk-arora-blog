@@ -4,12 +4,13 @@ import { createClient } from '@/utils/supabase/server';
 import { Plus, Edit2 } from 'lucide-react';
 import DeleteButton from '@/components/admin/DeleteButton';
 import ToggleButton from '@/components/admin/ToggleButton';
+import FeaturedButton from '@/components/admin/FeaturedButton';
 
 export default async function AdminDashboard() {
     const supabase = await createClient();
     const { data: posts, error } = await supabase
         .from('posts')
-        .select('id, title, published_at, category, slug, enabled')
+        .select('id, title, published_at, category, slug, enabled, featured')
         .order('published_at', { ascending: false });
 
     if (error) {
@@ -42,6 +43,9 @@ export default async function AdminDashboard() {
                                     ) : (
                                         <span className="px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-bold text-[10px] shrink-0">Live</span>
                                     )}
+                                    {post.featured && (
+                                        <span className="px-2 py-0.5 rounded-full bg-amber-400/10 border border-amber-400/20 text-amber-400 font-bold text-[10px] shrink-0">★ Featured</span>
+                                    )}
                                 </div>
                                 <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-[var(--text-muted)] mt-2">
                                     <span className="px-2 py-0.5 rounded bg-[var(--bg-elevated)] border border-[var(--border)]">{post.category}</span>
@@ -50,7 +54,8 @@ export default async function AdminDashboard() {
                                     <span className="truncate max-w-[200px]">/{post.slug}</span>
                                 </div>
                             </div>
-                            <div className="flex items-center gap-3 shrink-0">
+                            <div className="flex items-center gap-2 shrink-0">
+                                <FeaturedButton id={post.id} featured={post.featured === true} />
                                 <ToggleButton id={post.id} enabled={post.enabled !== false} />
                                 <Link
                                     href={`/admin/edit/${post.id}`}
