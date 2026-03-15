@@ -49,3 +49,22 @@ create trigger posts_updated_at
   before update on public.posts
   for each row
   execute function public.handle_updated_at();
+
+-- 6. Create a table for audit logs
+create table public.audit_logs (
+  id uuid default gen_random_uuid() primary key,
+  user_id uuid references auth.users(id),
+  event_type text not null, -- 'login', 'logout', 'timeout', 'create_post', etc.
+  metadata jsonb default '{}'::jsonb,
+  ip_address text,
+  user_agent text,
+  created_at timestamp with time zone default timezone('utc'::text, now()) not null
+);
+
+-- 7. Set RLS for audit logs
+alter table public.audit_logs enable row level security;
+
+-- Policy: Only authenticated users can see their logs, but the system (service role) or the user themselves can insert.
+-- For simplicity in this admin-only blog, we allow authenticated users to see and insert logs.
+create policy "Authenticated users can manage audit logs" on public.audit_logs
+  for all using (auth.role() = 'authenticated');
