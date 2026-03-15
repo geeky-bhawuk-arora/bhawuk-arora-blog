@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Github, Linkedin, Twitter, Menu, X } from 'lucide-react';
+import { Github, Linkedin, Mail, Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const navLinks = [
@@ -50,8 +50,8 @@ export default function Navbar() {
                                 key={link.href}
                                 href={link.href}
                                 className={`text-sm tracking-wide font-medium transition-colors duration-200 outline-none hover:text-[var(--text-primary)] ${isActive(link.href)
-                                        ? 'text-[var(--text-primary)]'
-                                        : 'text-[var(--text-secondary)]'
+                                    ? 'text-[var(--text-primary)]'
+                                    : 'text-[var(--text-secondary)]'
                                     }`}
                             >
                                 {link.label}
@@ -62,14 +62,14 @@ export default function Navbar() {
                     {/* Socials & Menu */}
                     <div className="flex items-center gap-4 shrink-0">
                         <div className="hidden md:flex items-center gap-3">
-                            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-white transition-colors p-1">
+                            <a href="mailto:hello@bhawuk.dev" className="text-[var(--text-secondary)] hover:text-white transition-colors p-1" title="Email">
+                                <Mail size={18} />
+                            </a>
+                            <a href="https://github.com/bhawuk" target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-white transition-colors p-1" title="GitHub">
                                 <Github size={18} />
                             </a>
-                            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-white transition-colors p-1">
+                            <a href="https://linkedin.com/in/bhawuk" target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-white transition-colors p-1" title="LinkedIn">
                                 <Linkedin size={18} />
-                            </a>
-                            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-white transition-colors p-1">
-                                <Twitter size={18} />
                             </a>
                         </div>
 
@@ -101,8 +101,8 @@ export default function Navbar() {
                                     key={link.href}
                                     href={link.href}
                                     className={`block px-4 py-3 rounded-lg text-lg font-medium transition-colors ${isActive(link.href)
-                                            ? 'bg-[var(--bg-elevated)] text-[var(--text-primary)]'
-                                            : 'text-[var(--text-secondary)] hover:bg-[var(--bg-elevated)] hover:text-[var(--text-primary)]'
+                                        ? 'bg-[var(--bg-elevated)] text-[var(--text-primary)]'
+                                        : 'text-[var(--text-secondary)] hover:bg-[var(--bg-elevated)] hover:text-[var(--text-primary)]'
                                         }`}
                                     onClick={() => setMenuOpen(false)}
                                 >
@@ -112,14 +112,14 @@ export default function Navbar() {
                         </div>
 
                         <div className="mt-8 pt-6 border-t border-[var(--border)] flex items-center justify-center gap-6">
-                            <a href="https://github.com" className="text-[var(--text-secondary)] hover:text-white p-2">
+                            <a href="mailto:hello@bhawuk.dev" className="text-[var(--text-secondary)] hover:text-white p-2">
+                                <Mail size={24} />
+                            </a>
+                            <a href="https://github.com/bhawuk" target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-white p-2">
                                 <Github size={24} />
                             </a>
-                            <a href="https://linkedin.com" className="text-[var(--text-secondary)] hover:text-white p-2">
+                            <a href="https://linkedin.com/in/bhawuk" target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-white p-2">
                                 <Linkedin size={24} />
-                            </a>
-                            <a href="https://twitter.com" className="text-[var(--text-secondary)] hover:text-white p-2">
-                                <Twitter size={24} />
                             </a>
                         </div>
                     </motion.div>
