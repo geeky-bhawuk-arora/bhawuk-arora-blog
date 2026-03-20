@@ -77,10 +77,11 @@ function parseBlocks(src: string): Block[] {
     while (i < lines.length) {
         const line = lines[i];
 
-        if (line.startsWith('![')) {
-            const match = line.match(/^!\[(.*?)\]\((.*?)\)/);
+        const trimmedLine = line.trim();
+        if (trimmedLine.startsWith('![')) {
+            const match = trimmedLine.match(/^!\[(.*?)\]\((.*?)\)/);
             if (match) {
-                blocks.push({ type: 'img', alt: match[1], url: match[2] });
+                blocks.push({ type: 'img', alt: match[1], url: match[2].trim() });
                 i++; continue;
             }
         }
