@@ -21,8 +21,8 @@ export default async function AdminLayout({
         <div className="min-h-screen pt-32 pb-24 w-full flex flex-col items-center">
             <IdleTimer />
             <div className="w-full max-w-4xl mx-auto px-6 md:px-8">
-                <nav className="flex justify-between items-center mb-12 p-4 rounded-xl bg-[var(--bg-card)] border border-[var(--border)]">
-                    <div className="flex items-center gap-6">
+                <nav className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-12 p-4 gap-4 rounded-xl bg-[var(--bg-card)] border border-[var(--border)]">
+                    <div className="flex flex-wrap items-center gap-4 sm:gap-6">
                         <Link href="/admin" className="flex items-center gap-2 text-[var(--text-primary)] hover:text-[var(--accent-blue)] transition-colors font-bold font-['Space_Grotesk']">
                             <LayoutDashboard size={18} /> Admin Dashboard
                         </Link>
