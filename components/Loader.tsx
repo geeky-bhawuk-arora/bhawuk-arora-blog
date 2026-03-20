@@ -4,95 +4,62 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
 
 const thinkingThoughts = [
-    "Gathering cosmic wisdom...",
-    "Simulating intelligence...",
-    "Optimizing neural pathways...",
-    "Consulting the digital oracle...",
-    "Decrypting the matrix...",
-    "Synthesizing perspective...",
-    "Scanning the multiverse...",
-    "Harnessing digital energy..."
+    "Sequencing neural data...",
+    "Synthesizing consciousness...",
+    "Optimizing recursive logic...",
+    "Consulting the source code...",
+    "Decrypting reality...",
+    "Harnessing quantum fluctuations...",
+    "Bridging digital dimensions...",
+    "Assembling the matrix..."
 ];
 
 export default function Loader({ size = 'md', color = 'blue' }: { size?: 'sm' | 'md' | 'lg', color?: string }) {
     const isSmall = size === 'sm';
 
     return (
-        <div className={`relative ${isSmall ? 'w-8 h-8' : 'w-24 h-24'} flex items-center justify-center`}>
-            {/* The "Prismatic" Backdrop */}
-            <motion.div
-                animate={{ 
-                    scale: [1, 1.2, 1],
-                    rotate: [0, 180, 360],
-                    borderRadius: ["30%", "50%", "30%"]
-                }}
-                transition={{ 
-                    duration: 10,
-                    repeat: Infinity,
-                    ease: "linear"
-                }}
-                className={`absolute inset-0 bg-gradient-to-tr ${color === 'white' ? 'from-white/10 via-gray-400/10 to-white/10' : 'from-blue-600/20 via-indigo-500/20 to-cyan-400/20'} blur-xl`}
-            />
-
-            {/* Floating Concentric Rings */}
-            {[0, 1, 2].map((i) => (
-                <motion.div
-                    key={i}
-                    animate={{ 
-                        rotate: i % 2 === 0 ? 360 : -360,
-                        scale: [1, 1.1, 1],
-                    }}
-                    transition={{ 
-                        rotate: { duration: 3 + i, repeat: Infinity, ease: "linear" },
-                        scale: { duration: 2, repeat: Infinity, ease: "easeInOut", delay: i * 0.2 }
-                    }}
-                    className="absolute border border-dashed border-opacity-30 rounded-full"
-                    style={{
-                        width: isSmall ? `${100 - i * 30}%` : `${100 - i * 20}%`,
-                        height: isSmall ? `${100 - i * 30}%` : `${100 - i * 20}%`,
-                        borderColor: color === 'white' ? 'white' : '#3b82f6',
-                        opacity: 0.2 + (i * 0.2)
-                    }}
-                />
-            ))}
-
-            {/* The "Center Pulse" Diamond */}
-            <motion.div
-                animate={{ 
-                    rotate: 45,
-                    scale: [1, 1.5, 1],
-                    boxShadow: [
-                        color === 'white' ? "0 0 10px rgba(255, 255, 255, 0.3)" : "0 0 10px rgba(59, 130, 246, 0.5)",
-                        color === 'white' ? "0 0 20px rgba(255, 255, 255, 0.6)" : "0 0 30px rgba(59, 130, 246, 0.8)",
-                        color === 'white' ? "0 0 10px rgba(255, 255, 255, 0.3)" : "0 0 10px rgba(59, 130, 246, 0.5)"
-                    ]
-                }}
-                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                className={`${isSmall ? 'w-2 h-2' : 'w-5 h-5'} bg-gradient-to-br ${color === 'white' ? 'from-white to-gray-300' : 'from-blue-500 to-indigo-600'} z-10 rotate-45`}
-            />
-
-            {/* Orbital Dots */}
-            {!isSmall && [0, 1, 2, 3].map((i) => (
-                <motion.div
-                    key={`dot-${i}`}
-                    animate={{ rotate: 360 }}
-                    transition={{ 
-                        duration: 4,
-                        repeat: Infinity,
-                        ease: "linear",
-                        delay: i * 1
-                    }}
-                    className="absolute inset-0"
-                >
-                    <div 
-                        className={`absolute -top-1 left-1/2 -ms-1 w-2 h-2 rounded-full blur-[0.5px]`}
-                        style={{ 
-                            backgroundColor: color === 'white' ? 'white' : '#60a5fa',
-                            opacity: 0.6
+        <div className={`relative ${isSmall ? 'w-10 h-10' : 'w-32 h-32'} flex items-center justify-center pointer-events-none`}>
+            {/* The "DNA Helix" Strands */}
+            {[...Array(isSmall ? 8 : 12)].map((_, i) => (
+                <div key={i} className="absolute inset-0 flex items-center justify-center">
+                    <motion.div
+                        animate={{ 
+                            rotateY: 360,
+                            translateY: isSmall ? [-10, 10] : [-30, 30],
+                            opacity: [0.2, 1, 0.2],
+                            scale: [0.8, 1.2, 0.8]
                         }}
-                    />
-                </motion.div>
+                        transition={{ 
+                            duration: 3, 
+                            repeat: Infinity, 
+                            ease: "easeInOut",
+                            delay: i * 0.2
+                        }}
+                        className="flex flex-col gap-2"
+                        style={{ transform: `rotate(${i * (360 / (isSmall ? 8 : 12))}deg)` }}
+                    >
+                        <div 
+                            className={`w-1.5 h-1.5 rounded-full ${color === 'white' ? 'bg-white shadow-[0_0_8px_white]' : 'bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.8)]'}`} 
+                        />
+                        <div 
+                            className={`w-0.5 ${isSmall ? 'h-4' : 'h-8'} mx-auto ${color === 'white' ? 'bg-white/20' : 'bg-blue-500/20'}`} 
+                        />
+                        <div 
+                            className={`w-1.5 h-1.5 rounded-full ${color === 'white' ? 'bg-white shadow-[0_0_8px_white]' : 'bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.8)]'}`} 
+                        />
+                    </motion.div>
+                </div>
             ))}
+
+            {/* Central "Core" Pulse */}
+            <motion.div
+                animate={{ 
+                    scale: [1, 1.5, 1],
+                    opacity: [0.1, 0.3, 0.1]
+                }}
+                transition={{ duration: 2, repeat: Infinity }}
+                className={`absolute ${isSmall ? 'w-4 h-4' : 'w-12 h-12'} rounded-full blur-xl ${color === 'white' ? 'bg-white' : 'bg-blue-600'}`}
+            />
         </div>
     );
 }
@@ -103,69 +70,78 @@ export function LoadingSection({ message }: { message?: string }) {
     useEffect(() => {
         const interval = setInterval(() => {
             setThoughtIndex((prev) => (prev + 1) % thinkingThoughts.length);
-        }, 3000);
+        }, 2500);
         return () => clearInterval(interval);
     }, []);
 
     return (
-        <div className="flex flex-col items-center justify-center gap-16 py-32 relative overflow-hidden bg-gradient-to-b from-transparent via-[var(--bg-elevated)]/5 to-transparent">
-            {/* Background floating particles */}
-            <div className="absolute inset-0 pointer-events-none opacity-20">
-                {[...Array(6)].map((_, i) => (
-                    <motion.div
-                        key={i}
-                        animate={{ 
-                            y: [-20, 20],
-                            x: [-10, 10],
-                            opacity: [0.2, 0.5, 0.2]
-                        }}
-                        transition={{ 
-                            duration: 5 + i,
-                            repeat: Infinity,
-                            ease: "easeInOut",
-                            delay: i * 0.5
-                        }}
-                        className="absolute w-1 h-1 bg-blue-500 rounded-full"
-                        style={{ 
-                            top: `${Math.random() * 100}%`,
-                            left: `${Math.random() * 100}%`
-                        }}
+        <div className="flex flex-col items-center justify-center gap-16 py-32 relative overflow-hidden">
+            {/* HUD Elements */}
+            {!message && (
+                <div className="absolute inset-0 flex items-center justify-center opacity-10">
+                    <motion.div 
+                        animate={{ rotate: 360 }} 
+                        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                        className="w-[500px] h-[500px] border border-blue-500 rounded-full border-dashed" 
                     />
-                ))}
-            </div>
+                    <motion.div 
+                        animate={{ rotate: -360 }} 
+                        transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                        className="absolute w-[400px] h-[400px] border border-cyan-400 rounded-full border-dotted" 
+                    />
+                </div>
+            )}
 
-            <Loader size="lg" />
+            <div className="relative">
+                <Loader size="lg" />
+            </div>
             
-            <div className="flex flex-col items-center gap-4 relative z-10">
+            <div className="flex flex-col items-center gap-6 relative z-10">
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={thoughtIndex}
-                        initial={{ opacity: 0, scale: 0.9, filter: 'blur(5px)' }}
-                        animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-                        exit={{ opacity: 0, scale: 1.1, filter: 'blur(5px)' }}
-                        transition={{ duration: 0.8 }}
-                        className="text-[11px] font-black text-[var(--accent-blue)] uppercase tracking-[0.5em] text-center max-w-xs"
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: 20 }}
+                        transition={{ duration: 0.4 }}
+                        className="flex flex-col items-center gap-2"
                     >
-                        {message || thinkingThoughts[thoughtIndex]}
+                        <p className="text-[12px] font-black text-[var(--text-primary)] uppercase tracking-[0.6em] text-center max-w-xs drop-shadow-sm">
+                            {message || thinkingThoughts[thoughtIndex]}
+                        </p>
+                        <div className="flex gap-1">
+                           {[...Array(5)].map((_, i) => (
+                               <motion.div
+                                   key={i}
+                                   animate={{ scaleY: [1, 2, 1], opacity: [0.3, 1, 0.3] }}
+                                   transition={{ duration: 0.8, repeat: Infinity, delay: i * 0.1 }}
+                                   className="w-1 h-3 bg-blue-500 rounded-full"
+                               />
+                           ))}
+                        </div>
                     </motion.div>
                 </AnimatePresence>
                 
-                {/* Minimalist segmented progress bar */}
-                <div className="flex gap-1">
-                    {[0, 1, 2, 3].map((i) => (
-                        <motion.div
-                            key={i}
-                            animate={{ 
-                                opacity: [0.2, 1, 0.2],
-                            }}
-                            transition={{ 
-                                duration: 1.2,
-                                repeat: Infinity,
-                                delay: i * 0.2
-                            }}
-                            className="w-4 h-[2px] bg-blue-500 rounded-full"
-                        />
-                    ))}
+                {/* Micro-HUD readouts */}
+                <div className="flex gap-8 font-mono text-[8px] text-[var(--text-muted)] opacity-50 uppercase tracking-widest">
+                    <div className="flex flex-col items-center">
+                        <span>Latency</span>
+                        <motion.span animate={{ opacity: [0.5, 1, 0.5] }} transition={{ duration: 0.5, repeat: Infinity }}>
+                            ~2ms
+                        </motion.span>
+                    </div>
+                    <div className="flex flex-col items-center">
+                        <span>Entropy</span>
+                        <motion.span animate={{ opacity: [0.5, 1, 0.5] }} transition={{ duration: 0.8, repeat: Infinity }}>
+                            99.9%
+                        </motion.span>
+                    </div>
+                    <div className="flex flex-col items-center">
+                        <span>Neural_Load</span>
+                        <motion.span animate={{ opacity: [0.5, 1, 0.5] }} transition={{ duration: 1.2, repeat: Infinity }}>
+                            Optimized
+                        </motion.span>
+                    </div>
                 </div>
             </div>
         </div>

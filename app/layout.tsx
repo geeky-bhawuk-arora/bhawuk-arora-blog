@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     template: "%s | Bhawuk Arora",
   },
   description:
-    "Professional bug creator & MLOps architect. I teach computers how to think (so they can finally do my homework) and build cloud systems that respect the laws of physics... most of the time.",
+    "Corporate Kid in Tech ;)",
   keywords: [
     "Bhawuk Arora",
     "MLOps Engineer",

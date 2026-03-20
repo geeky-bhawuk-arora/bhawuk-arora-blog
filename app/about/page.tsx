@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "About — Bhawuk Arora",
+    title: "About",
     description: "Bhawuk Arora is an AI & Data Science student exploring the intersection of DevOps, MLOps, and distributed systems.",
 };
 

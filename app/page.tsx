@@ -11,7 +11,7 @@ import { Cpu, Terminal, Database, Cloud, Code, BarChart } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Bhawuk Arora",
-  description: "Professional bug creator & MLOps architect. I teach computers how to think (so they can finally do my homework) and build cloud systems that respect the laws of physics... most of the time.",
+  description: "Corporate Kid in Tech ;)",
 };
 
 
@@ -75,7 +75,7 @@ export default async function HomePage() {
               </h2>
 
               <p className="text-lg md:text-xl text-[var(--text-muted)] leading-relaxed max-w-2xl mb-12 font-medium">
-                Operationalizing high-throughput ML systems and distributed infrastructure.
+                Corporate Kid in Tech ;)
               </p>
             </div>
 

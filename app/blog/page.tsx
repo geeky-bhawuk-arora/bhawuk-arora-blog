@@ -6,7 +6,7 @@ import { Post } from "@/lib/data";
 export const metadata: Metadata = {
     title: "Blog",
     description:
-        "Thoughts on code, AI, design, career, and the craft of building software.",
+        "Deep dives into MLOps, Distributed Systems, and High-Performance Infrastructure by Bhawuk Arora.",
 };
 
 export default async function BlogPage() {

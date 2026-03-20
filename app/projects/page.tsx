@@ -6,7 +6,7 @@ import AnimatedSection from '@/components/AnimatedSection';
 
 export const metadata: Metadata = {
     title: 'Projects',
-    description: 'A selection of engineering projects focused on MLOps, DevOps, and Scalable Infrastructure.',
+    description: 'High-performance infrastructure, MLOps pipelines, and cloud-native modules architected for scale.',
 };
 
 export default function ProjectsPage() {
