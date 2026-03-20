@@ -8,11 +8,11 @@ import { Heart } from "lucide-react";
 
 export const metadata: Metadata = {
   title: {
-    default: "Bhawuk Arora (^__^) | MLOps & Distributed Systems",
+    default: "Bhawuk Arora (^__^)",
     template: "%s | Bhawuk Arora",
   },
   description:
-    "Exploring the intersection of MLOps, Distributed Systems, and High-Performance Infrastructure. Engineering logs and deep dives by Bhawuk Arora (^__^).",
+    "Professional bug creator & MLOps architect. I teach computers how to think (so they can finally do my homework) and build cloud systems that respect the laws of physics... most of the time.",
   keywords: [
     "Bhawuk Arora",
     "MLOps Engineer",

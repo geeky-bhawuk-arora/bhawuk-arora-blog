@@ -40,8 +40,7 @@ export default function Navbar() {
                             <img src="/logo.svg" alt="Bhawuk Logo" className="w-full h-full object-cover" />
                         </div>
                         <span className="text-lg font-bold tracking-tight text-[var(--text-primary)] group-hover:text-[var(--accent-blue)] transition-colors">
-                            Bhawuk Arora (^__^)
-                        </span>
+                            Bhawuk.                        </span>
                     </Link>
 
                     {/* Desktop nav */}

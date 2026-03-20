@@ -10,8 +10,8 @@ import HeroHandshake from "@/components/HeroHandshake";
 import { Cpu, Terminal, Database, Cloud, Code, BarChart } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Bhawuk Arora — MLOps Engineer",
-  description: "I build scalable ML infrastructure, cloud systems, and automation pipelines.",
+  title: "Bhawuk Arora",
+  description: "Professional bug creator & MLOps architect. I teach computers how to think (so they can finally do my homework) and build cloud systems that respect the laws of physics... most of the time.",
 };
 
 
