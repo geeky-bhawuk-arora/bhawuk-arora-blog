@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUp, ArrowDown, MessageSquare, Send, User, ThumbsUp, RefreshCcw } from 'lucide-react';
 import { addComment, addRating } from '@/app/blog/[slug]/engagement-actions';
+import Loader from '@/components/Loader';
 
 interface Comment {
     id: string;
@@ -193,9 +194,9 @@ export default function Engagement({ postId, slug, comments, score, totalVotes }
                                     <button 
                                         type="submit"
                                         disabled={isVoting}
-                                        className="w-full py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-bold text-xs transition-colors shadow-lg shadow-blue-500/20"
+                                        className="w-full h-[46px] flex items-center justify-center bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-bold text-xs transition-colors shadow-lg shadow-blue-500/20"
                                     >
-                                        {isVoting ? 'Verifying...' : 'Submit Vote'}
+                                        {isVoting ? <Loader size="sm" color="white" /> : 'Submit Vote'}
                                     </button>
                                 </form>
                             </motion.div>
@@ -265,10 +266,14 @@ export default function Engagement({ postId, slug, comments, score, totalVotes }
                             <button
                                 type="submit"
                                 disabled={isSubmitting}
-                                className="w-full py-5 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl font-bold text-sm transition-all shadow-lg hover:shadow-blue-500/20 active:scale-[0.98] flex items-center justify-center gap-2 group disabled:opacity-50"
+                                className="w-full py-5 min-h-[58px] bg-blue-600 hover:bg-blue-500 text-white rounded-2xl font-bold text-sm transition-all shadow-lg hover:shadow-blue-500/20 active:scale-[0.98] flex items-center justify-center gap-2 group disabled:opacity-50"
                             >
-                                {isSubmitting ? 'Sending...' : replyTo ? 'Post Reply' : 'Post Comment'}
-                                <Send size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                                {isSubmitting ? <Loader size="sm" color="white" /> : (
+                                    <>
+                                        {replyTo ? 'Post Reply' : 'Post Comment'}
+                                        <Send size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                                    </>
+                                )}
                             </button>
                         </form>
                     </div>

@@ -8,13 +8,21 @@ import { Heart } from "lucide-react";
 
 export const metadata: Metadata = {
   title: {
-    default: "Bhawuk — Developer Blog",
-    template: "%s | Bhawuk",
+    default: "Bhawuk Arora (^__^) | MLOps & Distributed Systems",
+    template: "%s | Bhawuk Arora",
   },
   description:
-    "Engineering logs on MLOps, Distributed Systems, and Infrastructure Automation by Bhawuk Arora.",
-  keywords: ["MLOps", "DevOps", "Infrastructure as Code", "Kubernetes", "Reliability Engineering"],
-  authors: [{ name: "Bhawuk" }],
+    "Exploring the intersection of MLOps, Distributed Systems, and High-Performance Infrastructure. Engineering logs and deep dives by Bhawuk Arora (^__^).",
+  keywords: [
+    "Bhawuk Arora",
+    "MLOps Engineer",
+    "Distributed Systems",
+    "Infrastructure Automation",
+    "Site Reliability Engineering",
+    "Next.js Blog",
+    "Cloud Native"
+  ],
+  authors: [{ name: "Bhawuk Arora" }],
   icons: {
     icon: "/logo.svg",
     apple: "/logo.svg",
@@ -56,7 +64,7 @@ function SiteFooter() {
     <footer className="border-t border-[var(--border)] bg-[var(--bg-secondary)] mt-auto">
       <div className="max-w-5xl mx-auto px-6 md:px-8 py-10 flex flex-wrap items-center justify-between gap-4">
         <p className="text-sm font-medium text-[var(--text-muted)] flex items-center gap-1.5">
-          Made with <Heart size={14} className="text-red-500 fill-red-500" /> by Bhawuk
+          Made with <Heart size={14} className="text-red-500 fill-red-500" /> by Bhawuk Arora (^__^)
         </p>
 
         <div className="flex gap-6">
