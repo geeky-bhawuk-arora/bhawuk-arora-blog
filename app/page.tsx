@@ -10,7 +10,7 @@ import HeroHandshake from "@/components/HeroHandshake";
 import { Cpu, Terminal, Database, Cloud, Code, BarChart } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Bhawuk Arora",
+  title: "Bhawuk Arora ( ^__^ )",
   description: "Corporate Kid in Tech ;)",
 };
 
