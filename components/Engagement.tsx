@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowUp, ArrowDown, MessageSquare, Send, User, ThumbsUp } from 'lucide-react';
+import { ArrowUp, ArrowDown, MessageSquare, Send, User, ThumbsUp, RefreshCcw } from 'lucide-react';
 import { addComment, addRating } from '@/app/blog/[slug]/engagement-actions';
 
 interface Comment {
@@ -71,20 +71,49 @@ function CommentItem({
 export default function Engagement({ postId, slug, comments, score, totalVotes }: EngagementProps) {
     const [userVote, setUserVote] = useState<number>(0);
     const [isVoting, setIsVoting] = useState(false);
+    const [voteEmail, setVoteEmail] = useState('');
+    const [showVoteEmail, setShowVoteEmail] = useState(false);
+    const [pendingVote, setPendingVote] = useState<number | null>(null);
+    const [voteError, setVoteError] = useState<string | null>(null);
+
     const [name, setName] = useState('');
     const [message, setMessage] = useState('');
     const [replyTo, setReplyTo] = useState<{ id: string; name: string } | null>(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const handleVote = async (val: number) => {
+    const generateRandomName = () => {
+        const adjectives = ['Quantum', 'Digital', 'Silent', 'Azure', 'Neon', 'Cosmic', 'Solar', 'Lunar', 'Prismatic', 'Phantom', 'Stellar', 'Wandering'];
+        const animals = ['Raven', 'Wolf', 'Fox', 'Phoenix', 'Panda', 'Eagle', 'Owl', 'Lynx', 'Falcon', 'Panther', 'Cyborg', 'Voyager'];
+        const adj = adjectives[Math.floor(Math.random() * adjectives.length)];
+        const ani = animals[Math.floor(Math.random() * animals.length)];
+        const num = Math.floor(Math.random() * 999);
+        setName(`${adj} ${ani} ${num}`);
+    };
+
+    // Initialize with a random name
+    useState(() => {
+        generateRandomName();
+    });
+
+    const initiateVote = (val: number) => {
         if (userVote !== 0 || isVoting) return;
-        setUserVote(val);
+        setPendingVote(val);
+        setShowVoteEmail(true);
+        setVoteError(null);
+    };
+
+    const handleVote = async (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!voteEmail || pendingVote === null || isVoting) return;
+        
         setIsVoting(true);
+        setVoteError(null);
         try {
-            await addRating(postId, slug, val);
-        } catch (e) {
-            console.error(e);
-            setUserVote(0);
+            await addRating(postId, slug, pendingVote, voteEmail);
+            setUserVote(pendingVote);
+            setShowVoteEmail(false);
+        } catch (e: any) {
+            setVoteError(e.message || "Something went wrong while voting");
         } finally {
             setIsVoting(false);
         }
@@ -111,100 +140,150 @@ export default function Engagement({ postId, slug, comments, score, totalVotes }
 
     return (
         <section className="mt-20 pt-20 border-t border-[var(--border)]">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-16">
+            <div className="flex flex-col gap-12 sm:gap-20">
                 
-                {/* Voting Section */}
-                <div>
-                    <h3 className="text-2xl font-bold text-[var(--text-primary)] mb-4 flex items-center gap-3">
-                        <ThumbsUp className="text-[var(--accent-blue)]" size={24} />
-                        Community Score
-                    </h3>
-                    <div className="bg-[var(--bg-card)] border border-[var(--border)] p-8 rounded-3xl shadow-xl shadow-black/20">
-                        <div className="flex items-center gap-6 mb-8">
-                            <div className={`text-6xl font-black ${score > 0 ? 'text-green-500' : score < 0 ? 'text-red-500' : 'text-[var(--text-muted)]'}`}>
+                {/* Minimal Voting Section */}
+                <div className="flex flex-col items-center justify-center text-center">
+                    <div className="flex items-center gap-6 p-2 rounded-2xl bg-[var(--bg-card)] border border-[var(--border)] shadow-sm mb-6">
+                        <button
+                            type="button"
+                            disabled={userVote !== 0 || isVoting}
+                            onClick={() => initiateVote(1)}
+                            className={`p-3 rounded-xl transition-all ${userVote === 1 ? 'bg-green-500/10 text-green-500' : 'hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-green-500'}`}
+                        >
+                            <ArrowUp size={22} className={userVote === 1 ? 'fill-green-500' : ''} />
+                        </button>
+                        
+                        <div className="flex flex-col">
+                            <span className={`text-2xl font-black tabular-nums transition-colors ${score > 0 ? 'text-green-500' : score < 0 ? 'text-red-500' : 'text-[var(--text-primary)]'}`}>
                                 {score > 0 ? `+${score}` : score}
-                            </div>
-                            <div className="text-sm text-[var(--text-secondary)] leading-tight">
-                                Overall Score<br />
-                                <span className="text-[var(--text-muted)] font-mono text-[11px] tracking-tighter">{totalVotes} community votes</span>
-                            </div>
+                            </span>
                         </div>
 
-                        <div className="flex flex-col gap-4">
-                            <p className="text-xs font-bold text-[var(--accent-blue)] uppercase tracking-[0.2em]">Was this worth reading?</p>
-                            <div className="flex gap-4">
-                                <button
-                                    type="button"
-                                    disabled={userVote !== 0 || isVoting}
-                                    onClick={() => handleVote(1)}
-                                    className={`flex-1 flex items-center justify-center gap-2 py-4 rounded-2xl border-2 transition-all ${userVote === 1 ? 'bg-green-500/10 border-green-500 text-green-500' : 'bg-[var(--bg-elevated)] border-[var(--border)] hover:border-green-500/50 hover:text-green-500 text-[var(--text-secondary)]'}`}
-                                >
-                                    <ArrowUp size={24} className={userVote === 1 ? 'animate-bounce' : ''} />
-                                    <span className="font-bold">Useful</span>
-                                </button>
-                                <button
-                                    type="button"
-                                    disabled={userVote !== 0 || isVoting}
-                                    onClick={() => handleVote(-1)}
-                                    className={`flex-1 flex items-center justify-center gap-2 py-4 rounded-2xl border-2 transition-all ${userVote === -1 ? 'bg-red-500/10 border-red-500 text-red-500' : 'bg-[var(--bg-elevated)] border-[var(--border)] hover:border-red-500/50 hover:text-red-500 text-[var(--text-secondary)]'}`}
-                                >
-                                    <ArrowDown size={24} className={userVote === -1 ? 'animate-bounce' : ''} />
-                                    <span className="font-bold text-sm">Not for me</span>
-                                </button>
-                            </div>
-                        </div>
+                        <button
+                            type="button"
+                            disabled={userVote !== 0 || isVoting}
+                            onClick={() => initiateVote(-1)}
+                            className={`p-3 rounded-xl transition-all ${userVote === -1 ? 'bg-red-500/10 text-red-500' : 'hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-red-500'}`}
+                        >
+                            <ArrowDown size={22} className={userVote === -1 ? 'fill-red-500' : ''} />
+                        </button>
+                    </div>
+
+                    <AnimatePresence>
+                        {showVoteEmail && !userVote && (
+                            <motion.div 
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 0.95 }}
+                                className="max-w-xs w-full bg-[var(--bg-card)] border border-blue-500/30 p-6 rounded-2xl shadow-2xl relative"
+                            >
+                                <button onClick={() => setShowVoteEmail(false)} className="absolute top-3 right-3 text-[var(--text-muted)] hover:text-white">✕</button>
+                                <p className="text-xs font-bold text-[var(--text-primary)] mb-3 uppercase tracking-widest">Verify Email to Vote</p>
+                                <form onSubmit={handleVote} className="flex flex-col gap-3">
+                                    <input 
+                                        required
+                                        type="email"
+                                        placeholder="your@email.com"
+                                        value={voteEmail}
+                                        onChange={(e) => setVoteEmail(e.target.value)}
+                                        className="w-full px-4 py-2 text-sm rounded-lg bg-[var(--bg-elevated)] border border-[var(--border)] outline-none focus:border-blue-500 transition-colors"
+                                    />
+                                    {voteError && <p className="text-[10px] text-red-500 font-medium">{voteError}</p>}
+                                    <button 
+                                        type="submit"
+                                        disabled={isVoting}
+                                        className="w-full py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-bold text-xs transition-colors shadow-lg shadow-blue-500/20"
+                                    >
+                                        {isVoting ? 'Verifying...' : 'Submit Vote'}
+                                    </button>
+                                </form>
+                            </motion.div>
+                        )}
+                        {userVote !== 0 && (
+                            <motion.p 
+                                initial={{ opacity: 0, y: 5 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                className="text-xs font-bold text-[var(--accent-blue)]"
+                            >
+                                Thanks for your feedback!
+                            </motion.p>
+                        )}
+                    </AnimatePresence>
+
+                    <div className="mt-4 text-[var(--text-muted)] font-mono text-[10px] uppercase tracking-widest">
+                        {totalVotes} community votes cast
                     </div>
                 </div>
 
-                {/* Comment Form Section */}
-                <div id="comment-form">
-                    <h3 className="text-2xl font-bold text-[var(--text-primary)] mb-4 flex items-center gap-3">
-                        <MessageSquare className="text-blue-500" size={24} />
-                        {replyTo ? `Replying to @${replyTo.name}` : 'Join the Discussion'}
-                    </h3>
-                    <form onSubmit={handleComment} className="flex flex-col gap-4">
-                        {replyTo && (
-                            <div className="flex items-center justify-between px-4 py-2 bg-blue-500/10 border border-blue-500/30 rounded-lg text-xs text-blue-400">
-                                <span>Replying to {replyTo.name}</span>
-                                <button onClick={() => setReplyTo(null)} className="hover:text-white underline">Cancel</button>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-16">
+                    {/* Comment Form Section */}
+                    <div id="comment-form">
+                        <h3 className="text-2xl font-bold text-[var(--text-primary)] mb-4 flex items-center gap-3">
+                            <MessageSquare className="text-blue-500" size={24} />
+                            {replyTo ? `Replying to @${replyTo.name}` : 'Join the Discussion'}
+                        </h3>
+                        <form onSubmit={handleComment} className="flex flex-col gap-4">
+                            {replyTo && (
+                                <div className="flex items-center justify-between px-4 py-2 bg-blue-500/10 border border-blue-500/30 rounded-lg text-xs text-blue-400">
+                                    <span>Replying to {replyTo.name}</span>
+                                    <button onClick={() => setReplyTo(null)} className="hover:text-white underline">Cancel</button>
+                                </div>
+                            )}
+                            <div className="flex items-center gap-4 mb-2">
+                                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-white font-bold text-lg shadow-lg shrink-0">
+                                    {name ? name.charAt(0).toUpperCase() : '?'}
+                                </div>
+                                <div className="flex-1 relative group">
+                                    <input
+                                        readOnly
+                                        required
+                                        type="text"
+                                        placeholder="Generating name..."
+                                        value={name}
+                                        className="w-full px-5 py-4 rounded-2xl bg-[var(--bg-elevated)] border border-[var(--border)] text-[var(--accent-blue)] font-bold outline-none cursor-default text-sm shadow-inner pr-12"
+                                    />
+                                    <button
+                                        type="button"
+                                        onClick={generateRandomName}
+                                        title="Regenerate Anonymous Name"
+                                        className="absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-xl hover:bg-[var(--bg-card)] text-[var(--text-secondary)] hover:text-blue-500 transition-all border border-transparent hover:border-[var(--border)]"
+                                    >
+                                        <RefreshCcw size={16} className={isSubmitting ? 'animate-spin' : ''} />
+                                    </button>
+                                    <span className="absolute -top-5 left-1 text-[10px] text-[var(--text-muted)] font-bold uppercase tracking-widest">Random Anonymous Username</span>
+                                </div>
                             </div>
-                        )}
-                        <div className="flex items-center gap-4 mb-2">
-                            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-white font-bold text-lg shadow-lg shrink-0">
-                                {name ? name.charAt(0).toUpperCase() : '?'}
+                            <textarea
+                                required
+                                rows={4}
+                                placeholder="Share your perspective..."
+                                value={message}
+                                onChange={(e) => setMessage(e.target.value)}
+                                className="w-full px-5 py-5 rounded-2xl bg-[var(--bg-card)] border border-[var(--border)] text-[var(--text-primary)] outline-none focus:border-blue-500 transition-all text-sm resize-none shadow-inner mt-2"
+                            ></textarea>
+                            <button
+                                type="submit"
+                                disabled={isSubmitting}
+                                className="w-full py-5 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl font-bold text-sm transition-all shadow-lg hover:shadow-blue-500/20 active:scale-[0.98] flex items-center justify-center gap-2 group disabled:opacity-50"
+                            >
+                                {isSubmitting ? 'Sending...' : replyTo ? 'Post Reply' : 'Post Comment'}
+                                <Send size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                            </button>
+                        </form>
+                    </div>
+
+                    <div className="hidden lg:flex items-center justify-center p-8 rounded-3xl bg-[var(--bg-elevated)]/30 border border-dashed border-[var(--border)]">
+                        <div className="text-center space-y-4 max-w-xs">
+                            <div className="w-16 h-16 rounded-2xl bg-blue-500/10 flex items-center justify-center text-blue-500 mx-auto">
+                                <ThumbsUp size={32} />
                             </div>
-                            <div className="flex-1 relative group">
-                                <input
-                                    required
-                                    type="text"
-                                    minLength={2}
-                                    placeholder="Enter your full name"
-                                    value={name}
-                                    onChange={(e) => setName(e.target.value)}
-                                    className="w-full px-5 py-4 rounded-2xl bg-[var(--bg-card)] border border-[var(--border)] text-[var(--text-primary)] outline-none focus:border-blue-500 transition-all text-sm shadow-inner"
-                                />
-                                {name && name.length < 2 && (
-                                    <span className="absolute -bottom-5 left-1 text-[10px] text-red-500 font-medium">Please enter a valid name</span>
-                                )}
-                            </div>
+                            <h4 className="font-bold text-[var(--text-primary)]">Community Guidelines</h4>
+                            <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
+                                Share your thoughts with the community. Be respectful, supportive, and curious.
+                            </p>
                         </div>
-                        <textarea
-                            required
-                            rows={4}
-                            placeholder="Share your perspective..."
-                            value={message}
-                            onChange={(e) => setMessage(e.target.value)}
-                            className="w-full px-5 py-5 rounded-2xl bg-[var(--bg-card)] border border-[var(--border)] text-[var(--text-primary)] outline-none focus:border-blue-500 transition-all text-sm resize-none shadow-inner mt-2"
-                        ></textarea>
-                        <button
-                            type="submit"
-                            disabled={isSubmitting}
-                            className="w-full py-5 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl font-bold text-sm transition-all shadow-lg hover:shadow-blue-500/20 active:scale-[0.98] flex items-center justify-center gap-2 group disabled:opacity-50"
-                        >
-                            {isSubmitting ? 'Sending...' : replyTo ? 'Post Reply' : 'Post Comment'}
-                            <Send size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                        </button>
-                    </form>
+                    </div>
                 </div>
             </div>
 
