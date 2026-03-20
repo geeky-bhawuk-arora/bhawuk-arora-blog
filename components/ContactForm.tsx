@@ -1,10 +1,11 @@
 'use client';
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import emailjs from "@emailjs/browser";
 import { motion, AnimatePresence } from 'framer-motion';
-import { Send, CheckCircle, Github, Linkedin, Mail, MessageSquare, User, AtSign, ArrowRight } from "lucide-react";
+import { Send, CheckCircle, Github, Linkedin, Mail, MessageSquare, User, AtSign, ArrowRight, Zap } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
+import Loader from "./Loader";
 
 const ContactForm = () => {
     const formRef = useRef<HTMLFormElement>(null);
@@ -18,13 +19,6 @@ const ContactForm = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
 
-    useEffect(() => {
-        if (isSubmitted) {
-            const timer = setTimeout(() => setIsSubmitted(false), 8000);
-            return () => clearTimeout(timer);
-        }
-    }, [isSubmitted]);
-
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
@@ -32,188 +26,100 @@ const ContactForm = () => {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         setIsSubmitting(true);
-
         if (!formRef.current) return;
 
         emailjs
-            .sendForm(
-                "service_r3d3clv",
-                "template_61u37om",
-                formRef.current,
-                "kCjs4Oa7WYESJHpxp"
-            )
-            .then(
-                () => {
-                    setIsSubmitting(false);
-                    setIsSubmitted(true);
-                    setFormData({ name: "", email: "", subject: "", message: "" });
-                },
-                (error) => {
-                    console.error("❌ Error:", error);
-                    setIsSubmitting(false);
-                    alert("Failed to send message. Please try again later.");
-                }
-            );
+            .sendForm("service_r3d3clv", "template_61u37om", formRef.current, "kCjs4Oa7WYESJHpxp")
+            .then(() => {
+                setIsSubmitting(false);
+                setIsSubmitted(true);
+                setFormData({ name: "", email: "", subject: "", message: "" });
+            }, () => {
+                setIsSubmitting(false);
+                alert("Failed to send packet.");
+            });
     };
 
     return (
-        <div className="w-full">
-            <AnimatedSection delay={100}>
-                <div className="flex flex-col mb-12 max-w-xl">
-                    <h1 className="text-4xl md:text-5xl font-bold text-[var(--text-primary)] tracking-tight mb-4">
-                        Connect / <span className="text-[var(--accent-blue)]">Collaborate.</span>
-                    </h1>
-                    <p className="text-[var(--text-secondary)] text-base leading-relaxed border-l-2 border-[var(--border)] pl-4">
-                        Focusing on MLOps and cloud architecture. If you have a project that requires scalable infrastructure or automation, let's talk.
-                    </p>
-                </div>
-            </AnimatedSection>
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 py-12 md:py-20 relative">
+            {/* Ambient Background Glows */}
+            <div className="absolute top-0 right-0 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-blue-500/10 blur-[80px] md:blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none" />
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-                {/* Info Sidebar */}
-                <div className="lg:col-span-5 space-y-8">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-16 lg:gap-24 items-start">
+                
+                {/* Visual/Description Side */}
+                <div className="lg:col-span-12 xl:col-span-5 flex flex-col pt-8 md:pt-12">
+                    <AnimatedSection>
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-[var(--accent-blue)] text-[10px] font-black uppercase tracking-[0.2em] mb-6 w-fit">
+                            <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
+                            Transmission Active
+                        </div>
+                        <h1 className="text-5xl sm:text-7xl md:text-8xl font-black text-[var(--text-primary)] tracking-tighter leading-[0.9] mb-8">
+                            Say <br />
+                            <span className="text-[var(--accent-blue)]">Hello.</span>
+                        </h1>
+                        <p className="text-lg md:text-xl text-[var(--text-secondary)] leading-relaxed border-l-2 border-[var(--accent-blue)]/30 pl-6 md:pl-8 mb-12 md:mb-16 py-2 italic font-medium">
+                            I'm available for technical collaborations on MLOps, scalability, and automated platforms.
+                        </p>
+                    </AnimatedSection>
+
                     <AnimatedSection delay={200}>
-                        <div className="space-y-10">
-                            <div>
-                                <h3 className="text-[10px] font-mono font-bold text-[var(--text-muted)] uppercase tracking-[0.3em] mb-6 border-b border-[var(--border)] pb-2 flex items-center justify-between">
-                                    Engineering Req <span>01</span>
-                                </h3>
-                                <div className="space-y-6">
-                                    <ContactLink
-                                        icon={<Mail size={18} />}
-                                        label="Primary Channel"
-                                        value="bhawuk.arora"
-                                        href="mailto:bhawuk.arora008@gmail.com"
-                                    />
-                                    <ContactLink
-                                        icon={<Github size={18} />}
-                                        label="Source Code"
-                                        value="github/geeky-bhawuk"
-                                        href="https://github.com/geeky-bhawuk-arora"
-                                    />
-                                    <ContactLink
-                                        icon={<Linkedin size={18} />}
-                                        label="Human Network"
-                                        value="linkedin/in/bhawuk"
-                                        href="https://linkedin.com/in/bhawuk-arora"
-                                    />
-                                </div>
-                            </div>
-
-                            <div className="pt-8 border-t border-[var(--border)]">
-                                <h3 className="text-[10px] font-mono font-bold text-[var(--text-muted)] uppercase tracking-[0.3em] mb-4">Availability</h3>
-                                <div className="flex items-center gap-3 text-xs font-mono text-green-400 bg-green-500/5 border border-green-500/10 px-4 py-2 rounded-lg w-fit">
-                                    <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                                    Available for Projects
-                                </div>
-                            </div>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-1 gap-4">
+                            <ContactCard icon={<Mail size={22} />} label="Primary Channel" value="bhawuk.arora" href="mailto:bhawuk.arora008@gmail.com" color="blue" />
+                            <ContactCard icon={<Github size={22} />} label="Operational Source" value="geeky-bhawuk-arora" href="https://github.com/geeky-bhawuk-arora" color="gray" />
+                            <ContactCard icon={<Linkedin size={22} />} label="Human Network" value="bhawuk-arora" href="https://linkedin.com/in/bhawuk-arora" color="indigo" />
                         </div>
                     </AnimatedSection>
                 </div>
 
-                {/* Form Area */}
-                <div className="lg:col-span-7">
+                {/* Form Side */}
+                <div className="lg:col-span-12 xl:col-span-7 mt-8 md:mt-0 w-full">
                     <AnimatedSection delay={300}>
-                        <div className="bg-[var(--bg-card)] border border-[var(--border)] rounded-2xl p-8 shadow-sm">
-                            <div className="mb-8 flex items-center justify-between border-b border-[var(--border)] pb-3">
-                                <h3 className="text-[10px] font-mono font-bold text-[var(--text-muted)] uppercase tracking-[0.2em]">Communication Protocol</h3>
-                                <span className="text-[8px] font-mono text-[var(--text-muted)] uppercase opacity-50">Secure Handshake</span>
-                            </div>
-
+                        <div className="bg-[#0c0c0e] border border-white/5 rounded-[1.5rem] md:rounded-[2.5rem] p-6 sm:p-8 md:p-14 shadow-2xl relative overflow-hidden group/form">
+                            {/* Technical Grid Overlay */}
+                            <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,var(--border)_1px,transparent_0)] bg-[size:32px_32px] opacity-[0.1] pointer-events-none" />
+                            
                             <AnimatePresence mode="wait">
                                 {!isSubmitted ? (
-                                    <motion.form
-                                        key="contact-form"
-                                        ref={formRef}
-                                        onSubmit={handleSubmit}
-                                        initial={{ opacity: 0 }}
-                                        animate={{ opacity: 1 }}
-                                        exit={{ opacity: 0, y: -20 }}
-                                        className="space-y-6"
-                                    >
-                                        <div className="grid md:grid-cols-2 gap-6">
-                                            <InputGroup
-                                                icon={<User size={18} />}
-                                                label="Identity"
-                                                name="name"
-                                                value={formData.name}
-                                                onChange={handleInputChange}
-                                                placeholder="Name"
-                                            />
-                                            <InputGroup
-                                                icon={<AtSign size={18} />}
-                                                label="Endpoint"
-                                                name="email"
-                                                type="email"
-                                                value={formData.email}
-                                                onChange={handleInputChange}
-                                                placeholder="Email"
-                                            />
+                                    <motion.form key="form" ref={formRef} onSubmit={handleSubmit} className="space-y-8 md:space-y-10 relative z-10 w-full">
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-10">
+                                            <FloatingInput label="Your Name" name="name" value={formData.name} onChange={handleInputChange} />
+                                            <FloatingInput label="Email Address" name="email" type="email" value={formData.email} onChange={handleInputChange} />
                                         </div>
-
-                                        <InputGroup
-                                            icon={<MessageSquare size={18} />}
-                                            label="Subject"
-                                            name="subject"
-                                            value={formData.subject}
-                                            onChange={handleInputChange}
-                                            placeholder="Subject"
-                                        />
-
-                                        <div className="space-y-3">
-                                            <label className="text-[10px] font-mono font-bold text-[var(--text-muted)] uppercase tracking-wider ml-1">
-                                                Payload
-                                            </label>
+                                        <FloatingInput label="Subject Protocol" name="subject" value={formData.subject} onChange={handleInputChange} />
+                                        <div className="relative group w-full">
                                             <textarea
                                                 name="message"
                                                 value={formData.message}
                                                 onChange={handleInputChange}
-                                                rows={5}
+                                                rows={4}
                                                 required
+                                                className="w-full bg-transparent border-b-2 border-white/10 py-3 md:py-4 text-base md:text-xl text-[var(--text-primary)] placeholder-white/20 focus:outline-none focus:border-[var(--accent-blue)] transition-all resize-none leading-relaxed peer"
                                                 placeholder="Message content..."
-                                                className="w-full bg-[var(--bg)] border border-[var(--border)] rounded-xl px-5 py-4 text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-[var(--accent-blue)]/50 focus:ring-4 focus:ring-[var(--accent-blue)]/5 transition-all resize-none leading-relaxed"
                                             />
+                                            <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[var(--accent-blue)] transition-all duration-500 peer-focus:w-full" />
                                         </div>
 
                                         <button
                                             type="submit"
                                             disabled={isSubmitting}
-                                            className="group w-full relative h-14 rounded-xl bg-[var(--accent-blue)] hover:bg-blue-600 text-white font-bold transition-all active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-3 shadow-lg shadow-blue-500/20"
+                                            className="w-full h-16 md:h-20 rounded-xl md:rounded-2xl bg-[var(--accent-blue)] hover:bg-blue-600 text-white font-black text-lg md:text-xl transition-all active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-3 md:gap-4 shadow-xl shadow-blue-500/10 group overflow-hidden relative"
                                         >
-                                            {isSubmitting ? (
+                                            {isSubmitting ? <Loader size="sm" color="white" /> : (
                                                 <>
-                                                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                                                    Dispatching...
-                                                </>
-                                            ) : (
-                                                <>
-                                                    Execute Send
-                                                    <Send size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                                                    <Zap size={18} className="group-hover:scale-125 transition-transform text-blue-200" />
+                                                    Initialize Send
+                                                    <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform opacity-50" />
                                                 </>
                                             )}
                                         </button>
                                     </motion.form>
                                 ) : (
-                                    <motion.div
-                                        key="success-message"
-                                        initial={{ opacity: 0, scale: 0.9 }}
-                                        animate={{ opacity: 1, scale: 1 }}
-                                        exit={{ opacity: 0, scale: 0.9 }}
-                                        className="py-12 flex flex-col items-center text-center"
-                                    >
-                                        <div className="w-20 h-20 rounded-full bg-green-500/10 text-green-500 flex items-center justify-center mb-6">
-                                            <CheckCircle size={40} />
-                                        </div>
-                                        <h3 className="text-2xl font-bold text-[var(--text-primary)] mb-2">Success</h3>
-                                        <p className="text-[var(--text-secondary)] text-sm max-w-xs mb-8">
-                                            Message successfully pushed to the inbox. I'll get back to you shortly.
-                                        </p>
-                                        <button
-                                            onClick={() => setIsSubmitted(false)}
-                                            className="text-[var(--accent-blue)] font-bold text-sm hover:underline"
-                                        >
-                                            Send another message
-                                        </button>
+                                    <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="py-12 md:py-20 flex flex-col items-center text-center">
+                                        <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-green-500/10 text-green-500 flex items-center justify-center mb-8 md:mb-10 shadow-[0_0_30px_rgba(34,197,94,0.1)]"><CheckCircle size={40} /></div>
+                                        <h3 className="text-3xl md:text-4xl font-black text-white mb-4 tracking-tight">Sync Established</h3>
+                                        <p className="text-[var(--text-secondary)] text-base md:text-lg max-w-sm mb-10 md:mb-12">I've received your packet and will process it shortly.</p>
+                                        <button onClick={() => setIsSubmitted(false)} className="px-6 py-2.5 rounded-full border border-white/10 hover:border-white/20 text-[10px] font-bold uppercase tracking-widest transition-all">Start New Session</button>
                                     </motion.div>
                                 )}
                             </AnimatePresence>
@@ -225,34 +131,39 @@ const ContactForm = () => {
     );
 };
 
-const InputGroup = ({ icon, label, ...props }: any) => (
-    <div className="space-y-3">
-        <label className="text-[10px] font-mono font-bold text-[var(--text-muted)] uppercase tracking-wider ml-1">
+const FloatingInput = ({ label, ...props }: any) => (
+    <div className="relative group w-full">
+        <input
+            {...props}
+            required
+            className="w-full bg-transparent border-b-2 border-white/10 py-3 md:py-4 text-base md:text-xl text-[var(--text-primary)] placeholder-transparent focus:outline-none focus:border-[var(--accent-blue)] transition-all peer"
+            placeholder={label}
+        />
+        <label className="absolute left-0 top-0 text-white/30 text-xs md:text-sm uppercase font-black tracking-widest transition-all peer-focus:-top-6 peer-focus:text-[var(--accent-blue)] peer-focus:text-[10px] peer-[:not(:placeholder-shown)]:-top-6 peer-[:not(:placeholder-shown)]:text-[10px] cursor-text">
             {label}
         </label>
-        <div className="relative group/input">
-            <div className="absolute left-5 top-1/2 -translate-y-1/2 text-[var(--text-muted)] group-focus-within/input:text-[var(--accent-blue)] transition-colors">
-                {icon}
-            </div>
-            <input
-                required
-                className="w-full bg-[var(--bg)] border border-[var(--border)] rounded-xl pl-12 pr-6 py-4 text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-[var(--accent-blue)]/50 focus:ring-4 focus:ring-[var(--accent-blue)]/5 transition-all"
-                {...props}
-            />
-        </div>
+        <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-[var(--accent-blue)] transition-all duration-500 peer-focus:w-full" />
     </div>
 );
 
-const ContactLink = ({ icon, label, value, href }: { icon: React.ReactNode, label: string, value: string, href: string }) => (
-    <a href={href} target="_blank" rel="noopener noreferrer" className="flex items-center gap-5 group/link">
-        <div className="w-12 h-12 rounded-xl bg-[var(--bg)] border border-[var(--border)] flex items-center justify-center text-[var(--text-muted)] group-hover/link:text-[var(--accent-blue)] group-hover/link:border-[var(--accent-blue)]/50 transition-all duration-300 shrink-0">
-            {icon}
-        </div>
-        <div className="flex-1 min-w-0">
-            <p className="text-[10px] font-mono text-[var(--text-muted)] uppercase tracking-widest mb-1">{label}</p>
-            <p className="text-base text-[var(--text-primary)] font-bold group-hover/link:text-[var(--accent-blue)] transition-colors truncate">{value}</p>
-        </div>
-    </a>
-);
+const ContactCard = ({ icon, label, value, href, color }: any) => {
+    const colors: any = {
+        blue: 'text-blue-400 group-hover:bg-blue-500/10',
+        indigo: 'text-indigo-400 group-hover:bg-indigo-500/10',
+        gray: 'text-gray-400 group-hover:bg-gray-500/10'
+    };
+    
+    return (
+        <a href={href} target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 md:gap-6 p-1 group w-full">
+            <div className={`w-12 h-12 md:w-14 md:h-14 rounded-[1rem] md:rounded-2xl bg-white/[0.03] border border-white/5 flex items-center justify-center transition-all duration-500 ${colors[color]} shrink-0`}>
+                {icon}
+            </div>
+            <div className="min-w-0">
+                <p className="text-[8px] md:text-[9px] font-black text-white/30 uppercase tracking-[0.2em] mb-0.5">{label}</p>
+                <p className="text-base md:text-xl font-bold text-[var(--text-primary)] group-hover:text-[var(--accent-blue)] transition-colors tracking-tight truncate">{value}</p>
+            </div>
+        </a>
+    );
+};
 
 export default ContactForm;
