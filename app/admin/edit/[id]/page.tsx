@@ -23,6 +23,12 @@ export default async function EditPostPage({ params }: Props) {
         notFound();
     }
 
+    const { data: posts } = await supabase
+        .from('posts')
+        .select('category');
+    
+    const existingCategories = Array.from(new Set(posts?.map(p => p.category).filter(Boolean))).sort() as string[];
+
     return (
         <div>
             <div className="mb-8">
@@ -37,6 +43,7 @@ export default async function EditPostPage({ params }: Props) {
                 initialData={post}
                 action={updatePost}
                 submitLabel="Save Changes"
+                existingCategories={existingCategories}
             />
         </div>
     );

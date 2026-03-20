@@ -3,29 +3,14 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
-const greetings = [
-    { text: "Welcome", lang: "English" },
-    { text: "Sat Sri Akal", lang: "Punjabi" },
-    { text: "Namaste", lang: "Hindi" },
-    { text: "Bhawuk's Blog", lang: "Brand" },
-    { text: "Initializing", lang: "System" }
-];
-
 export default function LoadingScreen() {
-    const [index, setIndex] = useState(0);
     const [isVisible, setIsVisible] = useState(true);
 
     useEffect(() => {
-        if (index < greetings.length - 1) {
-            // Balanced timing for readability and excitement
-            const timer = setTimeout(() => setIndex(prev => prev + 1), 280);
-            return () => clearTimeout(timer);
-        } else {
-            // A bit more time on the final greeting
-            const timer = setTimeout(() => setIsVisible(false), 650);
-            return () => clearTimeout(timer);
-        }
-    }, [index]);
+        // Fluid 1.5s total duration for a smooth experience
+        const timer = setTimeout(() => setIsVisible(false), 1500);
+        return () => clearTimeout(timer);
+    }, []);
 
     return (
         <AnimatePresence>
@@ -33,77 +18,79 @@ export default function LoadingScreen() {
                 <motion.div
                     initial={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    transition={{ duration: 0.4, ease: "easeOut" }}
+                    transition={{ duration: 0.8, ease: [0.43, 0.13, 0.23, 0.96] }}
                     className="fixed inset-0 z-[100] flex items-center justify-center bg-[#070707] overflow-hidden"
                 >
-                    {/* Background Grid - Premium Look */}
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.03)_1px,transparent_0)] bg-[size:32px_32px]" />
-                    
-                    {/* Floating Glows */}
-                    <motion.div 
-                        animate={{ 
-                            opacity: [0.1, 0.2, 0.1],
-                            scale: [1, 1.2, 1],
-                        }}
-                        transition={{ duration: 4, repeat: Infinity }}
-                        className="absolute w-[500px] h-[500px] bg-blue-500/10 blur-[120px] rounded-full"
-                    />
+                    {/* Background Noise/Texture */}
+                    <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
 
-                    <div className="relative flex flex-col items-center">
-                        <div className="flex flex-col items-center gap-6 relative z-10">
-                            {/* Animated Terminal brackets with much faster text cycling */}
-                            <div className="flex items-center gap-6">
-                                <motion.span
-                                    initial={{ x: -10, opacity: 0 }}
-                                    animate={{ x: 0, opacity: 1 }}
-                                    className="text-blue-500 font-mono text-4xl md:text-6xl font-black"
-                                >
-                                    [
-                                </motion.span>
+                    {/* Fluid Liquid Shapes */}
+                    <div className="relative w-full h-full flex items-center justify-center">
+                        <motion.div 
+                            animate={{ 
+                                scale: [1, 1.2, 0.9, 1.1, 1],
+                                rotate: [0, 90, 180, 270, 360],
+                                borderRadius: ["20% 80% 30% 70% / 30% 30% 70% 70%", "80% 20% 70% 30% / 70% 70% 30% 30%", "20% 80% 30% 70% / 30% 30% 70% 70%"],
+                            }}
+                            transition={{ 
+                                duration: 8,
+                                repeat: Infinity,
+                                ease: "linear"
+                            }}
+                            className="absolute w-[300px] h-[300px] bg-blue-500/10 blur-[80px]"
+                        />
+                        <motion.div 
+                            animate={{ 
+                                scale: [1.2, 0.9, 1.1, 1, 1.2],
+                                rotate: [360, 270, 180, 90, 0],
+                                borderRadius: ["70% 30% 70% 30% / 30% 70% 30% 70%", "30% 70% 30% 70% / 70% 30% 70% 30%", "70% 30% 70% 30% / 30% 70% 30% 70%"],
+                            }}
+                            transition={{ 
+                                duration: 10,
+                                repeat: Infinity,
+                                ease: "linear"
+                            }}
+                            className="absolute w-[250px] h-[250px] bg-indigo-500/10 blur-[100px]"
+                        />
 
-                                <div className="h-20 flex items-center justify-center min-w-[280px] md:min-w-[400px]">
-                                    <AnimatePresence mode="wait">
-                                        <motion.div
-                                            key={index}
-                                            initial={{ y: 15, opacity: 0, scale: 0.95 }}
-                                            animate={{ y: 0, opacity: 1, scale: 1 }}
-                                            exit={{ y: -15, opacity: 0, scale: 1.05 }}
-                                            transition={{ duration: 0.12, ease: "easeOut" }}
-                                            className="text-center"
-                                        >
-                                            <h2 className="text-3xl md:text-6xl font-black text-white font-['Space_Grotesk'] tracking-widest lowercase">
-                                                {greetings[index].text}
-                                            </h2>
-                                            <div className="flex items-center justify-center gap-2 mt-3">
-                                                <div className="h-[1px] w-4 bg-blue-500/30" />
-                                                <p className="text-[10px] font-mono text-blue-500/60 uppercase tracking-[0.4em]">
-                                                    {greetings[index].lang}_X
-                                                </p>
-                                                <div className="h-[1px] w-4 bg-blue-500/30" />
-                                            </div>
-                                        </motion.div>
-                                    </AnimatePresence>
+                        {/* Central Minimal Info */}
+                        <div className="relative z-10 flex flex-col items-center gap-8">
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ duration: 0.5 }}
+                                className="flex flex-col items-center"
+                            >
+                                <span className="text-2xl md:text-3xl font-black font-['Space_Grotesk'] text-white tracking-[0.3em] uppercase">
+                                    Bhawuk
+                                </span>
+                                <div className="flex items-center gap-1.5 mt-2">
+                                    <div className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
+                                    <span className="text-[9px] font-mono text-blue-500/50 uppercase tracking-[0.5em]">Establishing Sync</span>
                                 </div>
+                            </motion.div>
 
-                                <motion.span
-                                    initial={{ x: 10, opacity: 0 }}
-                                    animate={{ x: 0, opacity: 1 }}
-                                    className="text-blue-500 font-mono text-4xl md:text-6xl font-black"
-                                >
-                                    ]
-                                </motion.span>
-                            </div>
-
-                            {/* Progress bar - Sleeker & Faster */}
-                            <div className="w-48 h-[2px] bg-white/5 rounded-full overflow-hidden mt-10 relative">
+                            {/* Fluid Progress Bar */}
+                            <div className="w-40 h-[2px] bg-white/5 rounded-full overflow-hidden relative">
                                 <motion.div
-                                    className="h-full bg-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.8)]"
-                                    initial={{ width: "0%" }}
-                                    animate={{ width: `${((index + 1) / greetings.length) * 100}%` }}
-                                    transition={{ duration: 0.2 }}
+                                    className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-500 to-transparent"
+                                    animate={{ 
+                                        x: [-200, 200]
+                                    }}
+                                    transition={{ 
+                                        duration: 1.5,
+                                        repeat: Infinity,
+                                        ease: "easeInOut"
+                                    }}
                                 />
                             </div>
                         </div>
+                    </div>
+
+                    {/* Corner Tech Accents */}
+                    <div className="absolute top-10 left-10 flex flex-col gap-1 opacity-20">
+                        <div className="w-8 h-[1px] bg-white" />
+                        <div className="w-4 h-[1px] bg-white" />
                     </div>
                 </motion.div>
             )}

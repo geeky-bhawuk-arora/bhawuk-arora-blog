@@ -8,20 +8,14 @@ interface PostFormProps {
     initialData?: Partial<Post> & { id?: string };
     action: (formData: FormData) => Promise<void>;
     submitLabel: string;
+    existingCategories?: string[];
 }
 
-export default function PostForm({ initialData, action, submitLabel }: PostFormProps) {
+export default function PostForm({ initialData, action, submitLabel, existingCategories = [] }: PostFormProps) {
     const [title, setTitle] = useState(initialData?.title || '');
     const [slug, setSlug] = useState(initialData?.slug || '');
     const [isAutoSlug, setIsAutoSlug] = useState(!initialData?.slug);
     const [category, setCategory] = useState(initialData?.category || '');
-
-    const categoryPresets: string[] = [
-        'Kubernetes', 'Terraform', 'CI/CD', 'MLOps pipelines',
-        'Databricks', 'System design', 'Docker', 'MLflow',
-        'Infrastructure', 'Cloud architecture', 'DevOps tooling',
-        'Machine Learning Systems', 'Data Engineering', 'Python', 'AI/ML'
-    ];
 
     useEffect(() => {
         if (isAutoSlug && title) {
@@ -99,32 +93,25 @@ export default function PostForm({ initialData, action, submitLabel }: PostFormP
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                 <div className="flex flex-col gap-2">
                     <label htmlFor="category" className="text-sm font-medium text-[var(--text-secondary)]">Category</label>
-                    <input
-                        required
-                        type="text"
-                        name="category"
-                        id="category"
-                        value={category}
-                        onChange={(e) => setCategory(e.target.value)}
-                        placeholder="Type or select below"
-                        className="px-4 py-2.5 rounded bg-[var(--bg)] border border-[var(--border)] text-[var(--text-primary)] outline-none focus:border-[var(--accent-blue)] focus:ring-1 focus:ring-[var(--accent-blue)]"
-                    />
-                    <div className="flex flex-wrap gap-1.5 mt-1">
-                        {categoryPresets.map(cat => (
-                            <button
-                                key={cat}
-                                type="button"
-                                onClick={() => setCategory(cat)}
-                                className={`px-2.5 py-1 rounded-md text-[10px] font-bold border transition-all cursor-pointer ${
-                                    category === cat
-                                        ? 'bg-[var(--accent-blue)]/15 border-[var(--accent-blue)]/40 text-[var(--accent-blue)]'
-                                        : 'bg-[var(--bg-elevated)] border-[var(--border)] text-[var(--text-muted)] hover:border-[var(--text-muted)] hover:text-[var(--text-secondary)]'
-                                }`}
-                            >
-                                {cat}
-                            </button>
-                        ))}
+                    <div className="relative group">
+                        <input
+                            required
+                            list="existing-categories"
+                            type="text"
+                            name="category"
+                            id="category"
+                            value={category}
+                            onChange={(e) => setCategory(e.target.value)}
+                            placeholder="Type or select existing"
+                            className="w-full px-4 py-2.5 rounded bg-[var(--bg)] border border-[var(--border)] text-[var(--text-primary)] outline-none focus:border-[var(--accent-blue)] focus:ring-1 focus:ring-[var(--accent-blue)]"
+                        />
+                        <datalist id="existing-categories">
+                            {existingCategories.map(cat => (
+                                <option key={cat} value={cat} />
+                            ))}
+                        </datalist>
                     </div>
+                    <p className="text-[10px] text-[var(--text-muted)] italic">Choose an existing category from the dropdown or type a new one.</p>
                 </div>
 
                 <div className="flex flex-col gap-2 md:col-span-2">
