@@ -88,3 +88,46 @@ create policy "Anyone can subscribe" on public.subscribers
 
 create policy "Authenticated users can manage subscribers" on public.subscribers
   for all using (auth.role() = 'authenticated');
+
+-- 10. Add 'banner_url' to public.posts
+ALTER TABLE public.posts ADD COLUMN IF NOT EXISTS banner_url text;
+
+-- 10. Create a table for blog comments
+create table public.comments (
+  id uuid default gen_random_uuid() primary key,
+  post_id uuid references public.posts(id) on delete cascade not null,
+  parent_id uuid references public.comments(id) on delete cascade, -- For threaded replies
+  user_name text not null,
+  content text not null,
+  created_at timestamp with time zone default timezone('utc'::text, now()) not null
+);
+
+-- 11. Set RLS for comments
+alter table public.comments enable row level security;
+
+-- Policy: Anyone can view and insert comments
+create policy "Anyone can view comments" on public.comments
+  for select using (true);
+
+create policy "Anyone can insert comments" on public.comments
+  for insert with check (true);
+
+-- 12. Create a table for post ratings (upvotes/downvotes)
+create table public.ratings (
+  id uuid default gen_random_uuid() primary key,
+  post_id uuid references public.posts(id) on delete cascade not null,
+  user_email text not null, -- To prevent duplicate votes
+  rating integer not null check (rating in (-1, 1)),
+  created_at timestamp with time zone default timezone('utc'::text, now()) not null,
+  unique(post_id, user_email) -- Primary constraint to prevent double voting
+);
+
+-- 13. Set RLS for ratings
+alter table public.ratings enable row level security;
+
+-- Policy: Anyone can view and insert ratings
+create policy "Anyone can view ratings" on public.ratings
+  for select using (true);
+
+create policy "Anyone can insert ratings" on public.ratings
+  for insert with check (true);

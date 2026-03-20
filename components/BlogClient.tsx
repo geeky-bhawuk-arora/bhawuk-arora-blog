@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
-import { Search, X, Clock, Calendar } from 'lucide-react';
+import { Search, X, Clock, Calendar, ThumbsUp } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Post, Category } from '@/lib/data';
 import { formatDate } from '@/lib/utils';
@@ -44,9 +44,17 @@ function CleanCard({ post }: { post: Post }) {
                         </span>
                     ))}
                 </div>
-                <div className="flex items-center gap-1.5 font-medium text-[11px] text-[var(--text-muted)] shrink-0">
-                    <Clock size={12} />
-                    {post.readingTime}m
+                <div className="flex items-center gap-3 font-medium text-[11px] text-[var(--text-muted)] shrink-0">
+                    <div className="flex items-center gap-1">
+                        <Clock size={12} />
+                        {post.readingTime}m
+                    </div>
+                    {post.score !== undefined && post.score !== 0 ? (
+                        <div className={`flex items-center gap-1 ${post.score > 0 ? 'text-green-500' : 'text-red-500'}`}>
+                            <ThumbsUp size={11} className={post.score > 0 ? 'fill-green-500/20' : 'fill-red-500/20'} />
+                            {post.score > 0 ? `+${post.score}` : post.score}
+                        </div>
+                    ) : null}
                 </div>
             </div>
         </motion.article>
@@ -56,16 +64,17 @@ function CleanCard({ post }: { post: Post }) {
 export default function BlogClient({ initialPosts }: { initialPosts: Post[] }) {
     const [search, setSearch] = useState('');
     const [activeCategory, setActiveCategory] = useState<string>('All');
+    const [sortBy, setSortBy] = useState<'newest' | 'oldest'>('newest');
+    const [visibleCount, setVisibleCount] = useState(POSTS_PER_PAGE);
+
     const categories = useMemo(() => {
         const unique = new Set(initialPosts.map(p => p.category));
         return ['All', ...Array.from(unique).sort()];
     }, [initialPosts]);
 
-    const [visibleCount, setVisibleCount] = useState(POSTS_PER_PAGE);
-
-    const filtered = useMemo(() => {
+    const filteredAndSorted = useMemo(() => {
         const q = search.toLowerCase();
-        return initialPosts.filter(p => {
+        let results = initialPosts.filter(p => {
             const matchesCat = activeCategory === 'All' || p.category === activeCategory;
             const matchesSearch = !q ||
                 p.title.toLowerCase().includes(q) ||
@@ -74,10 +83,16 @@ export default function BlogClient({ initialPosts }: { initialPosts: Post[] }) {
                 p.category.toLowerCase().includes(q);
             return matchesCat && matchesSearch;
         });
-    }, [search, activeCategory]);
 
-    const gridPosts = filtered.slice(0, visibleCount);
-    const hasMore = visibleCount < filtered.length;
+        return results.sort((a, b) => {
+            const dateA = new Date(a.publishedAt).getTime();
+            const dateB = new Date(b.publishedAt).getTime();
+            return sortBy === 'newest' ? dateB - dateA : dateA - dateB;
+        });
+    }, [search, activeCategory, sortBy, initialPosts]);
+
+    const gridPosts = filteredAndSorted.slice(0, visibleCount);
+    const hasMore = visibleCount < filteredAndSorted.length;
 
     return (
         <main className="min-h-screen pt-32 pb-24 w-full flex flex-col items-center">
@@ -92,16 +107,17 @@ export default function BlogClient({ initialPosts }: { initialPosts: Post[] }) {
                     Essays on building scalable ML infrastructure, cloud architecture, and the craft of engineering.
                 </p>
 
-                {/* Search & Filter */}
-                <div className="flex flex-col md:flex-row gap-4 items-start md:items-center justify-between">
-                    <div className="relative w-full md:w-96 group">
-                        <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-muted)] group-focus-within:text-blue-500 transition-colors" />
+                {/* Search & Filter Controls */}
+                <div className="flex flex-col lg:flex-row gap-4 items-stretch lg:items-center justify-between bg-[var(--bg-card)] p-4 rounded-xl border border-[var(--border)]">
+                    {/* Search Bar */}
+                    <div className="relative flex-1 group">
+                        <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-muted)] group-focus-within:text-[var(--accent-blue)] transition-colors" />
                         <input
                             type="text"
-                            placeholder="Search articles..."
+                            placeholder="Enter a topic or search..."
                             value={search}
-                            onChange={e => setSearch(e.target.value)}
-                            className="w-full pl-11 pr-10 py-3 rounded-lg text-sm bg-[var(--bg-elevated)] border border-[var(--border)] text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all outline-none"
+                            onChange={e => { setSearch(e.target.value); setVisibleCount(POSTS_PER_PAGE); }}
+                            className="w-full pl-11 pr-10 py-2.5 rounded-lg text-sm bg-[var(--bg)] border border-[var(--border)] text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:border-[var(--accent-blue)] focus:ring-1 focus:ring-[var(--accent-blue)] transition-all outline-none"
                         />
                         {search && (
                             <button onClick={() => setSearch('')} className="absolute right-4 top-1/2 -translate-y-1/2 text-[var(--text-muted)] hover:text-white transition-colors outline-none">
@@ -110,22 +126,38 @@ export default function BlogClient({ initialPosts }: { initialPosts: Post[] }) {
                         )}
                     </div>
 
-                    <div className="flex overflow-x-auto pb-2 -mx-2 px-2 md:pb-0 md:mx-0 md:px-0 md:flex-wrap gap-2 scrollbar-hide">
-                        {categories.map((cat: string) => {
-                            const isActive = activeCategory === cat;
-                            return (
-                                <button
-                                    key={cat}
-                                    onClick={() => setActiveCategory(cat)}
-                                    className={`flex-shrink-0 px-4 py-2 rounded-lg text-xs font-bold transition-all duration-200 outline-none border tracking-wide ${isActive
-                                        ? 'bg-[var(--accent-blue)] text-white border-[var(--accent-blue)] shadow-lg shadow-blue-500/20'
-                                        : 'bg-[var(--bg-elevated)] text-[var(--text-secondary)] border-[var(--border)] hover:border-[var(--text-muted)] hover:text-[var(--text-primary)]'
-                                        }`}
-                                >
-                                    {cat}
-                                </button>
-                            );
-                        })}
+                    <div className="flex flex-col sm:flex-row gap-3">
+                        {/* Category Dropdown */}
+                        <div className="relative">
+                            <select
+                                value={activeCategory}
+                                onChange={(e) => { setActiveCategory(e.target.value); setVisibleCount(POSTS_PER_PAGE); }}
+                                className="w-full sm:w-44 px-4 py-2.5 rounded-lg text-sm bg-[var(--bg)] border border-[var(--border)] text-[var(--text-primary)] outline-none focus:border-[var(--accent-blue)] appearance-none cursor-pointer hover:border-[var(--text-muted)] transition-all"
+                            >
+                                <option value="" disabled>Select Category</option>
+                                {categories.map(cat => (
+                                    <option key={cat} value={cat}>{cat === 'All' ? 'All Categories' : cat}</option>
+                                ))}
+                            </select>
+                            <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-[var(--text-muted)]">
+                                <span className="text-[10px]">▼</span>
+                            </div>
+                        </div>
+
+                        {/* Sort Dropdown */}
+                        <div className="relative">
+                            <select
+                                value={sortBy}
+                                onChange={(e) => setSortBy(e.target.value as 'newest' | 'oldest')}
+                                className="w-full sm:w-40 px-4 py-2.5 rounded-lg text-sm bg-[var(--bg)] border border-[var(--border)] text-[var(--text-primary)] outline-none focus:border-[var(--accent-blue)] appearance-none cursor-pointer hover:border-[var(--text-muted)] transition-all"
+                            >
+                                <option value="newest">Newest First</option>
+                                <option value="oldest">Oldest First</option>
+                            </select>
+                            <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-[var(--text-muted)] text-[10px]">
+                                <span>▼</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -1,9 +1,29 @@
+import { redirect } from 'next/navigation'
+import { createClient } from '@/utils/supabase/server'
 import { login } from './actions'
 
-export default function LoginPage() {
+export default async function LoginPage({
+    searchParams,
+}: {
+    searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}) {
+    const supabase = await createClient()
+    const { data: { user } } = await supabase.auth.getUser()
+
+    if (user) {
+        redirect('/admin')
+    }
+
+    const { timeout } = await searchParams
+
     return (
         <main className="min-h-screen pt-32 pb-24 w-full flex flex-col items-center">
             <div className="w-full max-w-md mx-auto px-6 md:px-8">
+                {timeout === 'true' && (
+                    <div className="mb-6 p-4 rounded-lg bg-yellow-500/10 border border-yellow-500/20 text-yellow-500 text-sm text-center">
+                        Your session has expired due to inactivity. Please sign in again.
+                    </div>
+                )}
                 <h1 className="text-3xl font-bold tracking-tight mb-8 text-[var(--text-primary)] font-['Space_Grotesk'] text-center">
                     Admin Login
                 </h1>

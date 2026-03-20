@@ -2,11 +2,12 @@
 
 import { useMemo, useState } from 'react';
 import Link from 'next/link';
-import { ArrowLeft, Clock, Calendar, Check, Copy } from 'lucide-react';
+import { ArrowLeft, Clock, Calendar, Check, Copy, Share2, ChevronRight, User } from 'lucide-react';
 import { Post, CATEGORY_COLORS, CATEGORY_BG } from '@/lib/data';
 import { formatDate } from '@/lib/utils';
 import TableOfContents from '@/components/TableOfContents';
 import ShareButtons from '@/components/ShareButtons';
+import Engagement from './Engagement';
 
 /* ── Inline Code renderer ─────────────────────────────────── */
 function InlineCode({ children }: { children: string }) {
@@ -63,6 +64,7 @@ type Block =
     | { type: 'h2'; id: string; text: string }
     | { type: 'h3'; id: string; text: string }
     | { type: 'p'; text: string }
+    | { type: 'img'; alt: string; url: string }
     | { type: 'code'; lang: string; code: string }
     | { type: 'ul'; items: string[] }
     | { type: 'checkbox'; items: Array<{ done: boolean; text: string }> };
@@ -74,6 +76,14 @@ function parseBlocks(src: string): Block[] {
 
     while (i < lines.length) {
         const line = lines[i];
+
+        if (line.startsWith('![')) {
+            const match = line.match(/^!\[(.*?)\]\((.*?)\)/);
+            if (match) {
+                blocks.push({ type: 'img', alt: match[1], url: match[2] });
+                i++; continue;
+            }
+        }
 
         if (line.startsWith('```')) {
             const lang = line.slice(3).trim() || 'code';
@@ -151,7 +161,15 @@ function SimpleRelatedCard({ post }: { post: Post }) {
     );
 }
 
-export default function ArticleClient({ post, relatedPosts = [] }: { post: Post, relatedPosts?: Post[] }) {
+interface EngagementData {
+    postId: string;
+    slug: string;
+    comments: any[];
+    score: number;
+    totalVotes: number;
+}
+
+export default function ArticleClient({ post, relatedPosts = [], engagement }: { post: Post, relatedPosts?: Post[], engagement: EngagementData }) {
     const blocks = useMemo(() => parseBlocks(post.content), [post.content]);
     const tocItems = useMemo(() => blocks.filter((b): b is Extract<Block, { type: 'h2' | 'h3' }> => b.type === 'h2' || b.type === 'h3').map(b => ({ id: b.id, text: b.text, level: b.type === 'h2' ? 2 : 3 })), [blocks]);
     const related = relatedPosts.slice(0, 2);
@@ -172,6 +190,18 @@ export default function ArticleClient({ post, relatedPosts = [] }: { post: Post,
 
                     {/* Left Column: Read Area centered and clean */}
                     <article className="lg:w-[70%] max-w-3xl shrink-0">
+
+                        {/* Optional Banner Image */}
+                        {post.bannerUrl && (
+                            <div className="mb-12 rounded-2xl overflow-hidden border border-[var(--border)] aspect-video relative group">
+                                <img 
+                                    src={post.bannerUrl} 
+                                    alt={post.title}
+                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg)]/80 via-transparent to-transparent opacity-60" />
+                            </div>
+                        )}
 
                         <div className="mb-12 border-b border-[var(--border)] pb-8">
                             <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-6 text-[var(--text-primary)] leading-[1.1]">
@@ -194,6 +224,14 @@ export default function ArticleClient({ post, relatedPosts = [] }: { post: Post,
                                 if (block.type === 'h2') return <h2 key={i} id={block.id}>{block.text}</h2>;
                                 if (block.type === 'h3') return <h3 key={i} id={block.id}>{block.text}</h3>;
                                 if (block.type === 'p') return <p key={i}>{renderInline(block.text)}</p>;
+                                if (block.type === 'img') return (
+                                    <div key={i} className="my-10">
+                                        <figure className="rounded-xl overflow-hidden border border-[var(--border)] bg-[var(--bg-card)]">
+                                            <img src={block.url} alt={block.alt} className="w-full object-contain" />
+                                            {block.alt && <figcaption className="text-center py-3 text-xs text-[var(--text-muted)] border-t border-[var(--border)] italic font-mono">{block.alt}</figcaption>}
+                                        </figure>
+                                    </div>
+                                );
                                 if (block.type === 'code') return <CodeBlock key={i} code={block.code} language={block.lang} />;
                                 if (block.type === 'ul') return <ul key={i}>{block.items.map((item, j) => <li key={j} className="flex"><span className="text-[var(--accent-blue)] mr-3 font-mono">-</span><span>{renderInline(item)}</span></li>)}</ul>;
                                 if (block.type === 'checkbox') return (
@@ -219,6 +257,15 @@ export default function ArticleClient({ post, relatedPosts = [] }: { post: Post,
                                 {post.authorBio}
                             </p>
                         </div>
+
+                        {/* Engagement: Ratings and Comments */}
+                        <Engagement 
+                            postId={engagement.postId} 
+                            slug={engagement.slug} 
+                            comments={engagement.comments} 
+                            score={engagement.score} 
+                            totalVotes={engagement.totalVotes} 
+                        />
 
                         {/* Related posts */}
                         {related.length > 0 && (

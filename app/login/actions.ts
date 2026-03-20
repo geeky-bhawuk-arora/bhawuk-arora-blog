@@ -59,5 +59,10 @@ export async function logout(arg?: string | FormData) {
 
     await supabase.auth.signOut()
     revalidatePath('/', 'layout')
+
+    if (eventType === 'timeout') {
+        redirect('/login?timeout=true')
+    }
+
     redirect('/')
 }

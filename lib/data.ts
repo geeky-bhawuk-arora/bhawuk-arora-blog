@@ -17,6 +17,10 @@ export interface Post {
     accentColor: string;
     author: string;
     authorBio: string;
+    bannerUrl?: string;
+    avgRating?: number;
+    score?: number;
+    totalVotes?: number;
 }
 
 export const CATEGORY_COLORS: Record<Category, string> = {

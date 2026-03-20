@@ -32,7 +32,7 @@ export default async function AdminLayout({
                     </div>
 
                     <form action={logout}>
-                        <button className="flex items-center gap-2 px-4 py-2 rounded-lg text-red-400 hover:bg-red-500/10 hover:text-red-500 transition-all font-medium">
+                        <button type="submit" className="flex items-center gap-2 px-4 py-2 rounded-lg text-red-400 hover:bg-red-500/10 hover:text-red-500 transition-all font-medium">
                             <LogOut size={16} /> Logout
                         </button>
                     </form>

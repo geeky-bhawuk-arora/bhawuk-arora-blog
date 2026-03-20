@@ -80,5 +80,33 @@ export default async function ArticlePage({ params }: Props) {
 
     const relatedPosts = (relatedData || []).map(mapPost);
 
-    return <ArticleClient post={post} relatedPosts={relatedPosts} />;
+    // Fetch comments and ratings
+    const { data: commentsData } = await supabase
+        .from('comments')
+        .select('*')
+        .eq('post_id', data.id)
+        .order('created_at', { ascending: false });
+
+    const { data: ratingsData } = await supabase
+        .from('ratings')
+        .select('rating')
+        .eq('post_id', data.id);
+
+    const comments = commentsData || [];
+    const totalVotes = ratingsData?.length || 0;
+    const score = ratingsData?.reduce((acc, curr) => acc + curr.rating, 0) || 0;
+
+    return (
+        <ArticleClient 
+            post={post} 
+            relatedPosts={relatedPosts} 
+            engagement={{
+                comments,
+                score,
+                totalVotes,
+                postId: data.id,
+                slug: data.slug
+            }}
+        />
+    );
 }
