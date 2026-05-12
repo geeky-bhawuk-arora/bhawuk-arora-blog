@@ -78,5 +78,12 @@ export const certifications: Certification[] = [
         icon: "oracle",
         color: "red",
         link: ""
+    },
+    {
+        name: "Databricks Certified Machine Learning Associate",
+        issuer: "Databricks",
+        icon: "databricks",
+        color: "red",
+        link: ""
     }
 ];
