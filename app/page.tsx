@@ -48,23 +48,7 @@ export default async function HomePage() {
           <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_2px_2px,var(--border)_1px,transparent_0)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-20 pointer-events-none" />
 
           <div className="relative z-10">
-            <div className="flex items-center gap-6 mb-12 font-medium text-[10px] tracking-[0.2em] text-[var(--text-muted)]">
-              <div className="flex items-center gap-2">
-                <div className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-20"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                </div>
-                <span className="text-emerald-400 font-bold">Node.Live</span>
-              </div>
-              <div className="hidden sm:block h-3 w-[1px] bg-[var(--border)]" />
-              <div className="hidden sm:flex items-center gap-2 opacity-60">
-                <span>Relay: Local Cluster</span>
-              </div>
-              <div className="hidden lg:block h-3 w-[1px] bg-[var(--border)]" />
-              <div className="hidden lg:flex items-center gap-2 opacity-60">
-                <span>Protocol: HTTPS/3</span>
-              </div>
-            </div>
+
 
             <div className="max-w-4xl">
               <h1 className="text-6xl sm:text-7xl md:text-9xl font-black tracking-tighter mb-6 text-[var(--text-primary)] leading-[0.85]">
@@ -79,28 +63,32 @@ export default async function HomePage() {
               </p>
             </div>
 
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-12">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-16">
               <Link
                 href="/projects"
-                className="px-8 py-4 rounded-xl text-white bg-[var(--accent-blue)] hover:bg-blue-600 transition-all font-bold shadow-lg shadow-blue-500/20 hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2 group"
+                className="relative overflow-hidden px-10 py-4.5 rounded-2xl text-white bg-blue-600 hover:bg-blue-500 transition-all font-bold shadow-[0_0_25px_rgba(37,99,235,0.25)] hover:shadow-[0_0_35px_rgba(37,99,235,0.45)] hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-3 group border border-blue-400/20"
               >
-                View My Work <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-[shimmer_2s_infinite] pointer-events-none" />
+                <span className="relative z-10">View My Work</span>
+                <ArrowRight size={20} className="group-hover:translate-x-1.5 transition-transform relative z-10" />
               </Link>
 
-              <div className="flex gap-4">
+              <div className="grid grid-cols-2 gap-4">
                 <a
                   href="https://res.cloudinary.com/bhawuk-prod/image/upload/v1759812546/bhawuk-portfolio-react/bhawuk_resume.jpg"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 sm:flex-none px-6 py-4 rounded-xl text-[var(--accent-blue)] bg-[var(--accent-blue)]/5 border border-[var(--accent-blue)]/20 hover:border-[var(--accent-blue)]/50 hover:bg-[var(--accent-blue)]/10 transition-all font-bold text-center"
+                  className="px-6 sm:px-8 py-4 rounded-2xl text-[var(--accent-blue)] bg-blue-500/5 border border-blue-500/20 hover:border-blue-500/50 hover:bg-blue-500/10 backdrop-blur-sm transition-all font-bold text-center flex items-center justify-center gap-2 group/btn shadow-sm"
                 >
-                  Resume
+                  <span className="text-sm sm:text-base">Resume</span>
+                  <ExternalLink size={16} className="opacity-40 group-hover/btn:opacity-100 group-hover/btn:translate-y-[-1px] transition-all" />
                 </a>
                 <Link
                   href="/blog"
-                  className="flex-1 sm:flex-none px-6 py-4 rounded-xl text-[var(--text-primary)] bg-[var(--bg-elevated)] border border-[var(--border)] hover:border-[var(--text-muted)] hover:bg-[var(--bg-card)] transition-all font-bold text-center text-sm sm:text-base"
+                  className="px-6 sm:px-8 py-4 rounded-2xl text-[var(--text-primary)] bg-[var(--bg-elevated)] border border-[var(--border)] hover:border-[var(--text-muted)] hover:bg-[var(--bg-card)] backdrop-blur-sm transition-all font-bold text-center text-sm sm:text-base flex items-center justify-center gap-2 group/blog shadow-sm"
                 >
-                  Blog
+                  <Calendar size={16} className="text-[var(--text-muted)] group-hover/blog:text-[var(--accent-blue)] transition-colors" />
+                  <span>Blog</span>
                 </Link>
               </div>
             </div>

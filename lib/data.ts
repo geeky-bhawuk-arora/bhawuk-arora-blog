@@ -53,7 +53,7 @@ export const CATEGORY_BG: Record<Category, string> = {
     'System design': '#6366f115',
 };
 
-const defaultAuthorBio = "AI & Data Science student exploring the intersection of DevOps, MLOps, and distributed systems. Currently deeply curious about breaking down complex systems.";
+const defaultAuthorBio = "I build ML platforms, but some of the most real parts of me exist far away from screens. I’m deeply curious about how things work, whether it’s distributed systems, human emotions, or the quiet meaning hidden inside ordinary moments.";
 
 export const posts: Post[] = [
     {
